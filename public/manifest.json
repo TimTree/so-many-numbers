@@ -1,7 +1,7 @@
 {
   "name": "So Many Numbers!",
   "short_name": "Numbers!",
-  "description": "The speedy math game that encourages those of all ages to discover their arithmetic abilities!",
+  "description": "The speedy math game that encourages those of all ages to discover their arithmetic abilities",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

@@ -3,9 +3,16 @@
     <p class="congrats">Congrats!</p>
     <p class="diffIndicator">{{difficulty}}</p>
     <p class="mathOps">{{mathOps}}</p>
-    <div class="results">
+    <div class="highScoreCongrats" v-if="$parent.isHighScore">
+      <div>New high score:</div>
+      <div>{{store.currentTime}} seconds</div>
+    </div>
+    <div class="results" v-else>
       <div>Your score: {{store.currentTime}} seconds</div>
-      <div>High score: {{highScore.highScore}} seconds</div>
+      <div v-if="playedMoreThanOnce">
+          High score: {{highScore.highScore.toFixed(1)}} seconds</div>
+      <div v-else>
+          First score on this set!</div>
     </div>
     <transition name="fade" appear>
       <div class="buttons-div">
@@ -14,7 +21,7 @@
         </p>
         <p class="pmargin">
           <router-link class="home-area" to="/">
-            <button class="button-again">Main Menu</button>
+            <button class="button-again">Change Set</button>
           </router-link>
         </p>
       </div>
@@ -45,6 +52,12 @@ export default {
     highScore() {
       return localStorage.saveData.ops[this.mathOps][this.difficultyLowerCase];
     },
+    playedMoreThanOnce() {
+      if (localStorage.saveData
+        .ops[this.mathOps][this.difficultyLowerCase].timesFinished > 1) {
+        return true;
+      } return false;
+    },
   },
   methods: {
     refresh() {
@@ -73,7 +86,7 @@ export default {
           this.$parent.isNotHighScore = true;
         }
       } else {
-        this.$parent.isHighScore = true;
+        this.$parent.isNotHighScore = true;
         localStorage.saveData.ops[this.mathOps][this.difficultyLowerCase] = {};
         localStorage.saveData.ops[this.mathOps][this.difficultyLowerCase]
           .highScore = Number(gameStore.state.currentTime);
@@ -81,7 +94,7 @@ export default {
           .timesFinished = 1;
       }
     } else {
-      this.$parent.isHighScore = true;
+      this.$parent.isNotHighScore = true;
       localStorage.saveData.ops[this.mathOps] = {};
       localStorage.saveData.ops[this.mathOps][this.difficultyLowerCase] = {};
       localStorage.saveData.ops[this.mathOps][this.difficultyLowerCase]
@@ -128,9 +141,16 @@ export default {
   margin-bottom:12px;
 }
 
+.highScoreCongrats {
+  font-size:6vmin;
+  font-weight:700;
+  line-height:1.5;
+  margin-bottom:12px;
+}
+
 .button-again {
     border: none;
-    padding: 4.5% 8%;
+    padding: 4.5% 10%;
     font-size: 6.5vmin;
     text-align: center;
     cursor: pointer;
@@ -162,7 +182,7 @@ export default {
 }
 
 .pmargin {
-  margin:calc(3px + 1.8vmin);
+  margin:calc(3px + 1.8vmin) 0;
 }
 
 @media (min-width: 420px) and (min-height: 420px) {
@@ -182,6 +202,10 @@ export default {
     font-size:4.6vmin;
   }
 
+  .highScoreCongrats {
+    font-size:4.6vmin;
+  }
+
   .button-again {
     font-size:5vmin;
     border-radius:2vmin;
@@ -189,7 +213,7 @@ export default {
   }
 
   .pmargin {
-    margin:3vmin;
+    margin:3vmin 0;
   }
 }
 </style>
