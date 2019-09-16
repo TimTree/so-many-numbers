@@ -10,5 +10,11 @@
 export default {
   components: {
   },
+  created() {
+    this.$parent.isHome = true;
+  },
+  destroyed() {
+    this.$parent.isHome = false;
+  },
 };
 </script>

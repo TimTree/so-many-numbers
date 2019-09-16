@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="bodyBG" v-bind:class="{homeColor:(this.$route.path === '/'),
-   gameColor:(this.$route.path === '/game'),
+  <div id="app" class="bodyBG" v-bind:class="{homeColor:isHome,
+   gameColor:isGame,
    oneThird: isOneThird,
    twoThirds: isTwoThirds,
     almost: isAlmost}">
@@ -16,6 +16,8 @@ export default {
   data() {
     return {
       store: gameStore.state,
+      isHome: false,
+      isGame: false,
     };
   },
   created() {

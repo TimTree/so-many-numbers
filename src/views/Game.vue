@@ -19,12 +19,14 @@ export default {
   },
   created() {
     gameStore.createGame(this.$route.query.diff, this.$route.query.ops);
+    this.$parent.isGame = true;
   },
   updated() {
 
   },
   destroyed() {
     gameStore.clearGame();
+    this.$parent.isGame = false;
   },
   components: {
     Countdown,

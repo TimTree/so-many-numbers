@@ -18,7 +18,7 @@ export default {
     return Math.floor(this.state.numberOfProblems / 10 * 9);
   },
   createGame(diff, ops) {
-    this.state.numberOfProblems = 3; // Change this number if you want to debug
+    this.state.numberOfProblems = 30; // Change this number if you want to debug
     // Don't make it less than 1 (aka no game) or over 100 (since we don't
     // repeat expressions and some difficulty/operator combos only have
     // 100 possible expressions, risking an infinite loop)
