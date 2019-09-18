@@ -47,10 +47,11 @@ export default {
   display:flex;
   align-items:center;
   justify-content:center;
+  height:19.875vmin;
 }
 
 .logo img {
-  width:75vmin;
+  height:19.875vmin;
 }
 
 .authors {
@@ -72,10 +73,15 @@ a:hover {
 }
 
 @media (min-width: 420px) and (min-height: 420px) {
+  .logo {
+    height:13.25vmin;
+    min-height:63.6px;
+    max-height:159px;
+  }
   .logo img {
-    width:50vmin;
-    min-width:240px;
-    max-width:600px;
+    height:13.25vmin;
+    min-height:63.6px;
+    max-height:159px;
   }
 }
 
