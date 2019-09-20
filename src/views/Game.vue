@@ -18,7 +18,7 @@ export default {
     };
   },
   created() {
-    gameStore.createGame(this.$route.query.diff, this.$route.query.ops);
+    gameStore.createGame(this.$route.query.diff, this.$route.query.set);
     this.$parent.isGame = true;
   },
   updated() {

@@ -4,7 +4,7 @@
     <img src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
   </div>
   <div style="display:flex;align-items:center;justify-content:center;overflow:auto;">
-    <router-link :to="{ path: '/game', query: { diff: 'standard', ops: 'asmd' }}">Play</router-link>
+    <router-link :to="{ path: '/game', query: { diff: 'standard', set: 'asmd' }}">Play</router-link>
   </div>
   <div class="authors">
     <div>

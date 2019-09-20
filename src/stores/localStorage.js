@@ -1,10 +1,52 @@
 /* eslint-disable max-len */
+
+/**
+ * The localStorage class stores game save data and contains functions to
+ * load and add save data.
+ */
 export default {
-  supportsLocalStorage: true,
+  /**
+   * The save data contains:
+   *
+   * recents: The most recent sets the player played
+   * sets: An object that tracks the player's high score/number of plays
+   * for each difficulty/set
+   *
+   * Example:
+   *
+   * sets: {
+   *   +−×÷: {
+   *      simple: {
+   *        highScore: 37.9,
+   *        timesFinished: 2,
+   *      }
+   *      standard: {
+   *        highScore: 46.5,
+   *        timesFinished: 4,
+   *      }
+   *    },
+   *  ×: {
+   *      standard: {
+   *        highScore: 44.3,
+   *        timesFinished: 8,
+   *      }
+   *    }
+   * }
+   *
+   * The object is initially blank and dynamically adds sets/scores
+   * based on what the player plays.
+   */
   saveData: {
     recents: [],
-    ops: {},
+    sets: {},
   },
+
+  /**
+   * Test browser support for local storage and save the result
+   * to a variable so we don't need to run the local storage check
+   * multiple times
+   */
+  supportsLocalStorage: true,
   testLocalStorage() {
     const doesItWork = 'test';
     try {
@@ -14,6 +56,16 @@ export default {
       this.supportsLocalStorage = false;
     }
   },
+
+  /**
+   * Load the user's save data from localStorage to the saveData
+   * object.
+   *
+   * Each time we want to save something to localStorage, we modify the
+   * saveData object then run the below save() function to save the entire
+   * saveData object to storage. This is so browsers without localStorage
+   * support can still run the game.
+   */
   configureSaveData() {
     this.testLocalStorage();
     if (this.supportsLocalStorage) {
@@ -28,6 +80,11 @@ export default {
       }
     }
   },
+  /**
+   * Save the saveData object to localStorage if the browser supports it.
+   * The save data must be stringified to JSON because localStorage can
+   * only handle strings.
+   */
   save() {
     if (this.supportsLocalStorage) {
       localStorage.setItem('soManyNumbersSaveData', JSON.stringify(this.saveData));

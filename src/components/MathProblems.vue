@@ -49,6 +49,18 @@ export default {
     };
   },
   watch: {
+    /**
+     * When the player enters text to the input box, check if the box contains
+     * the current solution.
+     *
+     * If the box contains the solution, increment the number of problems solved
+     * and run a pulse animation.
+     * Then, display the encouragement marker depending on what number problem
+     * the player is on.
+     * If the box does not contain the solution, start a hidden timer. After
+     * a certain amount of time, highlight the input box red to inform the player
+     * it's the wrong solution.
+     */
     answer() {
       this.isWrong = false;
       clearTimeout(this.wrongTimeout);
@@ -74,9 +86,6 @@ export default {
         this.wrongTimeout = setTimeout(() => { this.isWrong = true; }, 1200);
       }
     },
-  },
-  computed: {
-
   },
   mounted() {
     this.$refs.focusHere.focus();
