@@ -89,7 +89,7 @@ that happens when resizing the browser window. */
   height:30px;
   width:0%;
   border-radius:10px;
-  transition: width 0.2s ease-out;
+  transition: width 0.18s ease-out;
 }
 
 .percent-complete {
@@ -123,7 +123,7 @@ that happens when resizing the browser window. */
   opacity:0.25;
   display:inline-flex;
   align-items:flex-end;
-  transition:opacity 0.15s;
+  transition:opacity 0.12s;
 }
 
 .home-area:hover {
@@ -132,7 +132,7 @@ that happens when resizing the browser window. */
 
 .home-button {
   height:6.5vmin;
-  transition:transform 0.15s;
+  transition:transform 0.12s;
 }
 
 .home-button:active {

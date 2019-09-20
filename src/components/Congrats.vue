@@ -171,7 +171,7 @@ export default {
     border: none;
     border-radius:3vmin;
     box-shadow: 0 1.5vmin #999;
-    transition:background-color 0.15s, transform 0.15s, box-shadow 0.15s;;
+    transition:background-color 0.12s, transform 0.12s, box-shadow 0.12s;;
     font-family:'noto sans',sans-serif;
 }
 

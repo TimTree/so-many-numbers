@@ -5,15 +5,15 @@
     <b>Standard</b> Difficulty (Change)
   </p>
   <h1>Select Set</h1>
-  <div class="set-pane">
+  <div class="set-pane" v-if="!onRecents">
     <div class="set-buttons">
       <button class="small-circle" v-bind:class="{smallCircleActivated: isPlus}"
        v-on:click="addPlus()" ontouchstart>+</button>
       <button class="small-circle" v-bind:class="{smallCircleActivated: isMinus}"
        v-on:click="addMinus()" ontouchstart>−</button>
-      <button id="multiply" class="small-circle" v-bind:class="{smallCircleActivated: isMultiply}"
+      <button class="small-circle" v-bind:class="{smallCircleActivated: isMultiply}"
        v-on:click="addMultiply()" ontouchstart>×</button>
-      <button id="divide" class="small-circle" v-bind:class="{smallCircleActivated: isDivide}"
+      <button class="small-circle" v-bind:class="{smallCircleActivated: isDivide}"
        v-on:click="addDivide()" ontouchstart>÷</button>
     </div>
     <div ontouchstart>
@@ -22,6 +22,14 @@
           Start
       </router-link>
     </div>
+  </div>
+  <button class="set-switcher" ontouchstart
+   v-on:click="toggleRecents()">{{setSwitcherText}}</button>
+  <div class="recents-pane" v-if="onRecents">
+    You haven't played any sets yet!
+  </div>
+  <div class="auxillary-buttons">
+    <a>Help</a>
   </div>
 </div>
   </transition>
@@ -36,6 +44,7 @@ export default {
       isMultiply: false,
       isDivide: false,
       startEnabled: false,
+      onRecents: false,
     };
   },
   computed: {
@@ -51,6 +60,12 @@ export default {
         computedSet += 'd';
       }
       return computedSet;
+    },
+    setSwitcherText() {
+      if (!this.onRecents) {
+        return 'Recents\xa0\xa0▾';
+      }
+      return 'Menu\xa0\xa0▴';
     },
   },
   methods: {
@@ -105,6 +120,13 @@ export default {
         this.startEnabled = true;
       }
     },
+    toggleRecents() {
+      if (!this.onRecents) {
+        this.onRecents = true;
+      } else {
+        this.onRecents = false;
+      }
+    },
   },
 };
 </script>
@@ -126,7 +148,7 @@ export default {
 h1 {
   font-weight:400;
   font-size:7vmin;
-  margin:0 0 0.5em 0;
+  margin:0;
 }
 
 .set-buttons {
@@ -144,7 +166,7 @@ button {
   padding: 0;
   color:#fafafa;
   font-family:"noto sans", sans-serif;
-  transition: background-color 0.15s, transform 0.15s, box-shadow 0.15s;
+  transition: background-color 0.12s, transform 0.12s, box-shadow 0.12s;
 }
 
 button::-moz-focus-inner {
@@ -163,6 +185,7 @@ button:active {
   height:14.5vmin;
   font-size:11vmin;
   margin:0 0.18em;
+  line-height:0;
 }
 
 .small-circle:hover {
@@ -216,6 +239,37 @@ button:active {
   transform:none;
 }
 
+.set-switcher {
+  box-shadow: 0 1.8vmin #999;
+  background-color: #c2a230;
+  border-radius:8vmin;
+  padding:0.4vmin 6vmin;
+  font-size:5vmin;
+  margin-top:1.2em;
+}
+
+.set-switcher:hover {
+  background-color:#b39529;
+}
+
+.set-switcher:active {
+  background-color:#bb9610;
+  box-shadow: 0 0.5vmin #999;
+  transform: translateY(1vmin);
+}
+
+.auxillary-buttons {
+  margin-top:7vh;
+  font-size:calc(10px + 2.2vmin);
+}
+
+.recents-pane {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  height:20vmin;
+}
+
 @media (min-width: 420px) and (min-height: 420px) {
   .difficulty-indicator {
     margin-top:0;
@@ -239,6 +293,12 @@ button:active {
     padding:1.2vmin 4.5vmin;
     font-size:6vmin;
   }
+  .set-switcher {
+    box-shadow: 0 1vmin #999;
+    border-radius:8vmin;
+    padding:0.4vmin 4vmin;
+    font-size:calc(5px + 2.6vmin);
+  }
 }
 
 @media (max-height: 520px) {
@@ -246,15 +306,24 @@ button:active {
     margin-top:0.75em;
   }
   .start-button {
-    margin-top:0.5em;
-    padding-top:1vmin;
-    padding-bottom:1vmin;
+    margin-top:0.75em;
+    padding-top:1.2vmin;
+    padding-bottom:1.2vmin;
+  }
+  .set-switcher {
+    margin-top:1em;
+  }
+  .auxillary-buttons {
+    margin-top:4vh;
   }
 }
 
 @media (min-height: 800px) {
   .difficulty-indicator {
     margin-bottom:1.8em;
+  }
+  .auxillary-buttons {
+    margin-top:7vh;
   }
 }
 </style>
