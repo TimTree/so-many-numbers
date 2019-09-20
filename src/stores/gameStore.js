@@ -35,11 +35,18 @@ export default {
   createGame(diff, ops) {
     /**
      * Change this number if you want to debug.
-     * Don't make it less than 1 (aka no game) or over 100 (since we don't
-     * repeat expressions and some difficulty/operator combos only have
-     * 100 possible expressions, risking an infinite loop)
+     * If you make the number less than 1 (aka no game) or over 100 (risking
+     * an infinite loop since we don't repeat problems and some diff/sets
+     * only have 100 possible problems), edit the problem count to the nearest
+     * valid amount.
      */
-    this.state.numberOfProblems = 30;
+    this.state.numberOfProblems = 101;
+
+    if (this.state.numberOfProblems < 1) {
+      this.state.numberOfProblems = 1;
+    } else if (this.state.numberOfProblems > 100) {
+      this.state.numberOfProblems = 100;
+    }
     /**
      * Define the ruleset (math problem bounds) based on chosen difficulty
      */
@@ -113,7 +120,8 @@ export default {
         }
         solution = firstNumber / secondNumber;
       }
-      if (this.state.expressions.includes(`${firstNumber} ${operatorRand} ${secondNumber} =`)) {
+      if (this.state.expressions.includes(`${firstNumber} ${operatorRand} ${secondNumber} =`)
+      && this.state.numberOfProblems) {
         i -= 1;
       } else {
         this.state.expressions.push(`${firstNumber} ${operatorRand} ${secondNumber} =`);

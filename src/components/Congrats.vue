@@ -65,7 +65,7 @@ export default {
      */
     refresh() {
       gameStore.clearGame();
-      gameStore.createGame(this.$route.query.diff, this.$route.query.ops);
+      gameStore.createGame(this.$route.query.diff, this.$route.query.set);
       this.$parent.$parent.isCountdown = true;
     },
   },
@@ -86,7 +86,7 @@ export default {
       if (Object.prototype.hasOwnProperty
         .call(localStorage.saveData.sets[this.mathOps], this.difficultyLowerCase)) {
         localStorage.saveData
-          .ops[this.mathOps][this.difficultyLowerCase].timesFinished += 1;
+          .sets[this.mathOps][this.difficultyLowerCase].timesFinished += 1;
         if (Number(gameStore.state.currentTime)
          < localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase]
            .highScore) {
