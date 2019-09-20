@@ -3,12 +3,13 @@
   <div class="logo">
     <img src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
   </div>
-  <div style="display:flex;align-items:center;justify-content:center;overflow:auto;">
-    <router-link :to="{ path: '/game', query: { diff: 'standard', set: 'asmd' }}">Play</router-link>
+  <div class="home-body">
+    <SelectSet />
   </div>
   <div class="authors">
     <div>
-      By Ashley Caswell and Timothy Hsu //
+      By <a href="https://github.com/ash-caz" target="_blank" rel="noopener">Ashley Caswell</a>
+       and <a href="https://github.com/TimTree" target="_blank" rel="noopener">Timothy Hsu</a> //
        <a href="https://github.com/TimTree/so-many-numbers" target="_blank" rel="noopener">GitHub Repo</a>
     </div>
   </div>
@@ -16,9 +17,11 @@
 </template>
 
 <script>
+import SelectSet from '@/components/SelectSet.vue';
 
 export default {
   components: {
+    SelectSet,
   },
   created() {
     this.$parent.isHome = true;
@@ -29,13 +32,24 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .home-div {
   height:100%;
   overflow:hidden;
   display:grid;
   grid-template-columns:100%;
   grid-template-rows: auto 1fr 7%;
+}
+
+.home-body {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  overflow:auto;
+  margin:0 auto;
+  width:98%;
+  max-width:1200px;
 }
 
 .logo {

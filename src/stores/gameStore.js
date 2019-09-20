@@ -30,7 +30,7 @@ export default {
   /**
    * Generate a game, given a difficulty and set of operators
    * @param {string} diff - the difficulty of the game - Simple or Standard
-   * @param {string} ops - the operators (set) to usefor the game
+   * @param {string} ops - the operators (set) to use for the game
    */
   createGame(diff, ops) {
     /**
@@ -40,7 +40,7 @@ export default {
      * only have 100 possible problems), edit the problem count to the nearest
      * valid amount.
      */
-    this.state.numberOfProblems = 101;
+    this.state.numberOfProblems = 30;
 
     if (this.state.numberOfProblems < 1) {
       this.state.numberOfProblems = 1;
@@ -120,8 +120,7 @@ export default {
         }
         solution = firstNumber / secondNumber;
       }
-      if (this.state.expressions.includes(`${firstNumber} ${operatorRand} ${secondNumber} =`)
-      && this.state.numberOfProblems) {
+      if (this.state.expressions.includes(`${firstNumber} ${operatorRand} ${secondNumber} =`)) {
         i -= 1;
       } else {
         this.state.expressions.push(`${firstNumber} ${operatorRand} ${secondNumber} =`);

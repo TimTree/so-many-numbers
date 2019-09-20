@@ -132,6 +132,11 @@ that happens when resizing the browser window. */
 
 .home-button {
   height:6.5vmin;
+  transition:transform 0.15s;
+}
+
+.home-button:active {
+  transform:scale(0.9);
 }
 
 .timer-area-outside {

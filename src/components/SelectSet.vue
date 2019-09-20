@@ -1,0 +1,260 @@
+<template>
+  <transition name="fade" appear>
+<div style="text-align:center;">
+  <p class="difficulty-indicator">
+    <b>Standard</b> Difficulty (Change)
+  </p>
+  <h1>Select Set</h1>
+  <div class="set-pane">
+    <div class="set-buttons">
+      <button class="small-circle" v-bind:class="{smallCircleActivated: isPlus}"
+       v-on:click="addPlus()" ontouchstart>+</button>
+      <button class="small-circle" v-bind:class="{smallCircleActivated: isMinus}"
+       v-on:click="addMinus()" ontouchstart>−</button>
+      <button id="multiply" class="small-circle" v-bind:class="{smallCircleActivated: isMultiply}"
+       v-on:click="addMultiply()" ontouchstart>×</button>
+      <button id="divide" class="small-circle" v-bind:class="{smallCircleActivated: isDivide}"
+       v-on:click="addDivide()" ontouchstart>÷</button>
+    </div>
+    <div ontouchstart>
+      <router-link tag="button" class="start-button" v-bind:class="{startDisabled: !startEnabled}"
+       :disabled="!startEnabled" :to="{ path: '/game', query: { diff: 'standard', set: getSet }}">
+          Start
+      </router-link>
+    </div>
+  </div>
+</div>
+  </transition>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isPlus: false,
+      isMinus: false,
+      isMultiply: false,
+      isDivide: false,
+      startEnabled: false,
+    };
+  },
+  computed: {
+    getSet() {
+      let computedSet = '';
+      if (this.isPlus) {
+        computedSet += 'a';
+      } if (this.isMinus) {
+        computedSet += 's';
+      } if (this.isMultiply) {
+        computedSet += 'm';
+      } if (this.isDivide) {
+        computedSet += 'd';
+      }
+      return computedSet;
+    },
+  },
+  methods: {
+    /**
+     * The following four functions toggle their respective operators.
+     *
+     * I probably could condense these functions into one if I had more
+     * time to figure it out.
+     */
+    addPlus() {
+      if (this.isPlus) {
+        this.isPlus = false;
+      } else {
+        this.isPlus = true;
+      }
+      this.updateButtonStatus();
+    },
+    addMinus() {
+      if (this.isMinus) {
+        this.isMinus = false;
+      } else {
+        this.isMinus = true;
+      }
+      this.updateButtonStatus();
+    },
+    addMultiply() {
+      if (this.isMultiply) {
+        this.isMultiply = false;
+      } else {
+        this.isMultiply = true;
+      }
+      this.updateButtonStatus();
+    },
+    addDivide() {
+      if (this.isDivide) {
+        this.isDivide = false;
+      } else {
+        this.isDivide = true;
+      }
+      this.updateButtonStatus();
+    },
+
+    /**
+     * Check if there are selected operators for the set.
+     * If there are, make the start button appear bold.
+     * If not, subdue the start button.
+     */
+    updateButtonStatus() {
+      if (!this.isPlus && !this.isMinus && !this.isMultiply && !this.isDivide) {
+        this.startEnabled = false;
+      } else {
+        this.startEnabled = true;
+      }
+    },
+  },
+};
+</script>
+
+<style scoped>
+  .fade-enter-active {
+    transition: opacity .5s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
+.difficulty-indicator {
+  margin-top:0;
+  font-size:5vmin;
+}
+
+h1 {
+  font-weight:400;
+  font-size:7vmin;
+  margin:0 0 0.5em 0;
+}
+
+.set-buttons {
+  margin-top:1.2em;
+  display:block;
+}
+
+button {
+  border:none;
+  text-align:center;
+  text-decoration: none;
+  display: inline-block;
+  cursor:pointer;
+  outline:none;
+  padding: 0;
+  color:#fafafa;
+  font-family:"noto sans", sans-serif;
+  transition: background-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button:active {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.small-circle {
+  box-shadow: 0 1.8vmin #999;
+  background-color: #b5c5b4;
+  border-radius:50%;
+  width:16vmin;
+  height:14.5vmin;
+  font-size:11vmin;
+  margin:0 0.18em;
+}
+
+.small-circle:hover {
+  background-color:#9abb98;
+}
+
+.small-circle:active {
+  box-shadow: 0 0.5vmin #999;
+  transform: translateY(1vmin);
+}
+
+.smallCircleActivated {
+  background-color: #0d9806;
+}
+
+.smallCircleActivated:hover {
+  background-color: #0d9806;
+}
+
+.start-button {
+  margin-top:0.75em;
+  box-shadow: 0 1.8vmin #999;
+  background-color: #b23681;
+  border-radius:4vmin;
+  padding:2vmin 7vmin;
+  font-size:10vmin;
+}
+
+.start-button:hover {
+  background-color:#e86198;
+}
+
+.start-button:active {
+  box-shadow: 0 0.5vmin #999;
+  transform: translateY(1vmin);
+}
+
+.startDisabled {
+  cursor: not-allowed;
+  background-color:#d8c3d0;
+  box-shadow: 0px 0px !important;
+  transition:none;
+}
+
+.startDisabled:hover {
+  background-color:#d8c3d0;
+}
+
+.startDisabled:active {
+  background-color:#d8c3d0;
+  transform:none;
+}
+
+@media (min-width: 420px) and (min-height: 420px) {
+  .difficulty-indicator {
+    margin-top:0;
+    font-size:3vmin;
+  }
+  h1 {
+    font-weight:400;
+    font-size:calc(10px + 3.2vmin);
+  }
+  .small-circle {
+    box-shadow: 0 1vmin #999;
+    border-radius:50%;
+    width:9.5vmin;
+    height:8.5vmin;
+    font-size:6.5vmin;
+    letter-spacing:normal;
+  }
+  .start-button {
+    box-shadow: 0 1vmin #999;
+    border-radius:2vmin;
+    padding:1.2vmin 4.5vmin;
+    font-size:6vmin;
+  }
+}
+
+@media (max-height: 520px) {
+  .set-buttons {
+    margin-top:0.75em;
+  }
+  .start-button {
+    margin-top:0.5em;
+    padding-top:1vmin;
+    padding-bottom:1vmin;
+  }
+}
+
+@media (min-height: 800px) {
+  .difficulty-indicator {
+    margin-bottom:1.8em;
+  }
+}
+</style>

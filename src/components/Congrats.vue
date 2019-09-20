@@ -17,11 +17,11 @@
     <transition name="fade" appear>
       <div class="buttons-div">
         <p class="pmargin">
-          <button class="button-again" v-on:click="refresh">Play Again</button>
+          <button class="button-again" v-on:click="refresh" ontouchstart>Play Again</button>
         </p>
         <p class="pmargin">
           <router-link class="home-area" to="/">
-            <button class="button-again">Change Set</button>
+            <button class="button-again" ontouchstart>Change Set</button>
           </router-link>
         </p>
       </div>
@@ -182,6 +182,14 @@ export default {
 .button-again:active {
   box-shadow: 0 0.5vmin #999;
   transform: translateY(1vmin);
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button:active {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .fade-enter-active {
