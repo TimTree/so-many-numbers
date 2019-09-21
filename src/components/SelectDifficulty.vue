@@ -29,7 +29,7 @@
               v-on:click="mobileHelp = true;" ontouchstart>?
             </button>
           </div>
-          <p class='note'>You can always change the difficulty later.</p>
+          <p class='note' v-if="firstRun">You can always change the difficulty later.</p>
         </div>
       </transition>
     </div>
@@ -66,6 +66,14 @@ export default {
       hoverStandard: false,
       mobileHelp: false,
     };
+  },
+  computed: {
+    firstRun() {
+      if (localStorage.saveData.difficulty === '') {
+        return true;
+      }
+      return false;
+    },
   },
   methods: {
     changeDifficulty(diff) {

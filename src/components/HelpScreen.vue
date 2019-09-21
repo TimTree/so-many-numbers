@@ -1,10 +1,9 @@
-/* eslint-disable no-alert */
 <template>
   <div class="help">
   <div v-if="!onWarning">
-        <div>
-                <transition name="fade05" appear>
-                  <div>
+  <div>
+  <transition name="fade05" appear>
+  <div>
     <h1>Game Goals!</h1>
     <p>Solve <b>30 math problems</b> as fast as you can.</p>
     <p>Choose between <b>simple</b> and <b>standard</b> difficulties.</p>
@@ -15,9 +14,10 @@
       v-on:click="onWarning = true" ontouchstart>Delete save data</button><br><br>
     <button class="normal-button button-orange"
       v-on:click="$parent.onHelp= false;" ontouchstart>Go back</button>
-    </p></div>
-          </transition>
-    </div>
+    </p>
+  </div>
+  </transition>
+  </div>
   </div>
   <div style="width:95%;margin:0 auto;" v-if="onWarning">
     <p>Are you ABSOULTELY sure you want to delete all your save data?</p>
@@ -49,7 +49,7 @@ export default {
   watch: {
     onWarning() {
       if (this.onWarning) {
-        this.precaution = setTimeout(() => { this.yesPrecaution = true; }, 2000);
+        this.precaution = setTimeout(() => { this.yesPrecaution = true; }, 1500);
       } else {
         clearTimeout(this.precaution);
         this.yesPrecaution = false;

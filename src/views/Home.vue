@@ -5,7 +5,8 @@
   </div>
   <div class="home-body">
     <SelectDifficulty v-if="onSelectDifficulty"/>
-    <Help v-else-if="onHelp"/>
+    <HelpScreen v-else-if="onHelp"/>
+    <OnBoarding v-else-if="onOnboarding" />
     <SelectSet v-else />
   </div>
   <div class="authors">
@@ -20,23 +21,30 @@
 
 <script>
 import SelectDifficulty from '@/components/SelectDifficulty.vue';
-import Help from '@/components/Help.vue';
+import HelpScreen from '@/components/HelpScreen.vue';
 import SelectSet from '@/components/SelectSet.vue';
+import OnBoarding from '@/components/OnBoarding.vue';
+import localStorage from '@/stores/localStorage';
 
 export default {
   data() {
     return {
       onSelectDifficulty: false,
       onHelp: false,
+      onOnboarding: false,
     };
   },
   components: {
     SelectDifficulty,
-    Help,
+    HelpScreen,
     SelectSet,
+    OnBoarding,
   },
   created() {
     this.$parent.isHome = true;
+    if (localStorage.saveData.difficulty === '') {
+      this.onOnboarding = true;
+    }
   },
   destroyed() {
     this.$parent.isHome = false;
