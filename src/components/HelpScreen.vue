@@ -66,7 +66,7 @@ export default {
 .help {
   text-align:center;
   width:95%;
-  font-size:calc(10px + 1.4vmin);
+  font-size:calc(10px + 1.6vmin);
 }
 
 h1 {
@@ -98,6 +98,12 @@ h1 {
   .reset {
     font-size:1.8vmin;
     padding:1vmin 2vmin;
+  }
+}
+
+@media (max-height: 520px) {
+  p {
+    margin:0.75em 0;
   }
 }
 </style>
