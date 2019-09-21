@@ -1,8 +1,10 @@
 <template>
-  <transition name="fade" appear>
 <div style="text-align:center;">
+<transition name="fade" appear>
+<div>
   <p class="difficulty-indicator">
-    <b>Standard</b> Difficulty (Change)
+    <b>{{difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}}</b> Difficulty
+     <a v-on:click="$parent.onSelectDifficulty = true;">(Change)</a>
   </p>
   <h1>Select Set</h1>
 
@@ -19,7 +21,7 @@
     </div>
     <div ontouchstart>
       <router-link tag="button" class="start-button" v-bind:class="{startDisabled: !startEnabled}"
-       :disabled="!startEnabled" :to="{ path: '/game', query: { diff: 'standard', set: getSet }}">
+       :disabled="!startEnabled" :to="{ path: '/game', query: { diff: difficulty, set: getSet }}">
           Start
       </router-link>
     </div>
@@ -32,17 +34,17 @@
     <div class="recents-buttons" v-if="recentSets[0]">
       <div style="display:flex;" ontouchstart>
       <router-link v-if="recentSets[0]" tag="button" class="circle"
-       :to="{ path: '/game', query: { diff: 'standard', set: recentSetsToChars(0) }}">
+       :to="{ path: '/game', query: { diff: difficulty, set: recentSetsToChars(0) }}">
        {{displayRecentSets(0)[0]}}<br v-if="recentSets[0].length>2" />
        <span v-if="recentSets[0].length>2">{{displayRecentSets(0)[1]}}</span>
       </router-link>
         <router-link v-if="recentSets[1]" tag="button" class="circle"
-       :to="{ path: '/game', query: { diff: 'standard', set: recentSetsToChars(1) }}">
+       :to="{ path: '/game', query: { diff: difficulty, set: recentSetsToChars(1) }}">
        {{displayRecentSets(1)[0]}}<br v-if="recentSets[1].length>2" />
        <span v-if="recentSets[1].length>2">{{displayRecentSets(1)[1]}}</span>
       </router-link>
       <router-link v-if="recentSets[2]" tag="button" class="circle"
-       :to="{ path: '/game', query: { diff: 'standard', set: recentSetsToChars(2)}}">
+       :to="{ path: '/game', query: { diff: difficulty, set: recentSetsToChars(2)}}">
         {{displayRecentSets(2)[0]}}<br v-if="recentSets[2].length>2" />
        <span v-if="recentSets[2].length>2">{{displayRecentSets(2)[1]}}</span>
       </router-link>
@@ -57,7 +59,8 @@
     <a>Help</a>
   </div>
 </div>
-  </transition>
+</transition>
+</div>
 </template>
 
 <script>
@@ -114,6 +117,12 @@ export default {
         return 'Recents\xa0\xa0▾';
       }
       return 'Menu\xa0\xa0▴';
+    },
+    difficulty() {
+      if (localStorage.saveData.difficulty) {
+        return localStorage.saveData.difficulty;
+      }
+      return 'standard';
     },
   },
   methods: {
@@ -246,13 +255,13 @@ export default {
 </script>
 
 <style scoped>
-  .fade-enter-active {
+.fade-enter-active {
     transition: opacity .5s;
-  }
+}
 
-  .fade-enter, .fade-leave-to {
-    opacity: 0;
-  }
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
 
 .difficulty-indicator {
   margin-top:0;

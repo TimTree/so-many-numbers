@@ -4,7 +4,8 @@
     <img src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
   </div>
   <div class="home-body">
-    <SelectSet />
+    <SelectDifficulty v-if="onSelectDifficulty"/>
+    <SelectSet v-else />
   </div>
   <div class="authors">
     <div>
@@ -17,10 +18,17 @@
 </template>
 
 <script>
+import SelectDifficulty from '@/components/SelectDifficulty.vue';
 import SelectSet from '@/components/SelectSet.vue';
 
 export default {
+  data() {
+    return {
+      onSelectDifficulty: false,
+    };
+  },
   components: {
+    SelectDifficulty,
     SelectSet,
   },
   created() {
