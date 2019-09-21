@@ -49,7 +49,7 @@
       </div>
     </div>
     <div class="no-recents" v-else>
-      You haven't played any sets yet!
+      You haven't finished any sets yet!
     </div>
   </div>
 
@@ -74,6 +74,26 @@ export default {
       onRecents: false,
       recentSets: localStorage.saveData.recents,
     };
+  },
+  created() {
+    if (localStorage.saveData.titleView === 0) {
+      this.onRecents = false;
+    } else {
+      this.onRecents = true;
+    }
+    if (localStorage.saveData.savedSet.includes('+')) {
+      this.isPlus = true;
+    }
+    if (localStorage.saveData.savedSet.includes('−')) {
+      this.isMinus = true;
+    }
+    if (localStorage.saveData.savedSet.includes('×')) {
+      this.isMultiply = true;
+    }
+    if (localStorage.saveData.savedSet.includes('÷')) {
+      this.isDivide = true;
+    }
+    this.updateButtonStatus();
   },
   computed: {
     getSet() {
@@ -106,34 +126,50 @@ export default {
     addPlus() {
       if (this.isPlus) {
         this.isPlus = false;
+        localStorage.saveData.savedSet = localStorage.saveData.savedSet
+          .filter(item => item !== '+');
       } else {
         this.isPlus = true;
+        localStorage.saveData.savedSet.push('+');
       }
       this.updateButtonStatus();
+      localStorage.save();
     },
     addMinus() {
       if (this.isMinus) {
         this.isMinus = false;
+        localStorage.saveData.savedSet = localStorage.saveData.savedSet
+          .filter(item => item !== '−');
       } else {
         this.isMinus = true;
+        localStorage.saveData.savedSet.push('−');
       }
       this.updateButtonStatus();
+      localStorage.save();
     },
     addMultiply() {
       if (this.isMultiply) {
         this.isMultiply = false;
+        localStorage.saveData.savedSet = localStorage.saveData.savedSet
+          .filter(item => item !== '×');
       } else {
         this.isMultiply = true;
+        localStorage.saveData.savedSet.push('×');
       }
       this.updateButtonStatus();
+      localStorage.save();
     },
     addDivide() {
       if (this.isDivide) {
         this.isDivide = false;
+        localStorage.saveData.savedSet = localStorage.saveData.savedSet
+          .filter(item => item !== '÷');
       } else {
         this.isDivide = true;
+        localStorage.saveData.savedSet.push('÷');
       }
       this.updateButtonStatus();
+      localStorage.save();
     },
 
     /**
@@ -151,12 +187,17 @@ export default {
 
     /**
      * Toggle the title view (menu or recents)
+     * Also save the current view state to localStorage
      */
     toggleRecents() {
       if (!this.onRecents) {
         this.onRecents = true;
+        localStorage.saveData.titleView = 1;
+        localStorage.save();
       } else {
         this.onRecents = false;
+        localStorage.saveData.titleView = 0;
+        localStorage.save();
       }
     },
 

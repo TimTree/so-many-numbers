@@ -42,7 +42,7 @@ export default {
    */
   saveData: {
     titleView: 0,
-    savedSet: '',
+    savedSet: [],
     difficulty: '',
     recents: [],
     sets: {},
