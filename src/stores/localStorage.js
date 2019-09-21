@@ -8,6 +8,10 @@ export default {
   /**
    * The save data contains:
    *
+   * titleView: 0 if the player last viewed the operators menu or 1 if
+   * the player last viewed the Recents pane
+   * savedSet: The set of operators that was last clicked on
+   * difficulty: The player's current set difficulty (simple or standard)
    * recents: The most recent sets the player played
    * sets: An object that tracks the player's high score/number of plays
    * for each difficulty/set
@@ -37,6 +41,9 @@ export default {
    * based on what the player plays.
    */
   saveData: {
+    titleView: 0,
+    savedSet: '',
+    difficulty: '',
     recents: [],
     sets: {},
   },

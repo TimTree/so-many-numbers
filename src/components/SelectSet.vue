@@ -5,7 +5,8 @@
     <b>Standard</b> Difficulty (Change)
   </p>
   <h1>Select Set</h1>
-  <div class="set-pane" v-if="!onRecents">
+
+  <div class="set-pane" v-show="!onRecents">
     <div class="set-buttons">
       <button class="small-circle" v-bind:class="{smallCircleActivated: isPlus}"
        v-on:click="addPlus()" ontouchstart>+</button>
@@ -23,11 +24,35 @@
       </router-link>
     </div>
   </div>
+
   <button class="set-switcher" ontouchstart
    v-on:click="toggleRecents()">{{setSwitcherText}}</button>
-  <div class="recents-pane" v-if="onRecents">
-    You haven't played any sets yet!
+
+  <div class="recents-pane" v-show="onRecents">
+    <div class="recents-buttons" v-if="recentSets[0]">
+      <div style="display:flex;" ontouchstart>
+      <router-link v-if="recentSets[0]" tag="button" class="circle"
+       :to="{ path: '/game', query: { diff: 'standard', set: recentSetsToChars(0) }}">
+       {{displayRecentSets(0)[0]}}<br v-if="recentSets[0].length>2" />
+       <span v-if="recentSets[0].length>2">{{displayRecentSets(0)[1]}}</span>
+      </router-link>
+        <router-link v-if="recentSets[1]" tag="button" class="circle"
+       :to="{ path: '/game', query: { diff: 'standard', set: recentSetsToChars(1) }}">
+       {{displayRecentSets(1)[0]}}<br v-if="recentSets[1].length>2" />
+       <span v-if="recentSets[1].length>2">{{displayRecentSets(1)[1]}}</span>
+      </router-link>
+      <router-link v-if="recentSets[2]" tag="button" class="circle"
+       :to="{ path: '/game', query: { diff: 'standard', set: recentSetsToChars(2)}}">
+        {{displayRecentSets(2)[0]}}<br v-if="recentSets[2].length>2" />
+       <span v-if="recentSets[2].length>2">{{displayRecentSets(2)[1]}}</span>
+      </router-link>
+      </div>
+    </div>
+    <div class="no-recents" v-else>
+      You haven't played any sets yet!
+    </div>
   </div>
+
   <div class="auxillary-buttons">
     <a>Help</a>
   </div>
@@ -36,6 +61,8 @@
 </template>
 
 <script>
+import localStorage from '@/stores/localStorage';
+
 export default {
   data() {
     return {
@@ -45,6 +72,7 @@ export default {
       isDivide: false,
       startEnabled: false,
       onRecents: false,
+      recentSets: localStorage.saveData.recents,
     };
   },
   computed: {
@@ -120,12 +148,57 @@ export default {
         this.startEnabled = true;
       }
     },
+
+    /**
+     * Toggle the title view (menu or recents)
+     */
     toggleRecents() {
       if (!this.onRecents) {
         this.onRecents = true;
       } else {
         this.onRecents = false;
       }
+    },
+
+    /**
+     * Display the recent set in a format that looks good in the big circle button.
+     * @param {int} num - The array index of the set in localStorage's recents array
+     * @returns {string} - The formatted set. Sets with more than three operators are
+     * split into two parts so we can add an HTML line break between them
+     */
+    displayRecentSets(num) {
+      const opsToWorkWith = this.recentSets[num];
+      let opsArray;
+      if (opsToWorkWith.length < 3) {
+        opsArray = [opsToWorkWith, ''];
+      } else if (opsToWorkWith.length === 3) {
+        opsArray = [opsToWorkWith.substring(0, 2), opsToWorkWith.substring(2)];
+      } else {
+        opsArray = [opsToWorkWith.substring(0, 2), opsToWorkWith.substring(2, 4)];
+      }
+      return opsArray;
+    },
+
+    /**
+     * The query string for sets are expressed in letters instead of the actual operators.
+     * Since localStorage holds the actual operators, we need to convert them to letter
+     * format so the Recents buttons can properly process the sets.
+     * @param {int} num - The array index of the set in localStorage's recents array
+     * @returns {string} - The set expressed in letters
+     */
+    recentSetsToChars(num) {
+      const opsToWorkWith = this.recentSets[num];
+      let charOutput = '';
+      const dict = {
+        '+': 'a',
+        '−': 's',
+        '×': 'm',
+        '÷': 'd',
+      };
+      for (let i = 0; i < opsToWorkWith.length; i += 1) {
+        charOutput += dict[opsToWorkWith[i]];
+      }
+      return charOutput;
     },
   },
 };
@@ -154,6 +227,16 @@ h1 {
 .set-buttons {
   margin-top:1.2em;
   display:block;
+}
+
+.recents-buttons, .no-recents {
+  margin-top:7vmin;
+  margin-bottom:1vmin;
+  display:flex;
+}
+
+.no-recents {
+  font-size:calc(10px + 2.2vmin);
 }
 
 button {
@@ -214,11 +297,11 @@ button:active {
   font-size:10vmin;
 }
 
-.start-button:hover {
+.circle:hover, .start-button:hover {
   background-color:#e86198;
 }
 
-.start-button:active {
+.circle:active, .start-button:active {
   box-shadow: 0 0.5vmin #999;
   transform: translateY(1vmin);
 }
@@ -267,7 +350,18 @@ button:active {
   display:flex;
   align-items:center;
   justify-content:center;
-  height:20vmin;
+}
+
+.circle {
+  box-shadow: 0 1.8vmin #999;
+  background-color: #b23681;
+  border-radius:50%;
+  width:24vmin;
+  height:22.5vmin;
+  font-size:12vmin;
+  line-height:0.65;
+  margin:0 0.18em;
+  letter-spacing:normal;
 }
 
 @media (min-width: 420px) and (min-height: 420px) {
@@ -298,6 +392,15 @@ button:active {
     border-radius:8vmin;
     padding:0.4vmin 4vmin;
     font-size:calc(5px + 2.6vmin);
+  }
+  .circle {
+    box-shadow: 0 1vmin #999;
+    background-color: #b23681;
+    border-radius:50%;
+    width:13vmin;
+    height:12vmin;
+    font-size:6vmin;
+    line-height:0.65;
   }
 }
 
