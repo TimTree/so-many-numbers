@@ -97,4 +97,11 @@ export default {
       localStorage.setItem('soManyNumbersSaveData', JSON.stringify(this.saveData));
     }
   },
+  /**
+   * Wipe the save data and reload the game
+   */
+  wipeData() {
+    localStorage.removeItem('soManyNumbersSaveData');
+    window.location.reload();
+  },
 };

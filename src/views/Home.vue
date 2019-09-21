@@ -5,6 +5,7 @@
   </div>
   <div class="home-body">
     <SelectDifficulty v-if="onSelectDifficulty"/>
+    <Help v-else-if="onHelp"/>
     <SelectSet v-else />
   </div>
   <div class="authors">
@@ -19,16 +20,19 @@
 
 <script>
 import SelectDifficulty from '@/components/SelectDifficulty.vue';
+import Help from '@/components/Help.vue';
 import SelectSet from '@/components/SelectSet.vue';
 
 export default {
   data() {
     return {
       onSelectDifficulty: false,
+      onHelp: false,
     };
   },
   components: {
     SelectDifficulty,
+    Help,
     SelectSet,
   },
   created() {

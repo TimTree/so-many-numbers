@@ -56,7 +56,7 @@
   </div>
 
   <div class="auxillary-buttons">
-    <a>Help</a>
+    <a v-on:click="$parent.onHelp = true;">Help</a>
   </div>
 </div>
 </transition>

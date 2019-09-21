@@ -1,5 +1,5 @@
 <template>
-<div style="text-align:center;">
+<div style="text-align:center;width:100%;">
   <div v-if="!mobileHelp">
     <transition name="fade" appear>
       <div>
