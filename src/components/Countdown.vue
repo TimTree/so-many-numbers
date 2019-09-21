@@ -1,6 +1,6 @@
 <template>
   <div style="height:100%;">
-    <transition name="fade" appear>
+    <transition name="fade07" appear>
       <div class="countdown">
         <p class="soManyTitle">So Many Numbers!</p>
         <p class="diffIndicator">{{difficulty}}</p>
@@ -40,14 +40,6 @@ export default {
 </script>
 
 <style scoped>
-  .fade-enter-active {
-    transition: opacity .7s;
-  }
-
-  .fade-enter, .fade-leave-to {
-    opacity: 0;
-  }
-
 .countdown {
     height:85%;
     display:flex;

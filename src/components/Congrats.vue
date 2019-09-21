@@ -14,14 +14,15 @@
       <div v-else>
           First score on this set!</div>
     </div>
-    <transition name="fade" appear>
+    <transition name="fade07" appear>
       <div class="buttons-div">
         <p class="pmargin">
-          <button class="button-again" v-on:click="refresh" ontouchstart>Play Again</button>
+          <button class="button-again button-magenta"
+           v-on:click="refresh" ontouchstart>Play Again</button>
         </p>
         <p class="pmargin">
           <router-link class="home-area" to="/">
-            <button class="button-again" ontouchstart>Change Set</button>
+            <button class="button-again button-magenta" ontouchstart>Change Set</button>
           </router-link>
         </p>
       </div>
@@ -160,44 +161,9 @@ export default {
 }
 
 .button-again {
-    border: none;
-    padding: 4.5% 10%;
-    font-size: 6.5vmin;
-    text-align: center;
-    cursor: pointer;
-    outline: none;
-    color: #fff;
-    background-color: #b23681;
-    border: none;
-    border-radius:3vmin;
-    box-shadow: 0 1.5vmin #999;
-    transition:background-color 0.12s, transform 0.12s, box-shadow 0.12s;;
-    font-family:'noto sans',sans-serif;
-}
-
-.button-again:hover {
-  background-color:#e86198;
-}
-
-.button-again:active {
-  box-shadow: 0 0.5vmin #999;
-  transform: translateY(1vmin);
-}
-
-button::-moz-focus-inner {
-  border: 0;
-}
-
-button:active {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-.fade-enter-active {
-  transition: opacity .7s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
+  padding: 4.5% 10%;
+  font-size: 6.5vmin;
+  border-radius:3vmin;
 }
 
 .pmargin {
@@ -228,7 +194,6 @@ button:active {
   .button-again {
     font-size:5vmin;
     border-radius:2vmin;
-    box-shadow: 0 1vmin #999;
   }
 
   .pmargin {

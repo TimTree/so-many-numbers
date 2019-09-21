@@ -1,6 +1,6 @@
 <template>
 <div style="text-align:center;">
-<transition name="fade" appear>
+<transition name="fade05" appear>
 <div>
   <p class="difficulty-indicator">
     <b>{{difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}}</b> Difficulty
@@ -10,17 +10,22 @@
 
   <div class="set-pane" v-show="!onRecents">
     <div class="set-buttons">
-      <button class="small-circle" v-bind:class="{smallCircleActivated: isPlus}"
+      <button class="small-circle button-greenUnselected"
+       v-bind:class="{'button-greenSelected': isPlus}"
        v-on:click="addPlus()" ontouchstart>+</button>
-      <button class="small-circle" v-bind:class="{smallCircleActivated: isMinus}"
+      <button class="small-circle button-greenUnselected"
+       v-bind:class="{'button-greenSelected': isMinus}"
        v-on:click="addMinus()" ontouchstart>−</button>
-      <button class="small-circle" v-bind:class="{smallCircleActivated: isMultiply}"
+      <button class="small-circle button-greenUnselected"
+       v-bind:class="{'button-greenSelected': isMultiply}"
        v-on:click="addMultiply()" ontouchstart>×</button>
-      <button class="small-circle" v-bind:class="{smallCircleActivated: isDivide}"
+      <button class="small-circle button-greenUnselected"
+       v-bind:class="{'button-greenSelected': isDivide}"
        v-on:click="addDivide()" ontouchstart>÷</button>
     </div>
     <div ontouchstart>
-      <router-link tag="button" class="start-button" v-bind:class="{startDisabled: !startEnabled}"
+      <router-link tag="button" class="start-button button-magenta"
+       v-bind:class="{startDisabled: !startEnabled}"
        :disabled="!startEnabled" :to="{ path: '/game', query: { diff: difficulty, set: getSet }}">
           Start
       </router-link>
@@ -33,17 +38,17 @@
   <div class="recents-pane" v-show="onRecents">
     <div class="recents-buttons" v-if="recentSets[0]">
       <div style="display:flex;" ontouchstart>
-      <router-link v-if="recentSets[0]" tag="button" class="circle"
+      <router-link v-if="recentSets[0]" tag="button" class="circle button-magenta"
        :to="{ path: '/game', query: { diff: difficulty, set: recentSetsToChars(0) }}">
        {{displayRecentSets(0)[0]}}<br v-if="recentSets[0].length>2" />
        <span v-if="recentSets[0].length>2">{{displayRecentSets(0)[1]}}</span>
       </router-link>
-        <router-link v-if="recentSets[1]" tag="button" class="circle"
+        <router-link v-if="recentSets[1]" tag="button" class="circle button-magenta"
        :to="{ path: '/game', query: { diff: difficulty, set: recentSetsToChars(1) }}">
        {{displayRecentSets(1)[0]}}<br v-if="recentSets[1].length>2" />
        <span v-if="recentSets[1].length>2">{{displayRecentSets(1)[1]}}</span>
       </router-link>
-      <router-link v-if="recentSets[2]" tag="button" class="circle"
+      <router-link v-if="recentSets[2]" tag="button" class="circle button-magenta"
        :to="{ path: '/game', query: { diff: difficulty, set: recentSetsToChars(2)}}">
         {{displayRecentSets(2)[0]}}<br v-if="recentSets[2].length>2" />
        <span v-if="recentSets[2].length>2">{{displayRecentSets(2)[1]}}</span>
@@ -255,14 +260,6 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active {
-    transition: opacity .5s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
 .difficulty-indicator {
   margin-top:0;
   font-size:5vmin;
@@ -289,71 +286,11 @@ h1 {
   font-size:calc(10px + 2.2vmin);
 }
 
-button {
-  border:none;
-  text-align:center;
-  text-decoration: none;
-  display: inline-block;
-  cursor:pointer;
-  outline:none;
-  padding: 0;
-  color:#fafafa;
-  font-family:"noto sans", sans-serif;
-  transition: background-color 0.12s, transform 0.12s, box-shadow 0.12s;
-}
-
-button::-moz-focus-inner {
-  border: 0;
-}
-
-button:active {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-.small-circle {
-  box-shadow: 0 1.8vmin #999;
-  background-color: #b5c5b4;
-  border-radius:50%;
-  width:16vmin;
-  height:14.5vmin;
-  font-size:11vmin;
-  margin:0 0.18em;
-  line-height:0;
-}
-
-.small-circle:hover {
-  background-color:#9abb98;
-}
-
-.small-circle:active {
-  box-shadow: 0 0.5vmin #999;
-  transform: translateY(1vmin);
-}
-
-.smallCircleActivated {
-  background-color: #0d9806;
-}
-
-.smallCircleActivated:hover {
-  background-color: #0d9806;
-}
-
 .start-button {
   margin-top:0.75em;
-  box-shadow: 0 1.8vmin #999;
-  background-color: #b23681;
   border-radius:4vmin;
   padding:2vmin 7vmin;
   font-size:10vmin;
-}
-
-.circle:hover, .start-button:hover {
-  background-color:#e86198;
-}
-
-.circle:active, .start-button:active {
-  box-shadow: 0 0.5vmin #999;
-  transform: translateY(1vmin);
 }
 
 .startDisabled {
@@ -373,7 +310,6 @@ button:active {
 }
 
 .set-switcher {
-  box-shadow: 0 1.8vmin #999;
   background-color: #c2a230;
   border-radius:8vmin;
   padding:0.4vmin 6vmin;
@@ -383,12 +319,6 @@ button:active {
 
 .set-switcher:hover {
   background-color:#b39529;
-}
-
-.set-switcher:active {
-  background-color:#bb9610;
-  box-shadow: 0 0.5vmin #999;
-  transform: translateY(1vmin);
 }
 
 .auxillary-buttons {
@@ -402,18 +332,6 @@ button:active {
   justify-content:center;
 }
 
-.circle {
-  box-shadow: 0 1.8vmin #999;
-  background-color: #b23681;
-  border-radius:50%;
-  width:24vmin;
-  height:22.5vmin;
-  font-size:12vmin;
-  line-height:0.65;
-  margin:0 0.18em;
-  letter-spacing:normal;
-}
-
 @media (min-width: 420px) and (min-height: 420px) {
   .difficulty-indicator {
     margin-top:0;
@@ -423,34 +341,15 @@ button:active {
     font-weight:400;
     font-size:calc(10px + 3.2vmin);
   }
-  .small-circle {
-    box-shadow: 0 1vmin #999;
-    border-radius:50%;
-    width:9.5vmin;
-    height:8.5vmin;
-    font-size:6.5vmin;
-    letter-spacing:normal;
-  }
   .start-button {
-    box-shadow: 0 1vmin #999;
     border-radius:2vmin;
     padding:1.2vmin 4.5vmin;
     font-size:6vmin;
   }
   .set-switcher {
-    box-shadow: 0 1vmin #999;
     border-radius:8vmin;
     padding:0.4vmin 4vmin;
     font-size:calc(5px + 2.6vmin);
-  }
-  .circle {
-    box-shadow: 0 1vmin #999;
-    background-color: #b23681;
-    border-radius:50%;
-    width:13vmin;
-    height:12vmin;
-    font-size:6vmin;
-    line-height:0.65;
   }
 }
 

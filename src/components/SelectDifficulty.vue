@@ -1,13 +1,13 @@
 <template>
 <div style="text-align:center;width:100%;">
   <div v-if="!mobileHelp">
-    <transition name="fade" appear>
+    <transition name="fade05" appear>
       <div>
         <h1>Select Difficulty</h1>
-          <button class="diff-button" v-on:click="changeDifficulty('simple')"
+          <button class="diff-button button-magenta" v-on:click="changeDifficulty('simple')"
             v-on:mouseover="hoverSimple = true" v-on:mouseleave="hoverSimple = false"
             ontouchstart>Simple</button>
-          <button class="diff-button" v-on:click="changeDifficulty('standard')"
+          <button class="diff-button button-magenta" v-on:click="changeDifficulty('standard')"
             v-on:mouseover="hoverStandard = true" v-on:mouseleave="hoverStandard = false"
             ontouchstart>Standard</button>
            <div class="diff-description" v-bind:class="{visible: hoverSimple || hoverStandard}">
@@ -25,7 +25,7 @@
             </p>
           </div>
           <div class="diff-qmark">
-            <button class="small-help"
+            <button class="small-circle button-purple"
               v-on:click="mobileHelp = true;" ontouchstart>?
             </button>
           </div>
@@ -33,7 +33,7 @@
         </div>
       </transition>
     </div>
-  <transition name="fade" appear>
+  <transition name="fade05" appear>
     <div class="help-popup" v-if="mobileHelp">
     <p>
       <b>Simple</b>: Play with a basic set of problems.
@@ -48,7 +48,7 @@
       6+3 &nbsp; 5×4 &nbsp; 16+17 &nbsp; 11×12
     </p>
     <p>
-    <button class="small-back"
+    <button class="normal-button button-orange"
       v-on:click="mobileHelp = false;" ontouchstart>Go back</button>
     </p>
     </div>
@@ -79,57 +79,17 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active {
-  transition: opacity .5s;
-}
-
-.fade-enter, .fade-leave-to {
-  opacity: 0;
-}
-
 h1 {
   font-weight:400;
   font-size:7vmin;
   margin:0;
 }
 
-button {
-  border:none;
-  text-align:center;
-  text-decoration: none;
-  display: inline-block;
-  cursor:pointer;
-  outline:none;
-  padding: 0;
-  color:#fafafa;
-  font-family:"noto sans", sans-serif;
-  transition: background-color 0.12s, transform 0.12s, box-shadow 0.12s;
-}
-
-button::-moz-focus-inner {
-  border: 0;
-}
-
-button:active {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 .diff-button {
-  box-shadow: 0 1.8vmin #999;
-  background-color: #b23681;
   border-radius:4vmin;
   padding:2vmin 7vmin;
   font-size:7.5vmin;
   margin:0.75em 0.18em 0 0.18em;
-}
-
-.diff-button:hover {
-  background-color:#e86198;
-}
-
-.diff-button:active {
-  box-shadow: 0 0.5vmin #999;
-  transform: translateY(1vmin);
 }
 
 .diff-description {
@@ -157,36 +117,6 @@ button:active {
   font-size:calc(8px + 1.5vmin);
 }
 
-.small-help {
-  box-shadow: 0 1.8vmin #999;
-  background-color: #726bd3;
-  border-radius:50%;
-  width:16vmin;
-  height:14.5vmin;
-  font-size:11vmin;
-  margin:0 0.18em;
-  line-height:0;
-}
-
-.small-help:active {
-  box-shadow: 0 0.5vmin #999;
-  transform: translateY(1vmin);
-}
-
-.small-back {
-  margin-top:0.5em;
-  box-shadow: 0 1.8vmin #999;
-  background-color: #c27120;
-  border-radius:3vmin;
-  padding:1.5vmin 4vmin;
-  font-size:6vmin;
-}
-
-.small-back:active {
-  box-shadow: 0 0.5vmin #999;
-  transform: translateY(1vmin);
-}
-
 .help-popup {
   font-size:6vmin;
   width:90%;
@@ -199,7 +129,6 @@ button:active {
     font-size:calc(10px + 3.2vmin);
   }
   .diff-button {
-    box-shadow: 0 1vmin #999;
     border-radius:2vmin;
     padding:1.2vmin 4.5vmin;
     font-size:5vmin;

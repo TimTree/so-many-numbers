@@ -48,6 +48,7 @@ export default {
   },
 };
 </script>
+
 <style>
 @import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap');
 
@@ -60,6 +61,149 @@ html, body, #app {
   color:#000;
 }
 
+* {
+  touch-action: manipulation;
+}
+
+a {
+  color:#0e5ab9 !important;
+  text-decoration:none !important;
+  cursor:pointer;
+  transition:color 0.15s;
+}
+
+a:hover {
+  color:#03a003 !important;
+}
+
+/**Button styles */
+button {
+  border:none;
+  text-align:center;
+  text-decoration: none;
+  display: inline-block;
+  cursor:pointer;
+  outline:none;
+  padding: 0;
+  color:#fafafa;
+  font-family:"noto sans", sans-serif;
+  box-shadow: 0 1.8vmin #999;
+  transition: background-color 0.12s, transform 0.12s, box-shadow 0.12s;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+button:active {
+  box-shadow: 0 0.5vmin #999;
+  transform: translateY(1vmin);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.button-magenta {
+  background-color: #b23681;
+}
+
+.button-magenta:hover {
+  background-color:#e86198;
+}
+
+.button-orange {
+  background-color: #c27120;
+}
+
+.button-orange:hover {
+  background-color:#dc862f;
+}
+
+.button-purple {
+  background-color:#726bd3;
+}
+
+.button-purple:hover {
+  background-color:#837ce7;
+}
+
+.button-greenUnselected {
+  background-color: #b5c5b4;
+}
+
+.button-greenUnselected:hover {
+  background-color:#9abb98;
+}
+
+.button-greenSelected, .button-greenSelected:hover {
+  background-color: #0d9806;
+}
+
+.small-circle {
+  border-radius:50%;
+  width:16vmin;
+  height:14.5vmin;
+  font-size:11vmin;
+  margin:0 0.18em;
+  line-height:0;
+}
+
+.circle {
+  border-radius:50%;
+  width:24vmin;
+  height:22.5vmin;
+  font-size:12vmin;
+  line-height:0.65;
+  margin:0 0.18em;
+  letter-spacing:normal;
+}
+
+.normal-button {
+  margin-top:0.5em;
+  border-radius:3vmin;
+  padding:1.5vmin 4vmin;
+  font-size:6vmin;
+}
+
+@media (min-width: 420px) and (min-height: 420px) {
+  button {
+    box-shadow: 0 1vmin #999;
+  }
+  .small-circle {
+    border-radius:50%;
+    width:9.5vmin;
+    height:8.5vmin;
+    font-size:6.5vmin;
+    letter-spacing:normal;
+  }
+  .circle {
+    border-radius:50%;
+    width:13vmin;
+    height:12vmin;
+    font-size:6vmin;
+    line-height:0.65;
+  }
+  .normal-button {
+    border-radius:1.5vmin;
+    padding:0.8vmin 3vmin;
+    font-size:3.5vmin;
+  }
+}
+
+/** Transitions */
+.fade05-enter-active {
+  transition: opacity .5s;
+}
+
+.fade07-enter-active {
+  transition: opacity .7s;
+}
+
+.fade05-enter, .fade05-leave-to, .fade07-enter, .fade07-leave-to {
+  opacity: 0;
+}
+
+</style>
+
+<style scoped>
 .bodyBG {
   position:absolute;
   transition: background-color 0.2s;
@@ -83,9 +227,5 @@ html, body, #app {
 
 .almost {
   background-color:#e6c695;
-}
-
-* {
-  touch-action: manipulation;
 }
 </style>

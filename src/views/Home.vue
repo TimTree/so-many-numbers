@@ -44,7 +44,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .home-div {
   height:100%;
   overflow:hidden;
@@ -85,17 +85,6 @@ export default {
   align-items:flex-start;
   justify-content:center;
   font-size:calc(9px + 0.5vw);
-}
-
-a {
-  color:#0e5ab9 !important;
-  text-decoration:none !important;
-  cursor:pointer;
-  transition:color 0.15s;
-}
-
-a:hover {
-  color:#03a003 !important;
 }
 
 @media (min-width: 420px) and (min-height: 420px) {
