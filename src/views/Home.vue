@@ -47,7 +47,6 @@ export default {
 <style scoped>
 .home-div {
   height:100%;
-  overflow:hidden;
   display:grid;
   grid-template-columns:100%;
   grid-template-rows: auto 1fr 7%;
@@ -58,7 +57,6 @@ export default {
   align-items:center;
   justify-content:center;
   flex-direction:column;
-  overflow:auto;
   margin:0 auto;
   width:98%;
   max-width:1200px;

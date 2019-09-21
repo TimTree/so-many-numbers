@@ -19,10 +19,11 @@
           </transition>
     </div>
   </div>
-  <div v-if="onWarning">
+  <div style="width:95%;margin:0 auto;" v-if="onWarning">
     <p>Are you ABSOULTELY sure you want to delete all your save data?</p>
     <p><b>You cannot undo this action.</b> The game will refresh if you select Yes.</p>
-    <p style="font-size:200%;"><a v-on:click="wipeData()">Yes</a>
+    <p style="font-size:200%;"><a class="hiddenYes"
+     v-bind:class="{visibleYes: yesPrecaution}" v-on:click="wipeData()">Yes</a>
      &nbsp;&nbsp; <a v-on:click="onWarning=false;"><b>Cancel</b></a></p>
   </div>
   </div>
@@ -35,13 +36,28 @@ export default {
   data() {
     return {
       onWarning: false,
-      dont: true,
+      yesPrecaution: false,
     };
   },
   methods: {
     wipeData() {
-      localStorage.wipeData();
+      if (this.yesPrecaution) {
+        localStorage.wipeData();
+      }
     },
+  },
+  watch: {
+    onWarning() {
+      if (this.onWarning) {
+        this.precaution = setTimeout(() => { this.yesPrecaution = true; }, 2000);
+      } else {
+        clearTimeout(this.precaution);
+        this.yesPrecaution = false;
+      }
+    },
+  },
+  destroyed() {
+    clearTimeout(this.precaution);
   },
 };
 </script>
@@ -65,6 +81,17 @@ h1 {
 
 .reset:hover {
   background-color:#e23737;
+}
+
+.hiddenYes {
+  opacity:0;
+  transition: opacity 0.5s;
+  cursor:default;
+}
+
+.visibleYes {
+  opacity:1;
+  cursor:pointer;
 }
 
 @media (min-width: 420px) and (min-height: 420px) {
