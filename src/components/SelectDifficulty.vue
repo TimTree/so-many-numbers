@@ -1,14 +1,58 @@
 <template>
 <div style="text-align:center;">
-<transition name="fade" appear>
-  <div>
-  <h1>Select Difficulty</h1>
-  <button class="diff-button" v-on:click="changeDifficulty('simple')"
-   ontouchstart>Simple</button>
-  <button class="diff-button" v-on:click="changeDifficulty('standard')"
-   ontouchstart>Standard</button>
-  </div>
-</transition>
+  <div v-if="!mobileHelp">
+    <transition name="fade" appear>
+      <div>
+        <h1>Select Difficulty</h1>
+          <button class="diff-button" v-on:click="changeDifficulty('simple')"
+            v-on:mouseover="hoverSimple = true" v-on:mouseleave="hoverSimple = false"
+            ontouchstart>Simple</button>
+          <button class="diff-button" v-on:click="changeDifficulty('standard')"
+            v-on:mouseover="hoverStandard = true" v-on:mouseleave="hoverStandard = false"
+            ontouchstart>Standard</button>
+           <div class="diff-description" v-bind:class="{visible: hoverSimple || hoverStandard}">
+            <span v-if="hoverSimple">Play with a basic set of problems.</span>
+            <span v-if="hoverStandard">Play with a wider variety of problems.</span>
+            <span v-else>&nbsp;</span>
+            <p class='diff-examples'>
+              <span v-if="hoverSimple">
+                6+3 &nbsp; 5×4 &nbsp; 7+7 &nbsp; 6×2
+              </span>
+              <span v-if="hoverStandard">
+                6+3 &nbsp; 5×4 &nbsp; 16+17 &nbsp; 11×12
+              </span>
+              <span v-else>&nbsp;</span>
+            </p>
+          </div>
+          <div class="diff-qmark">
+            <button class="small-help"
+              v-on:click="mobileHelp = true;" ontouchstart>?
+            </button>
+          </div>
+          <p class='note'>You can always change the difficulty later.</p>
+        </div>
+      </transition>
+    </div>
+  <transition name="fade" appear>
+    <div class="help-popup" v-if="mobileHelp">
+    <p>
+      <b>Simple</b>: Play with a basic set of problems.
+    </p>
+    <p>
+      6+3 &nbsp; 5×4 &nbsp; 7+7 &nbsp; 6×2
+    </p>
+    <p>
+      <b>Standard</b>: Play with a wider variety of problems.
+    </p>
+    <p>
+      6+3 &nbsp; 5×4 &nbsp; 16+17 &nbsp; 11×12
+    </p>
+    <p>
+    <button class="small-back"
+      v-on:click="mobileHelp = false;" ontouchstart>Go back</button>
+    </p>
+    </div>
+  </transition>
 </div>
 </template>
 
@@ -18,7 +62,9 @@ import localStorage from '@/stores/localStorage';
 export default {
   data() {
     return {
-
+      hoverSimple: false,
+      hoverStandard: false,
+      mobileHelp: false,
     };
   },
   methods: {
@@ -86,6 +132,67 @@ button:active {
   transform: translateY(1vmin);
 }
 
+.diff-description {
+  margin:7vmin 0;
+  font-size:calc(10px + 2.2vmin);
+  opacity:0;
+  transition:opacity 0.12s;
+  display:none;
+}
+
+.diff-examples {
+  font-size:calc(12px + 4vmin);
+  letter-spacing:0.1em;
+}
+
+.diff-qmark {
+  margin:7vmin;
+  font-size:calc(12px + 8vmin);
+}
+.visible {
+  opacity:1;
+}
+
+.note {
+  font-size:calc(8px + 1.5vmin);
+}
+
+.small-help {
+  box-shadow: 0 1.8vmin #999;
+  background-color: #726bd3;
+  border-radius:50%;
+  width:16vmin;
+  height:14.5vmin;
+  font-size:11vmin;
+  margin:0 0.18em;
+  line-height:0;
+}
+
+.small-help:active {
+  box-shadow: 0 0.5vmin #999;
+  transform: translateY(1vmin);
+}
+
+.small-back {
+  margin-top:0.5em;
+  box-shadow: 0 1.8vmin #999;
+  background-color: #c27120;
+  border-radius:3vmin;
+  padding:1.5vmin 4vmin;
+  font-size:6vmin;
+}
+
+.small-back:active {
+  box-shadow: 0 0.5vmin #999;
+  transform: translateY(1vmin);
+}
+
+.help-popup {
+  font-size:6vmin;
+  width:90%;
+  margin:0 auto;
+}
+
 @media (min-width: 420px) and (min-height: 420px) {
   h1 {
     font-weight:400;
@@ -96,6 +203,12 @@ button:active {
     border-radius:2vmin;
     padding:1.2vmin 4.5vmin;
     font-size:5vmin;
+  }
+  .diff-description {
+    display:block;
+  }
+  .diff-qmark {
+    display:none;
   }
 
 }

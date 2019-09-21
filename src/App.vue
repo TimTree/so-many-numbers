@@ -57,6 +57,7 @@ html, body, #app {
   width:100%;
   font-family:"noto sans", sans-serif;
   -webkit-text-size-adjust:100%;
+  color:#000;
 }
 
 .bodyBG {
