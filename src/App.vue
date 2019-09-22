@@ -50,7 +50,29 @@ export default {
 </script>
 
 <style>
-@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700&display=swap');
+@font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Noto Sans'), local('NotoSans'),
+         url('assets/noto-sans-v9-latin-regular.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Noto Sans';
+    font-style: italic;
+    font-weight: 400;
+    src: local('Noto Sans Italic'), local('NotoSans-Italic'),
+         url('assets/noto-sans-v9-latin-italic.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Noto Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Noto Sans Bold'), local('NotoSans-Bold'),
+         url('assets/noto-sans-v9-latin-700.woff2') format('woff2');
+  }
 
 html, body, #app {
   margin:0;
