@@ -7,6 +7,7 @@
     <SelectDifficulty v-if="onSelectDifficulty"/>
     <HelpScreen v-else-if="onHelp"/>
     <OnBoarding v-else-if="onOnboarding" />
+    <UpdatesScreen v-else-if="onUpdatesScreen" />
     <SelectSet v-else />
   </main>
   <footer class="authors">
@@ -24,6 +25,7 @@ import SelectDifficulty from '@/components/SelectDifficulty.vue';
 import HelpScreen from '@/components/HelpScreen.vue';
 import SelectSet from '@/components/SelectSet.vue';
 import OnBoarding from '@/components/OnBoarding.vue';
+import UpdatesScreen from '@/components/UpdatesScreen.vue';
 import localStorage from '@/stores/localStorage';
 
 export default {
@@ -32,6 +34,7 @@ export default {
       onSelectDifficulty: false,
       onHelp: false,
       onOnboarding: false,
+      onUpdatesScreen: false,
     };
   },
   components: {
@@ -39,6 +42,7 @@ export default {
     HelpScreen,
     SelectSet,
     OnBoarding,
+    UpdatesScreen,
   },
   created() {
     this.$parent.isHome = true;

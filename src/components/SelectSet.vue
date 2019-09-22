@@ -61,7 +61,8 @@
   </div>
 
   <div class="auxillary-buttons">
-    <a v-on:click="$parent.onHelp = true;">Help</a>
+    <a v-on:click="$parent.onHelp = true;">Help</a> &nbsp;&nbsp;
+     <a v-on:click="$parent.onUpdatesScreen = true;">Updates</a>
   </div>
 </div>
 </transition>
