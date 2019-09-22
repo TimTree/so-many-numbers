@@ -66,7 +66,7 @@ html, body, #app {
 }
 
 a {
-  color:#0e5ab9 !important;
+  color:#0c4fa1 !important;
   text-decoration:none !important;
   cursor:pointer;
   transition:color 0.15s;

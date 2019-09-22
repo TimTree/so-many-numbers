@@ -8,6 +8,7 @@ module.exports = {
       favicon32: 'img/icons/favicon32.png',
       favicon16: 'img/icons/favicon16.png',
       appleTouchIcon: 'img/icons/apple-touch-icon.png',
+      appleMobileWebAppStatusBarStyle: 'black',
       maskIcon: '',
       msTileImage: '',
     },

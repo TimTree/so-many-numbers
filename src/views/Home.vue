@@ -1,21 +1,21 @@
 <template>
 <div class="home-div">
-  <div class="logo">
+  <header>
     <img src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
-  </div>
-  <div class="home-body">
+  </header>
+  <main>
     <SelectDifficulty v-if="onSelectDifficulty"/>
     <HelpScreen v-else-if="onHelp"/>
     <OnBoarding v-else-if="onOnboarding" />
     <SelectSet v-else />
-  </div>
-  <div class="authors">
+  </main>
+  <footer class="authors">
     <div>
       By <a href="https://github.com/ash-caz" target="_blank" rel="noopener">Ashley Caswell</a>
        and <a href="https://github.com/TimTree" target="_blank" rel="noopener">Timothy Hsu</a> //
        <a href="https://github.com/TimTree/so-many-numbers" target="_blank" rel="noopener">GitHub Repo</a>
     </div>
-  </div>
+  </footer>
 </div>
 </template>
 
@@ -60,7 +60,7 @@ export default {
   grid-template-rows: auto 1fr 7%;
 }
 
-.home-body {
+main {
   display:flex;
   align-items:center;
   justify-content:center;
@@ -70,7 +70,7 @@ export default {
   max-width:1200px;
 }
 
-.logo {
+header {
   background-color:#cfe0f1;
   background-image: linear-gradient(to bottom right, #71c1f7, #b0dff3, #71c1f7);
   width:100%;
@@ -82,7 +82,7 @@ export default {
   height:19.875vmin;
 }
 
-.logo img {
+header img {
   height:19.875vmin;
 }
 
@@ -90,31 +90,34 @@ export default {
   display:flex;
   align-items:flex-start;
   justify-content:center;
-  font-size:calc(9px + 0.5vw);
+  font-size:calc(9px + 0.9vw);
 }
 
 @media (min-width: 420px) and (min-height: 420px) {
-  .logo {
+  header {
     height:13.25vmin;
     min-height:63.6px;
     max-height:159px;
   }
-  .logo img {
+  header img {
     height:13.25vmin;
     min-height:63.6px;
     max-height:159px;
+  }
+  .authors {
+    font-size:calc(9px + 0.5vw);
   }
 }
 
 @media (min-height: 800px) {
-  .logo {
+  header {
     box-shadow: 0px 3px 7px rgb(0,0,0,0.3);
     padding:20px 0;
   }
 }
 
 @media (min-height: 1000px) {
-  .logo {
+  header {
     padding:30px 0;
   }
 }
