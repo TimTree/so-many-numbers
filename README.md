@@ -1,13 +1,9 @@
-**Note: This updated rewrite of So Many Numbers is incomplete.**
-
-Please use the [current production version](https://so-many-numbers.github.io) in the meantime.
-
 <p align="center">
  <img src="src/assets/SoManyNumbersTitleLight.svg" width=500 align="center" alt="So Many Numbers!">
 </p>
 
 <p align="center">
-<a href="#"><strong>Game URL</strong></a>
+<a href="https://numbers.gamesbytim.com"><strong>numbers.gamesbytim.com</strong></a>
 </p>
 
 <p align="center">
