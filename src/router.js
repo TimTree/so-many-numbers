@@ -13,9 +13,13 @@ export default new Router({
       component: Home,
     },
     {
+      path: '/index.html',
+      name: 'home',
+      component: Home,
+    },
+    {
       path: '/game',
       name: 'game',
-
       component: () => import('./views/Game.vue'),
     },
   ],
