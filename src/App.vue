@@ -54,6 +54,7 @@ export default {
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: local('Noto Sans'), local('NotoSans'),
          url('assets/noto-sans-v9-latin-regular.woff2') format('woff2');
   }
@@ -62,6 +63,7 @@ export default {
     font-family: 'Noto Sans';
     font-style: italic;
     font-weight: 400;
+    font-display: swap;
     src: local('Noto Sans Italic'), local('NotoSans-Italic'),
          url('assets/noto-sans-v9-latin-italic.woff2') format('woff2');
   }
@@ -70,6 +72,7 @@ export default {
     font-family: 'Noto Sans';
     font-style: normal;
     font-weight: 700;
+    font-display: swap;
     src: local('Noto Sans Bold'), local('NotoSans-Bold'),
          url('assets/noto-sans-v9-latin-700.woff2') format('woff2');
   }
