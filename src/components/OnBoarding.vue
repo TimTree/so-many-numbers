@@ -10,7 +10,7 @@
     </p>
     <button class="normal-button button-orange" style="margin-top:0;"
       v-on:click="$parent.onOnboarding= false;$parent.onSelectDifficulty = true;"
-       ontouchstart>Get started</button>
+      >Get started</button>
   </div>
   </transition>
   </div>

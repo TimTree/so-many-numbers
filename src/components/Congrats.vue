@@ -18,11 +18,11 @@
       <div class="buttons-div">
         <p class="pmargin">
           <button class="button-again button-magenta"
-           v-on:click="refresh" ontouchstart>Play Again</button>
+           v-on:click="refresh">Play Again</button>
         </p>
         <p class="pmargin">
           <router-link class="home-area" to="/">
-            <button class="button-again button-magenta" ontouchstart>Change Set</button>
+            <button class="button-again button-magenta">Change Set</button>
           </router-link>
         </p>
       </div>

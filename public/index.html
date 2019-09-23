@@ -17,11 +17,12 @@
     <div id="app"></div>
     <!-- Change body background color before vue loads to prevent white flicker -->
     <script>
-        if (window.location.hash.substr(1) === "/") {
-          document.body.style.backgroundColor="#d3d3d3";
-        } else {
-          document.body.style.backgroundColor="#fafafa";
-        }
+      document.addEventListener("touchstart", function() {}, {passive: true});
+      if (window.location.hash.substr(1) === "/") {
+        document.body.style.backgroundColor="#d3d3d3";
+      } else {
+        document.body.style.backgroundColor="#fafafa";
+      }
     </script>
     <!-- built files will be auto injected -->
   </body>

@@ -11,9 +11,9 @@
     <p>Strive to beat your high scores!</p>
     <p>
     <button class="normal-button reset"
-      v-on:click="onWarning = true" ontouchstart>Delete save data</button><br><br>
+      v-on:click="onWarning = true">Delete save data</button><br><br>
     <button class="normal-button button-orange"
-      v-on:click="$parent.onHelp= false;" ontouchstart>Go back</button>
+      v-on:click="$parent.onHelp= false;">Go back</button>
     </p>
   </div>
   </transition>

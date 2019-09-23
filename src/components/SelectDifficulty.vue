@@ -6,10 +6,10 @@
         <h1>Select Difficulty</h1>
           <button class="diff-button button-magenta" v-on:click="changeDifficulty('simple')"
             v-on:mouseover="hoverSimple = true" v-on:mouseleave="hoverSimple = false"
-            ontouchstart>Simple</button>
+           >Simple</button>
           <button class="diff-button button-magenta" v-on:click="changeDifficulty('standard')"
             v-on:mouseover="hoverStandard = true" v-on:mouseleave="hoverStandard = false"
-            ontouchstart>Standard</button>
+           >Standard</button>
            <div class="diff-description" v-bind:class="{visible: hoverSimple || hoverStandard}">
             <span v-if="hoverSimple">Play with a basic set of problems.</span>
             <span v-if="hoverStandard">Play with a wider variety of problems.</span>
@@ -26,15 +26,16 @@
           </div>
           <div class="diff-qmark">
             <button class="small-circle button-purple"
-              v-on:click="mobileHelp = true;" ontouchstart>?
+              v-on:click="mobileHelp = true;">?
             </button>
           </div>
           <p class='note' v-if="firstRun">You can always change the difficulty later.</p>
         </div>
       </transition>
     </div>
-  <transition name="fade05" appear>
     <div class="help-popup" v-if="mobileHelp">
+    <transition name="fade05" appear>
+    <div>
     <p>
       <b>Simple</b>: Play with a basic set of problems.
     </p>
@@ -49,10 +50,11 @@
     </p>
     <p>
     <button class="normal-button button-orange"
-      v-on:click="mobileHelp = false;" ontouchstart>Go back</button>
+      v-on:click="mobileHelp = false;">Go back</button>
     </p>
     </div>
-  </transition>
+    </transition>
+    </div>
 </div>
 </template>
 

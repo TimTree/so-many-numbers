@@ -12,14 +12,14 @@
     <p>
     <span v-if="isOnline">
     <button class="normal-button forceUpdate"
-      v-on:click="forceUpdate()" ontouchstart>Force update</button>
+      v-on:click="forceUpdate()">Force update</button>
     </span>
     <span v-else>
       <i>Force update disabled - you're offline</i>
     </span>
       <br><br>
     <button class="normal-button button-orange"
-      v-on:click="$parent.onUpdatesScreen=false;" ontouchstart>Go back</button>
+      v-on:click="$parent.onUpdatesScreen=false;">Go back</button>
     </p>
   </div>
   </transition>

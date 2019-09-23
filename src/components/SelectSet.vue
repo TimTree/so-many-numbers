@@ -12,18 +12,18 @@
     <div class="set-buttons">
       <button class="small-circle button-greenUnselected"
        v-bind:class="{'button-greenSelected': isPlus}"
-       v-on:click="addPlus()" ontouchstart>+</button>
+       v-on:click="addPlus()">+</button>
       <button class="small-circle button-greenUnselected"
        v-bind:class="{'button-greenSelected': isMinus}"
-       v-on:click="addMinus()" ontouchstart>−</button>
+       v-on:click="addMinus()">−</button>
       <button class="small-circle button-greenUnselected"
        v-bind:class="{'button-greenSelected': isMultiply}"
-       v-on:click="addMultiply()" ontouchstart>×</button>
+       v-on:click="addMultiply()">×</button>
       <button class="small-circle button-greenUnselected"
        v-bind:class="{'button-greenSelected': isDivide}"
-       v-on:click="addDivide()" ontouchstart>÷</button>
+       v-on:click="addDivide()">÷</button>
     </div>
-    <div ontouchstart>
+    <div>
       <router-link tag="button" class="start-button button-magenta"
        v-bind:class="{startDisabled: !startEnabled}"
        :disabled="!startEnabled" :to="{ path: '/game', query: { diff: difficulty, set: getSet }}">
@@ -32,12 +32,12 @@
     </div>
   </div>
 
-  <button class="set-switcher" ontouchstart
+  <button class="set-switcher"
    v-on:click="toggleRecents()">{{setSwitcherText}}</button>
 
   <div class="recents-pane" v-show="onRecents">
     <div class="recents-buttons" v-if="recentSets[0]">
-      <div style="display:flex;" ontouchstart>
+      <div style="display:flex;">
       <router-link v-if="recentSets[0]" tag="button" class="circle button-magenta"
        :to="{ path: '/game', query: { diff: difficulty, set: recentSetsToChars(0) }}">
        {{displayRecentSets(0)[0]}}<br v-if="recentSets[0].length>2" />
