@@ -3,11 +3,11 @@
   <transition name="fade05" appear>
   <div>
     <p style="margin-top:0;">
-      <img src='@/assets/SoManyNumbersOnboarding.png' alt='So Many Numbers onboarding' />
+      <img src='@/assets/SoManyNumbersOnboarding.png' alt='So Many Numbers game screenshot' />
     </p>
-    <p>
-    <b>Objective:</b> Solve 30 math problems as fast as you can!
-    </p>
+    <main>
+    <strong>Objective:</strong> Solve 30 math problems as fast as you can!
+    </main>
     <button class="normal-button button-orange" style="margin-top:0;"
       v-on:click="$parent.onOnboarding= false;$parent.onSelectDifficulty = true;"
       >Get started</button>
@@ -33,6 +33,10 @@ img {
   height:45vmin;
   border-radius:0.5vmin;
   box-shadow:2px 2px 7px rgba(0,0,0,0.3);
+}
+
+main {
+  margin:1em 0;
 }
 
 @media (min-width: 420px) and (min-height: 420px) {
