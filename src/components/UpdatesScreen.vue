@@ -3,10 +3,10 @@
   <div>
   <transition name="fade05" appear>
   <div>
-    <p>So Many Numbers automatically stores to your device cache for offline use.
-      When we update the game, it may take a while for the cache to receive the update.
+    <p>So Many Numbers automatically downloads to your device for offline use.
+      When we update the game, you may not receive the update right away.
     </p>
-    <p>Select "Force update" to immediately download the latest release.
+    <p>Click "Force update" to immediately fetch the latest update.
     <b>You will temporarily lose offline access</b> until the game
      successfully reloads.</p>
     <p>

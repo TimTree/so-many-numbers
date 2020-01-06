@@ -14,7 +14,7 @@
     <div>
       By <a href="https://github.com/ash-caz" target="_blank" rel="noopener">Ashley Caswell</a>
        and <a href="https://github.com/TimTree" target="_blank" rel="noopener">Timothy Hsu</a> //
-       <a href="https://github.com/TimTree/so-many-numbers" target="_blank" rel="noopener">GitHub Repo</a>
+       <a href="https://github.com/TimTree/so-many-numbers" target="_blank" rel="noopener">Source</a>
     </div>
   </footer>
 </div>
