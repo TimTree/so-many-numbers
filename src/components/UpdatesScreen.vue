@@ -3,19 +3,20 @@
   <div>
   <transition name="fade05" appear>
   <div>
-    <p>So Many Numbers automatically downloads to your device for offline use.
-      When we update the game, you may not receive the update right away.
+    <p>So Many Numbers downloads to your device for offline use.
+      It automatically updates as we release new versions.
     </p>
-    <p>Click "Force update" to immediately fetch the latest update.
+    <p>Click "Update now" to get the latest update before it automatically
+       downloads.
     <b>You will temporarily lose offline access</b> until the game
      successfully reloads.</p>
     <p>
     <span v-if="isOnline">
     <button class="normal-button forceUpdate"
-      v-on:click="forceUpdate()">Force update</button>
+      v-on:click="forceUpdate()">Update now</button>
     </span>
     <span v-else>
-      <i>Force update disabled - you're offline</i>
+      <i>"Update now" disabled - you're offline</i>
     </span>
       <br><br>
     <button class="normal-button button-orange"
