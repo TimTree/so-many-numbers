@@ -44,8 +44,8 @@ export default {
   },
   methods: {
     /**
-     * Force a game update by unregistering the service worker
-     * and refreshing the game
+     * Force a game update by unregistering the service worker,
+     * purging the cache, and refreshing the game
      */
     forceUpdate() {
       if ('serviceWorker' in navigator) {
@@ -53,6 +53,12 @@ export default {
           .then((registrations) => {
             registrations.forEach((registration) => {
               registration.unregister();
+            });
+          });
+        caches.keys()
+          .then((cacheNames) => {
+            cacheNames.forEach((cacheName) => {
+              caches.delete(cacheName);
             });
           });
       }
