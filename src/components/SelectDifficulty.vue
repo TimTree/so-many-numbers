@@ -13,15 +13,15 @@
            <div class="diff-description" v-bind:class="{visible: hoverSimple || hoverStandard}">
             <span v-if="hoverSimple">Play with a basic set of problems.</span>
             <span v-if="hoverStandard">Play with a wider variety of problems.</span>
-            <span v-else>&nbsp;</span>
-            <p class='diff-examples'>
+            <span style="display:inline-block;" v-else></span>
+            <p class='diff-examples extra-space'>
               <span v-if="hoverSimple">
-                6+3 &nbsp; 5×4 &nbsp; 7+7 &nbsp; 6×2
+                <span>6+3 5×4 7+7 6×2</span>
               </span>
               <span v-if="hoverStandard">
-                6+3 &nbsp; 5×4 &nbsp; 16+17 &nbsp; 11×12
+                <span>6+3 5×4 16+17 11×12</span>
               </span>
-              <span v-else>&nbsp;</span>
+              <span style="display:inline-block;" v-else></span>
             </p>
           </div>
           <div class="diff-qmark">
@@ -39,14 +39,14 @@
     <p>
       <b>Simple</b>: Play with a basic set of problems.
     </p>
-    <p>
-      6+3 &nbsp; 5×4 &nbsp; 7+7 &nbsp; 6×2
+    <p class="extra-space">
+      6+3 5×4 7+7 6×2
     </p>
     <p>
       <b>Standard</b>: Play with a wider variety of problems.
     </p>
-    <p>
-      6+3 &nbsp; 5×4 &nbsp; 16+17 &nbsp; 11×12
+    <p class="extra-space">
+      6+3 5×4 16+17 11×12
     </p>
     <p>
     <button class="normal-button button-orange"
@@ -113,6 +113,10 @@ h1 {
 .diff-examples {
   font-size:calc(12px + 4vmin);
   letter-spacing:0.1em;
+}
+
+.extra-space {
+  word-spacing:0.52em;
 }
 
 .diff-qmark {

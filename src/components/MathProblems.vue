@@ -7,15 +7,15 @@
     </div>
     </transition>
     <div class="set1">
-      <div class="expression1">{{store.expressions[store.numberOfProblemsSolved-2]}}&nbsp;</div>
+      <div class="expression1">{{store.expressions[store.numberOfProblemsSolved-2]}} </div>
       <div class="solution1">{{store.solutions[store.numberOfProblemsSolved-2]}}</div>
     </div>
     <div class="set2">
-      <div class="expression2">{{store.expressions[store.numberOfProblemsSolved-1]}}&nbsp;</div>
+      <div class="expression2">{{store.expressions[store.numberOfProblemsSolved-1]}} </div>
       <div class="solution2">{{store.solutions[store.numberOfProblemsSolved-1]}}</div>
     </div>
     <div class="set3" v-bind:class="{pulsed: isCorrect}">
-      <div class="expression3">{{store.expressions[store.numberOfProblemsSolved]}}&nbsp;</div>
+      <div class="expression3">{{store.expressions[store.numberOfProblemsSolved]}} </div>
       <div>
         <input v-bind:class="{green: isCorrect, red: isWrong}" v-model="answer" ref="focusHere"
          class="math-box" autocomplete="off"
@@ -190,6 +190,10 @@ export default {
 
 .encourage-leave-to {
   opacity:0;
+}
+
+.expression1, .expression2, .expression3 {
+  white-space: pre;
 }
 
 @media (min-width: 420px) and (min-height: 420px) {

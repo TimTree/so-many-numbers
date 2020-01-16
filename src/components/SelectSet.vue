@@ -61,8 +61,8 @@
   </div>
 
   <div class="auxillary-buttons">
-    <a v-on:click="$parent.onHelp = true;">Help</a> &nbsp;&nbsp;
-     <a v-on:click="$parent.onUpdatesScreen = true;">Updater</a>
+    <a v-on:click="$parent.onHelp = true;">Help</a> <span></span>
+    <a v-on:click="$parent.onUpdatesScreen = true;">Updater</a>
   </div>
 </div>
 </transition>
@@ -325,6 +325,7 @@ h1 {
 .auxillary-buttons {
   margin-top:7vh;
   font-size:calc(10px + 2.2vmin);
+  word-spacing:0.8em;
 }
 
 .recents-pane {

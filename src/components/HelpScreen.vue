@@ -22,9 +22,9 @@
   <div style="width:95%;margin:0 auto;" v-if="onWarning">
     <p>Are you ABSOULTELY sure you want to delete all your save data?</p>
     <p><b>You cannot undo this action.</b> The game will refresh if you select Yes.</p>
-    <p style="font-size:200%;"><a class="hiddenYes"
+    <p style="font-size:200%;word-spacing:0.8em;"><a class="hiddenYes"
      v-bind:class="{visibleYes: yesPrecaution}" v-on:click="wipeData()">Yes</a>
-     &nbsp;&nbsp; <a v-on:click="onWarning=false;"><b>Cancel</b></a></p>
+     <span></span> <a v-on:click="onWarning=false;"><b>Cancel</b></a></p>
   </div>
   </div>
 </template>
