@@ -12,5 +12,9 @@ module.exports = {
       maskIcon: '',
       msTileImage: '',
     },
+    workboxPluginMode: 'GenerateSW',
+    workboxOptions: {
+      exclude: ['_headers', '_redirects'],
+    },
   },
 };
