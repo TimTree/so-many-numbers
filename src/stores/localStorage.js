@@ -8,6 +8,7 @@ export default {
   /**
    * The save data contains:
    *
+   * firstRun: True if the player passed onboarding, false otherwise
    * titleView: 0 if the player last viewed the operators menu or 1 if
    * the player last viewed the Recents pane
    * savedSet: The set of operators that was last clicked on
@@ -41,9 +42,10 @@ export default {
    * based on what the player plays.
    */
   saveData: {
+    firstRun: false,
     titleView: 0,
-    savedSet: [],
-    difficulty: '',
+    savedSet: ['+', '−', '×', '÷'],
+    difficulty: 'standard',
     recents: [],
     sets: {},
   },

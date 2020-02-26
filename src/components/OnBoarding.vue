@@ -9,7 +9,7 @@
     <strong>Objective:</strong> Solve 30 math problems as fast as you can!
     </main>
     <button class="normal-button button-orange" style="margin-top:0;"
-      v-on:click="$parent.onOnboarding= false;$parent.onSelectDifficulty = true;"
+      v-on:click="onboardProceed();"
       >Get started</button>
   </div>
   </transition>
@@ -17,8 +17,16 @@
 </template>
 
 <script>
-export default {
+import localStorage from '@/stores/localStorage';
 
+export default {
+  methods: {
+    onboardProceed() {
+      this.$parent.onOnboarding = false;
+      localStorage.saveData.firstRun = true;
+      localStorage.save();
+    },
+  },
 };
 </script>
 

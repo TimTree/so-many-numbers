@@ -46,7 +46,7 @@ export default {
   },
   created() {
     this.$parent.isHome = true;
-    if (localStorage.saveData.difficulty === '') {
+    if (localStorage.saveData.firstRun === false) {
       this.onOnboarding = true;
     }
   },
