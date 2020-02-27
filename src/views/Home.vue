@@ -1,4 +1,5 @@
 <template>
+<transition name="fade05" appear>
 <div class="home-div">
   <header>
     <img src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
@@ -18,6 +19,7 @@
     </div>
   </footer>
 </div>
+</transition>
 </template>
 
 <script>
@@ -75,10 +77,9 @@ main {
 }
 
 header {
-  background-color:#cfe0f1;
-  background-image: linear-gradient(to bottom right, #71c1f7, #b0dff3, #71c1f7);
+  background-color: #c6e3f3;
   width:100%;
-  box-shadow: 0px 2px 7px rgb(0,0,0,0.3);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
   padding:10px 0;
   display:flex;
   align-items:center;
@@ -115,7 +116,6 @@ header img {
 
 @media (min-height: 800px) {
   header {
-    box-shadow: 0px 3px 7px rgb(0,0,0,0.3);
     padding:20px 0;
   }
 }

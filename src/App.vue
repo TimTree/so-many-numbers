@@ -215,7 +215,7 @@ button:active {
 
 /** Transitions */
 .fade05-enter-active {
-  transition: opacity .5s;
+  transition: opacity 0.3s ease-in;
 }
 
 .fade07-enter-active {
@@ -235,7 +235,7 @@ button:active {
 }
 
 .homeColor {
-  background-color:#d3d3d3;
+  background-color:#fafafa;
 }
 
 .gameColor {

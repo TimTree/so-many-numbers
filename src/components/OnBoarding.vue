@@ -6,7 +6,7 @@
       <img src='@/assets/SoManyNumbersOnboarding.png' alt='So Many Numbers game screenshot' />
     </p>
     <main>
-    <strong>Objective:</strong> Solve 30 math problems as fast as you can!
+    <strong>So many numbers!</strong> Solve 30 problems as fast as you can.
     </main>
     <button class="normal-button button-orange" style="margin-top:0;"
       v-on:click="onboardProceed();"

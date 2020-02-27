@@ -4,25 +4,31 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="The speedy math game that encourages those of
-     all ages to discover their arithmetic abilities">
+    <meta name="description" content="The speedy math game that encourages those of all ages to
+     discover their arithmetic abilities">
     <meta name="format-detection" content="telephone=no">
     <title>So Many Numbers! - Speedy Math Game</title>
+    <style>
+      body {
+        background-color: #fafafa;
+      }
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #131414;
+        }
+      }
+    </style>
   </head>
   <body>
     <noscript>
-      <strong>We're sorry but So Many Numbers doesn't work properly without JavaScript
-         enabled. Please enable it to continue.</strong>
+      <strong>
+        We're sorry but So Many Numbers doesn't work properly without JavaScript enabled. Please
+         enable it to continue.
+      </strong>
     </noscript>
     <div id="app"></div>
     <script>
       document.addEventListener("touchstart", function() {}, {passive: true});
-      // Change body background color before vue loads to prevent white flicker
-      if (window.location.pathname === "/" || window.location.pathname === "/index.html") {
-        document.body.style.backgroundColor="#d3d3d3";
-      } else {
-        document.body.style.backgroundColor="#fafafa";
-      }
     </script>
   </body>
 </html>
