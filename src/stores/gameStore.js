@@ -21,10 +21,10 @@ export default {
     return Math.floor(this.state.numberOfProblems / 3);
   },
   getTwoThirds() {
-    return Math.floor(this.state.numberOfProblems / 3 * 2);
+    return Math.floor((this.state.numberOfProblems / 3) * 2);
   },
   getNineTenth() {
-    return Math.floor(this.state.numberOfProblems / 10 * 9);
+    return Math.floor((this.state.numberOfProblems / 10) * 9);
   },
 
   /**
@@ -160,7 +160,7 @@ export default {
     clearInterval(this.theTimer);
   },
   timer() {
-    this.theTime = this.theTime + this.timer2() / 1000;
+    this.theTime += this.timer2() / 1000;
     this.state.currentTime = this.theTime.toFixed(1);
   },
   timer2() {

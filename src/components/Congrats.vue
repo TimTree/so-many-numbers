@@ -80,7 +80,7 @@ export default {
      * for the difficulty/set and insert the current score as the high score.
      */
     localStorage.saveData.recents = localStorage.saveData.recents
-      .filter(item => item !== this.mathOps);
+      .filter((item) => item !== this.mathOps);
     localStorage.saveData.recents.unshift(this.mathOps);
     if (Object.prototype.hasOwnProperty
       .call(localStorage.saveData.sets, this.mathOps)) {

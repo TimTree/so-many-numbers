@@ -142,7 +142,7 @@ export default {
       if (this.isPlus) {
         this.isPlus = false;
         localStorage.saveData.savedSet = localStorage.saveData.savedSet
-          .filter(item => item !== '+');
+          .filter((item) => item !== '+');
       } else {
         this.isPlus = true;
         localStorage.saveData.savedSet.push('+');
@@ -154,7 +154,7 @@ export default {
       if (this.isMinus) {
         this.isMinus = false;
         localStorage.saveData.savedSet = localStorage.saveData.savedSet
-          .filter(item => item !== '−');
+          .filter((item) => item !== '−');
       } else {
         this.isMinus = true;
         localStorage.saveData.savedSet.push('−');
@@ -166,7 +166,7 @@ export default {
       if (this.isMultiply) {
         this.isMultiply = false;
         localStorage.saveData.savedSet = localStorage.saveData.savedSet
-          .filter(item => item !== '×');
+          .filter((item) => item !== '×');
       } else {
         this.isMultiply = true;
         localStorage.saveData.savedSet.push('×');
@@ -178,7 +178,7 @@ export default {
       if (this.isDivide) {
         this.isDivide = false;
         localStorage.saveData.savedSet = localStorage.saveData.savedSet
-          .filter(item => item !== '÷');
+          .filter((item) => item !== '÷');
       } else {
         this.isDivide = true;
         localStorage.saveData.savedSet.push('÷');
