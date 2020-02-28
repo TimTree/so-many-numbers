@@ -1,0 +1,559 @@
+<template>
+<div style="text-align:center;width:100%;">
+<transition name="fade" appear>
+<div>
+  <h2>Level <span class="header-help" v-on:click="$parent.onLevelExplanation = true;">
+    ?</span></h2>
+  <p class="difficulty-indicator">
+    <span class="level-unselected" v-bind:class="{'level-selected': isSimple}"
+    v-on:click="toggleLevel('simple')">Simple</span>
+    <span class="level-unselected" v-bind:class="{'level-selected': isStandard}"
+    v-on:click="toggleLevel('standard')">Standard</span>
+  </p>
+  <h2>Operators (Tap to toggle)</h2>
+  <div class="selected-operators" v-show="!onRecents">
+    <div class="small-circle-unselected" v-bind:class="{'small-circle-selected plus': isPlus}"
+     v-on:click="addPlus()">+</div>
+    <div class="small-circle-unselected" v-bind:class="{'small-circle-selected minus': isMinus}"
+     v-on:click="addMinus()">−</div>
+    <div class="small-circle-unselected"
+     v-bind:class="{'small-circle-selected multiply': isMultiply}"
+     v-on:click="addMultiply()">×</div>
+    <div class="small-circle-unselected" v-bind:class="{'small-circle-selected divide': isDivide}"
+     v-on:click="addDivide()">÷</div>
+  </div>
+  <div class="recents-pane" v-show="onRecents">
+    <div class="recents-buttons" v-if="recentSets[0]">
+       <div class="big-circle-selected"
+        v-bind:class="{'big-circle-unselected': getSet !== recentSetsToChars(0)}"
+        v-on:click="operatorOverride(recentSetsToChars(0))"
+        v-if="recentSets[0]">
+         <span v-html="displayRecentSets(0)[0]"></span>
+         <span v-if="recentSets[0].length>2" v-html="displayRecentSets(0)[1]"></span>
+       </div>
+       <div class="big-circle-selected"
+        v-bind:class="{'big-circle-unselected': getSet !== recentSetsToChars(1)}"
+        v-on:click="operatorOverride(recentSetsToChars(1))"
+        v-if="recentSets[1]">
+         <span v-html="displayRecentSets(1)[0]"></span>
+         <span v-if="recentSets[1].length>2" v-html="displayRecentSets(1)[1]"></span>
+       </div>
+       <div class="big-circle-selected"
+        v-bind:class="{'big-circle-unselected': getSet !== recentSetsToChars(2)}"
+        v-on:click="operatorOverride(recentSetsToChars(2))"
+        v-if="recentSets[2]">
+         <span v-html="displayRecentSets(2)[0]"></span>
+         <span v-if="recentSets[2].length>2" v-html="displayRecentSets(2)[1]"></span>
+       </div>
+    </div>
+    <div class="no-recents" v-else>
+      You haven't finished any games yet!
+    </div>
+  </div>
+  <div class="operators-menu">
+    <span><a v-on:click="toggleRecents()">{{setSwitcherText}}</a></span>
+  </div>
+  <div>
+  <router-link tag="button" class="start-button button-magenta"
+    v-bind:class="{startDisabled: !startEnabled}"
+    :disabled="!startEnabled" :to="{ path: '/game', query: { diff: difficulty, set: getSet }}">
+      Start
+  </router-link>
+  </div>
+
+  <div class="auxillary-buttons">
+    <a v-on:click="$parent.onHelp = true;" title="Settings">
+      <svg preserveAspectRatio="xMidYMid meet" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 31"><defs><clipPath id="clip0"><path d="M12 210 44 210 44 241 12 241Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip0)" transform="translate(-12 -210)"><path d="M25.4506 219.189C21.9343 220.541 20.1794 224.487 21.5309 228.003 22.8825 231.52 26.8287 233.275 30.3451 231.923 33.8614 230.571 35.6163 226.625 34.2648 223.109 32.9132 219.592 28.967 217.838 25.4506 219.189ZM22.7315 212.115C23.2073 211.932 23.6869 211.776 24.1689 211.648L26.9212 215.036C27.7598 214.91 28.5998 214.934 29.4134 215.102L32.2906 211.91C33.289 212.164 34.2315 212.583 35.0884 213.155L34.6459 217.428C35.3155 217.92 35.8961 218.528 36.3639 219.235L40.7231 219.01C40.9509 219.453 41.1563 219.914 41.3392 220.39 41.522 220.865 41.678 221.345 41.806 221.827L38.418 224.579C38.5444 225.418 38.5202 226.258 38.3523 227.072L41.5435 229.949C41.29 230.947 40.8708 231.89 40.2993 232.747L36.0254 232.304C35.5337 232.974 34.9261 233.554 34.2187 234.022L34.4442 238.381C34.0005 238.609 33.54 238.814 33.0642 238.997 32.5884 239.18 32.1088 239.336 31.6268 239.464L28.8746 236.076C28.0359 236.203 27.1959 236.178 26.3823 236.01L23.505 239.202C22.5067 238.948 21.5642 238.529 20.7073 237.957L21.1498 233.684C20.4802 233.192 19.8997 232.584 19.4318 231.877L15.0726 232.102C14.8448 231.659 14.6394 231.198 14.4565 230.722 14.2736 230.247 14.1177 229.767 13.9897 229.285L17.3778 226.533C17.2513 225.694 17.2755 224.854 17.4434 224.04L14.2522 221.163C14.5057 220.165 14.9249 219.222 15.4964 218.365L19.7703 218.808C20.262 218.138 20.8696 217.558 21.577 217.09L21.3515 212.731C21.7952 212.503 22.2557 212.298 22.7315 212.115Z" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>
+</a> <span></span>
+    <a v-on:click="$parent.onUpdatesScreen = true;" title="Stats">
+      <svg preserveAspectRatio="xMidYMid meet" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33 31"><defs><clipPath id="clip1"><path d="M8 175 41 175 41 206 8 206Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip1)" transform="translate(-8 -175)"><rect x="10" y="183" width="10" height="22" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/><rect x="20" y="176" width="10" height="29" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/><rect x="30" y="190" width="10" height="15" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/></g></svg>
+    </a>
+  </div>
+</div>
+</transition>
+</div>
+</template>
+
+<script>
+import localStorage from '@/stores/localStorage';
+
+export default {
+  data() {
+    return {
+      isPlus: false,
+      isMinus: false,
+      isMultiply: false,
+      isDivide: false,
+      isSimple: false,
+      isStandard: false,
+      startEnabled: false,
+      onRecents: false,
+      recentSets: localStorage.saveData.recents,
+    };
+  },
+  created() {
+    if (localStorage.saveData.titleView === 0) {
+      this.onRecents = false;
+    } else {
+      this.onRecents = true;
+    }
+    if (localStorage.saveData.savedSet.includes('+')) {
+      this.isPlus = true;
+    }
+    if (localStorage.saveData.savedSet.includes('−')) {
+      this.isMinus = true;
+    }
+    if (localStorage.saveData.savedSet.includes('×')) {
+      this.isMultiply = true;
+    }
+    if (localStorage.saveData.savedSet.includes('÷')) {
+      this.isDivide = true;
+    }
+    if (localStorage.saveData.difficulty === 'simple') {
+      this.isSimple = true;
+    } else {
+      this.isStandard = true;
+    }
+    this.updateButtonStatus();
+  },
+  computed: {
+    getSet() {
+      let computedSet = '';
+      if (this.isPlus) {
+        computedSet += 'a';
+      } if (this.isMinus) {
+        computedSet += 's';
+      } if (this.isMultiply) {
+        computedSet += 'm';
+      } if (this.isDivide) {
+        computedSet += 'd';
+      }
+      return computedSet;
+    },
+    setSwitcherText() {
+      if (!this.onRecents) {
+        return 'Recents';
+      }
+      return 'Menu';
+    },
+    difficulty() {
+      if (this.isSimple) {
+        return 'simple';
+      }
+      return 'standard';
+    },
+  },
+  methods: {
+    /**
+     * The following four functions toggle their respective operators.
+     *
+     * I probably could condense these functions into one if I had more
+     * time to figure it out.
+     */
+    addPlus() {
+      if (this.isPlus) {
+        this.isPlus = false;
+        localStorage.saveData.savedSet = localStorage.saveData.savedSet
+          .filter((item) => item !== '+');
+      } else {
+        this.isPlus = true;
+        localStorage.saveData.savedSet.push('+');
+      }
+      this.updateButtonStatus();
+      localStorage.save();
+    },
+    addMinus() {
+      if (this.isMinus) {
+        this.isMinus = false;
+        localStorage.saveData.savedSet = localStorage.saveData.savedSet
+          .filter((item) => item !== '−');
+      } else {
+        this.isMinus = true;
+        localStorage.saveData.savedSet.push('−');
+      }
+      this.updateButtonStatus();
+      localStorage.save();
+    },
+    addMultiply() {
+      if (this.isMultiply) {
+        this.isMultiply = false;
+        localStorage.saveData.savedSet = localStorage.saveData.savedSet
+          .filter((item) => item !== '×');
+      } else {
+        this.isMultiply = true;
+        localStorage.saveData.savedSet.push('×');
+      }
+      this.updateButtonStatus();
+      localStorage.save();
+    },
+    addDivide() {
+      if (this.isDivide) {
+        this.isDivide = false;
+        localStorage.saveData.savedSet = localStorage.saveData.savedSet
+          .filter((item) => item !== '÷');
+      } else {
+        this.isDivide = true;
+        localStorage.saveData.savedSet.push('÷');
+      }
+      this.updateButtonStatus();
+      localStorage.save();
+    },
+    operatorOverride(operators) {
+      this.isPlus = false;
+      this.isMinus = false;
+      this.isMultiply = false;
+      this.isDivide = false;
+      localStorage.saveData.savedSet = [];
+      for (let i = 0; i < operators.length; i += 1) {
+        if (operators.charAt(i) === 'a') {
+          this.isPlus = true;
+          localStorage.saveData.savedSet.push('+');
+        } else if (operators.charAt(i) === 's') {
+          this.isMinus = true;
+          localStorage.saveData.savedSet.push('−');
+        } else if (operators.charAt(i) === 'm') {
+          this.isMultiply = true;
+          localStorage.saveData.savedSet.push('×');
+        } else if (operators.charAt(i) === 'd') {
+          this.isDivide = true;
+          localStorage.saveData.savedSet.push('÷');
+        }
+      }
+      this.updateButtonStatus();
+      localStorage.save();
+    },
+    toggleLevel(level) {
+      if (level === 'simple') {
+        this.isSimple = true;
+        this.isStandard = false;
+        localStorage.saveData.difficulty = 'simple';
+        localStorage.save();
+      } else {
+        this.isSimple = false;
+        this.isStandard = true;
+        localStorage.saveData.difficulty = 'standard';
+        localStorage.save();
+      }
+    },
+
+    /**
+     * Check if there are selected operators for the set.
+     * If there are, make the start button appear bold.
+     * If not, subdue the start button.
+     */
+    updateButtonStatus() {
+      if (!this.isPlus && !this.isMinus && !this.isMultiply && !this.isDivide) {
+        this.startEnabled = false;
+      } else {
+        this.startEnabled = true;
+      }
+    },
+
+    /**
+     * Toggle the title view (menu or recents)
+     * Also save the current view state to localStorage
+     */
+    toggleRecents() {
+      if (!this.onRecents) {
+        this.onRecents = true;
+        localStorage.saveData.titleView = 1;
+        localStorage.save();
+      } else {
+        this.onRecents = false;
+        localStorage.saveData.titleView = 0;
+        localStorage.save();
+      }
+    },
+
+    /**
+     * Display the recent set in a format that looks good in the big circle button.
+     * @param {int} num - The array index of the set in localStorage's recents array
+     * @returns {string} - The formatted set. Sets with more than three operators are
+     * split into two parts so we can add an HTML line break between them
+     */
+    displayRecentSets(num) {
+      const opsToWorkWith = this.recentSets[num];
+      let opsArray;
+      const opsArray2 = [];
+      for (let i = 0; i < opsToWorkWith.length; i += 1) {
+        if (opsToWorkWith.charAt(i) === '+') {
+          opsArray2.push(`<span class="plus">${opsToWorkWith.charAt(i)}</span>`);
+        } else if (opsToWorkWith.charAt(i) === '−') {
+          opsArray2.push(`<span class='minus'>${opsToWorkWith.charAt(i)}</span>`);
+        } else if (opsToWorkWith.charAt(i) === '×') {
+          opsArray2.push(`<span class='multiply'>${opsToWorkWith.charAt(i)}</span>`);
+        } else if (opsToWorkWith.charAt(i) === '÷') {
+          opsArray2.push(`<span class='divide'>${opsToWorkWith.charAt(i)}</span>`);
+        }
+      }
+      if (opsArray2.length < 2) {
+        opsArray = [opsArray2[0], ''];
+      } else if (opsArray2.length === 2) {
+        opsArray = [opsArray2[0] + opsArray2[1], ''];
+      } else if (opsArray2.length === 3) {
+        opsArray = [opsArray2[0] + opsArray2[1], opsArray2[2]];
+      } else {
+        opsArray = [opsArray2[0] + opsArray2[1], opsArray2[2] + opsArray2[3]];
+      }
+      return opsArray;
+    },
+
+    /**
+     * The query string for sets are expressed in letters instead of the actual operators.
+     * Since localStorage holds the actual operators, we need to convert them to letter
+     * format so the Recents buttons can properly process the sets.
+     * @param {int} num - The array index of the set in localStorage's recents array
+     * @returns {string} - The set expressed in letters
+     */
+    recentSetsToChars(num) {
+      const opsToWorkWith = this.recentSets[num];
+      let charOutput = '';
+      const dict = {
+        '+': 'a',
+        '−': 's',
+        '×': 'm',
+        '÷': 'd',
+      };
+      for (let i = 0; i < opsToWorkWith.length; i += 1) {
+        charOutput += dict[opsToWorkWith[i]];
+      }
+      return charOutput;
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+h2 {
+  text-align: left;
+  font-size: 5vmin;
+  border-bottom: 0.2vmin solid var(--text-color);
+  margin: 0 auto 0.5em auto;
+  padding: 0 0 0 0.6em;
+  width: 90%;
+}
+
+.header-help {
+  @extend %flex-center;
+  display: inline-flex;
+  margin-left: 0.3em;
+  border-radius: 50%;
+  background: #e0e0e0;
+  width: 5.65vmin;
+  font-size: 80%;
+  cursor: pointer;
+}
+
+.difficulty-indicator {
+  margin: 0 0 1em 0;
+}
+
+.selected-operators {
+  font-size: 13vmin;
+  line-height: 1.2;
+  margin: 0.25em 0 0.4em 0;
+  font-weight: 700;
+  color: rgba(0,0,0,0.15);
+}
+
+.operators-menu, .selected-operators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.operators-menu span {
+  margin: 0 1em;
+}
+
+.difficulty-indicator span {
+  margin: 0 0.5em;
+  padding: 0.1em 0.6em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  transition: background-color $transition-time;
+}
+
+.level-unselected:hover {
+  background-color: #f0f0f0;
+}
+
+.level-selected {
+  background-color: #e0e0e0;
+}
+
+.level-selected:hover {
+  background-color: #d0d0d0;
+}
+
+.small-circle-unselected {
+  margin: 0 0.15em;
+  background-color: none;
+  border-radius: 50%;
+  width: 1.19em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.small-circle-unselected:hover {
+  background-color: #f0f0f0;
+}
+
+.small-circle-selected {
+  background-color: #e0e0e0;
+}
+
+.small-circle-selected:hover {
+  background-color: #d0d0d0;
+}
+
+
+h1 {
+  font-weight:400;
+  font-size:7vmin;
+  margin:0;
+}
+
+.set-buttons {
+  margin-top:1.2em;
+  display:block;
+}
+
+.recents-buttons, .no-recents {
+  display:flex;
+}
+
+.no-recents {
+  margin: 0.6em 1em;
+}
+
+.start-button {
+  margin-top:0.8em;
+  border-radius:4vmin;
+  padding:2vmin 7vmin;
+  font-size:10vmin;
+}
+
+.startDisabled {
+  cursor: not-allowed;
+  background-color:#d8c3d0;
+  box-shadow: 0px 0px !important;
+  transition:none;
+}
+
+.startDisabled:hover {
+  background-color:#d8c3d0;
+}
+
+.startDisabled:active {
+  background-color:#d8c3d0;
+  transform:none;
+}
+
+.set-switcher {
+  background-color: #c2a230;
+  border-radius:8vmin;
+  padding:0.4vmin 6vmin;
+  font-size:5vmin;
+  margin-top:1.2em;
+}
+
+.set-switcher:hover {
+  background-color:#b39529;
+}
+
+.auxillary-buttons {
+  margin-top:7vh;
+  font-size:calc(10px + 2.2vmin);
+  word-spacing:0.8em;
+}
+
+.auxillary-buttons svg {
+  height: calc(9px + 4vmin);
+}
+
+.recents-pane {
+  @extend %flex-center;
+  margin: 0.25em 0 0.7em 0;
+}
+
+.big-circle-selected {
+  border-radius: 50%;
+  font-size: 190%;
+  line-height: 0.65;
+  width: 18.5vmin;
+  height: 18.5vmin;
+  @extend %flex-center;
+  font-weight: 700;
+  margin: 0 0.25em;
+  cursor: pointer;
+  background-color: #e0e0e0;
+}
+
+.big-circle-selected:hover {
+  background-color: #d0d0d0;
+}
+
+@media (min-width: 420px) and (min-height: 420px) {
+  h2 {
+    font-size: calc(5vmin * 0.6);
+    border-bottom: 0.12vmin solid var(--text-color);
+  }
+
+  .header-help {
+    width: 3.24vmin;
+  }
+
+  .selected-operators {
+    font-size: calc(13vmin * 0.6);
+  }
+
+  h1 {
+    font-weight:400;
+    font-size:calc(10px + 3.2vmin);
+  }
+  .start-button {
+    border-radius:2vmin;
+    padding:1.2vmin 4.5vmin;
+    font-size:6vmin;
+  }
+  .set-switcher {
+    border-radius:8vmin;
+    padding:0.4vmin 4vmin;
+    font-size:calc(5px + 2.6vmin);
+  }
+
+  .recents-buttons div {
+    width: 11vmin;
+    height: 11vmin;
+  }
+
+}
+
+@media (max-height: 520px) {
+  .set-buttons {
+    margin-top:0.75em;
+  }
+  .start-button {
+    margin-top:0.55em;
+    padding-top:1.3vmin;
+    padding-bottom:1.3vmin;
+  }
+  .set-switcher {
+    margin-top:1em;
+  }
+  .auxillary-buttons {
+    margin-top:5vh;
+  }
+  .difficulty-indicator {
+    margin: 0 0 0.75em 0;
+  }
+}
+
+@media (min-height: 800px) {
+
+  .auxillary-buttons {
+    margin-top:7vh;
+  }
+}
+</style>

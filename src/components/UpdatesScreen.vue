@@ -1,7 +1,7 @@
 <template>
   <div class="help">
   <div>
-  <transition name="fade05" appear>
+  <transition name="fade" appear>
   <div>
     <p>So Many Numbers downloads to your device for offline use.
       It automatically updates as we release new versions.

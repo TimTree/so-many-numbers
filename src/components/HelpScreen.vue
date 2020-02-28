@@ -2,10 +2,10 @@
   <div class="help">
   <div v-if="!onWarning">
   <div>
-  <transition name="fade05" appear>
+  <transition name="fade" appear>
   <div>
     <h1>Game Goals!</h1>
-    <p>Solve <b>30 math problems</b> as fast as you can.</p>
+    <p>Solve <b>30 problems</b> as fast as you can.</p>
     <p>Choose between <b>simple</b> and <b>standard</b> difficulties.</p>
     <p>Select any <b>set</b> of operators to play with.</p>
     <p>Strive to beat your high scores!</p>
@@ -66,7 +66,6 @@ export default {
 .help {
   text-align:center;
   width:95%;
-  font-size:calc(10px + 1.6vmin);
 }
 
 h1 {

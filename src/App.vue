@@ -1,8 +1,7 @@
 <template>
-  <div id="app" class="bodyBG" v-bind:class="{homeColor:isHome,
-   gameColor:isGame,
-   oneThird: isOneThird,
-   twoThirds: isTwoThirds,
+  <div id="app" class="bodyBG" v-bind:class="{
+    oneThird: isOneThird,
+    twoThirds: isTwoThirds,
     almost: isAlmost}">
     <router-view/>
   </div>
@@ -49,7 +48,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+@import url("./assets/colors.css");
 @font-face {
     font-family: 'Noto Sans';
     font-style: normal;
@@ -78,12 +78,15 @@ export default {
   }
 
 html, body, #app {
-  margin:0;
-  height:100%;
-  width:100%;
-  font-family:"noto sans", sans-serif;
-  -webkit-text-size-adjust:100%;
-  color:#000;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  font-family: "noto sans", sans-serif;
+  box-sizing: border-box;
+  -webkit-text-size-adjust: 100%;
+  color: var(--text-color);
+  background-color: var(--primary-bg);
+  font-size: 5vmin;
 }
 
 * {
@@ -91,28 +94,28 @@ html, body, #app {
 }
 
 a {
-  color:#0c4fa1 !important;
-  text-decoration:none !important;
-  cursor:pointer;
-  transition:color 0.15s;
+  color: var(--link-color) !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: color $transition-time;
 }
 
 a:hover {
-  color:#03a003 !important;
+  color:var(--link-hover-color) !important;
 }
 
 /**Button styles */
 button {
-  border:none;
-  text-align:center;
+  border: none;
+  text-align: center;
   text-decoration: none;
   display: inline-block;
-  cursor:pointer;
-  outline:none;
+  cursor: pointer;
+  outline: none;
   padding: 0;
-  color:#fafafa;
-  font-family:"noto sans", sans-serif;
-  box-shadow: 0 1.8vmin #999;
+  color: #fafafa;
+  font-family: "noto sans", sans-serif;
+  box-shadow: 0 1.8vmin var(--button-shadow);
   transition: background-color 0.12s, transform 0.12s, box-shadow 0.12s;
 }
 
@@ -121,17 +124,17 @@ button::-moz-focus-inner {
 }
 
 button:active {
-  box-shadow: 0 0.5vmin #999;
+  box-shadow: 0 0.5vmin var(--button-shadow);
   transform: translateY(1vmin);
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .button-magenta {
-  background-color: #b23681;
+  background-color: var(--button-magenta);
 }
 
 .button-magenta:hover {
-  background-color:#e86198;
+  background-color: var(--button-magenta-hover);
 }
 
 .button-orange {
@@ -162,42 +165,48 @@ button:active {
   background-color: #0d9806;
 }
 
-.small-circle {
-  border-radius:50%;
-  width:16vmin;
-  height:14.5vmin;
-  font-size:11vmin;
-  margin:0 0.18em;
-  line-height:0;
-}
-
-.circle {
-  border-radius:50%;
-  width:24vmin;
-  height:22.5vmin;
-  font-size:12vmin;
-  line-height:0.65;
-  margin:0 0.18em;
-  letter-spacing:normal;
-}
-
 .normal-button {
-  margin-top:0.5em;
-  border-radius:3vmin;
-  padding:1.5vmin 4vmin;
-  font-size:6vmin;
+  margin-top: 0.5em;
+  border-radius: 3vmin;
+  padding: 1.5vmin 4vmin;
+  font-size: 6vmin;
 }
 
-@media (min-width: 420px) and (min-height: 420px) {
-  button {
-    box-shadow: 0 1vmin #999;
+.plus {
+  color: #fa2909;
+}
+
+.minus {
+  color: #afaf20;
+}
+
+.multiply {
+  color: #1086e7;
+}
+
+.divide {
+  color: #54b500;
+}
+
+.big-circle-unselected {
+  background-color: transparent !important;
+}
+
+.big-circle-unselected:hover {
+  background-color: #f0f0f0 !important;
+}
+
+.big-circle-unselected span {
+  color: rgba(0,0,0,0.15) !important;
+}
+
+@media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
+  html, body, #app {
+    font-size: calc(5vmin * 0.6);
   }
-  .small-circle {
-    border-radius:50%;
-    width:9.5vmin;
-    height:8.5vmin;
-    font-size:6.5vmin;
-    letter-spacing:normal;
+
+  button {
+    box-shadow: 0 1vmin var(--button-shadow);
   }
   .circle {
     border-radius:50%;
@@ -207,14 +216,14 @@ button:active {
     line-height:0.65;
   }
   .normal-button {
-    border-radius:1.5vmin;
-    padding:0.8vmin 3vmin;
-    font-size:3.5vmin;
+    border-radius: 1.5vmin;
+    padding: 0.8vmin 3vmin;
+    font-size: 3.5vmin;
   }
 }
 
 /** Transitions */
-.fade05-enter-active {
+.fade-enter-active {
   transition: opacity 0.3s ease-in;
 }
 
@@ -222,35 +231,28 @@ button:active {
   transition: opacity .7s;
 }
 
-.fade05-enter, .fade05-leave-to, .fade07-enter, .fade07-leave-to {
+.fade-enter, .fade-leave-to, .fade07-enter, .fade07-leave-to {
   opacity: 0;
 }
 
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
 .bodyBG {
-  position:absolute;
+  position: absolute;
   transition: background-color 0.2s;
-}
-
-.homeColor {
-  background-color:#fafafa;
-}
-
-.gameColor {
-  background-color:#fafafa;
+  background-color: var(--primary-bg);
 }
 
 .oneThird {
-  background-color:#c9ead0;
+  background-color: var(--one-third-bg) !important;
 }
 
 .twoThirds {
-  background-color:#e0e8b6;
+  background-color: var(--two-thirds-bg) !important;
 }
 
 .almost {
-  background-color:#e6c695;
+  background-color: var(--almost-bg) !important;
 }
 </style>

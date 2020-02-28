@@ -1,50 +1,53 @@
 <template>
-<transition name="fade05" appear>
 <div class="home-div">
   <header>
     <img src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
   </header>
   <main>
-    <SelectDifficulty v-if="onSelectDifficulty"/>
+    <LevelExplanation v-if="onLevelExplanation"/>
     <HelpScreen v-else-if="onHelp"/>
     <OnBoarding v-else-if="onOnboarding" />
     <UpdatesScreen v-else-if="onUpdatesScreen" />
     <SelectSet v-else />
   </main>
   <footer class="authors">
-    <div>
-      By <a href="https://github.com/ash-caz" target="_blank" rel="noopener">Ashley Caswell</a>
-       and <a href="https://github.com/TimTree" target="_blank" rel="noopener">Timothy Hsu</a> //
-       <a href="https://github.com/TimTree/so-many-numbers" target="_blank" rel="noopener">Source</a>
-    </div>
+    <span>
+      Created by <a href="https://github.com/ash-caz" target="_blank" rel="noopener">Ashley Caswell</a>
+       & <a href="https://github.com/TimTree" target="_blank" rel="noopener">Timothy Hsu</a>
+    </span>
+    <span>
+        <a href="https://github.com/TimTree/so-many-numbers"  target="_blank" rel="noopener" title="GitHub Repo">
+          <!-- eslint-disable-next-line max-len -->
+          <svg class="github" fill="currentColor" preserveAspectRatio="xMidYMid meet" viewBox="0 0 40 40"><g><path d="m20 0c-11 0-20 9-20 20 0 8.8 5.7 16.3 13.7 19 1 0.2 1.3-0.5 1.3-1 0-0.5 0-2 0-3.7-5.5 1.2-6.7-2.4-6.7-2.4-0.9-2.3-2.2-2.9-2.2-2.9-1.9-1.2 0.1-1.2 0.1-1.2 2 0.1 3.1 2.1 3.1 2.1 1.7 3 4.6 2.1 5.8 1.6 0.2-1.3 0.7-2.2 1.3-2.7-4.5-0.5-9.2-2.2-9.2-9.8 0-2.2 0.8-4 2.1-5.4-0.2-0.5-0.9-2.6 0.2-5.3 0 0 1.7-0.5 5.5 2 1.6-0.4 3.3-0.6 5-0.6 1.7 0 3.4 0.2 5 0.7 3.8-2.6 5.5-2.1 5.5-2.1 1.1 2.8 0.4 4.8 0.2 5.3 1.3 1.4 2.1 3.2 2.1 5.4 0 7.6-4.7 9.3-9.2 9.8 0.7 0.6 1.4 1.9 1.4 3.7 0 2.7 0 4.9 0 5.5 0 0.6 0.3 1.2 1.3 1 8-2.7 13.7-10.2 13.7-19 0-11-9-20-20-20z"></path></g></svg>
+          </a>
+    </span>
   </footer>
 </div>
-</transition>
 </template>
 
 <script>
-import SelectDifficulty from '@/components/SelectDifficulty.vue';
 import HelpScreen from '@/components/HelpScreen.vue';
-import SelectSet from '@/components/SelectSet.vue';
+import SelectSet from '@/components/home/SelectSet.vue';
 import OnBoarding from '@/components/OnBoarding.vue';
 import UpdatesScreen from '@/components/UpdatesScreen.vue';
+import LevelExplanation from '@/components/home/LevelExplanation.vue';
 import localStorage from '@/stores/localStorage';
 
 export default {
   data() {
     return {
-      onSelectDifficulty: false,
       onHelp: false,
       onOnboarding: false,
       onUpdatesScreen: false,
+      onLevelExplanation: false,
     };
   },
   components: {
-    SelectDifficulty,
     HelpScreen,
     SelectSet,
     OnBoarding,
     UpdatesScreen,
+    LevelExplanation,
   },
   created() {
     this.$parent.isHome = true;
@@ -58,59 +61,62 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .home-div {
-  height:100%;
-  display:grid;
-  grid-template-columns:100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 100%;
   grid-template-rows: auto 1fr 7%;
 }
 
 main {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  margin:0 auto;
-  width:98%;
-  max-width:1200px;
+  @extend %flex-center;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1024px;
 }
 
 header {
-  background-color: #c6e3f3;
-  width:100%;
+  @extend %flex-center;
+  background-color: var(--header-color);
+  width: 100%;
   box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
-  padding:10px 0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  height:19.875vmin;
+  padding: 10px 0;
+  height: 19.875vmin;
 }
 
 header img {
-  height:19.875vmin;
+  height: 19.875vmin;
 }
 
 .authors {
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-  font-size:calc(9px + 0.9vw);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: calc(55% + 3px);
 }
 
-@media (min-width: 420px) and (min-height: 420px) {
+.authors span:first-child {
+  margin-right: 1em;
+}
+
+.github {
+  height: calc(4.4vmin + 3px);
+}
+
+@media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   header {
-    height:13.25vmin;
-    min-height:63.6px;
-    max-height:159px;
+    height: 13.25vmin;
+    min-height: 63.6px;
+    max-height: 159px;
   }
   header img {
-    height:13.25vmin;
-    min-height:63.6px;
-    max-height:159px;
+    height: 13.25vmin;
+    min-height: 63.6px;
+    max-height: 159px;
   }
-  .authors {
-    font-size:calc(9px + 0.5vw);
+  .github {
+    height: calc(2.4vmin + 3px);
   }
 }
 
@@ -123,6 +129,12 @@ header img {
 @media (min-height: 1000px) {
   header {
     padding:30px 0;
+  }
+}
+
+@media (min-width: 1024px) and (min-height: 1024px) {
+  main {
+    max-width: 100vmin;
   }
 }
 </style>

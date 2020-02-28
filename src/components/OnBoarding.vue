@@ -1,6 +1,6 @@
 <template>
   <div class="onboarding">
-  <transition name="fade05" appear>
+  <transition name="fade" appear>
   <div>
     <p style="margin-top:0;">
       <img src='@/assets/SoManyNumbersOnboarding.png' alt='So Many Numbers game screenshot' />

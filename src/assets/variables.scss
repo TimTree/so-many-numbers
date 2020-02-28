@@ -1,0 +1,9 @@
+$transition-time: 0.12s;
+$mobile-boundary: 420px;
+
+%flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
