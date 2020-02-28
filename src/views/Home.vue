@@ -8,7 +8,7 @@
     <HelpScreen v-else-if="onHelp"/>
     <OnBoarding v-else-if="onOnboarding" />
     <UpdatesScreen v-else-if="onUpdatesScreen" />
-    <SelectSet v-else />
+    <Selection v-else />
   </main>
   <footer class="authors">
     <span>
@@ -27,7 +27,7 @@
 
 <script>
 import HelpScreen from '@/components/HelpScreen.vue';
-import SelectSet from '@/components/home/SelectSet.vue';
+import Selection from '@/components/home/Selection.vue';
 import OnBoarding from '@/components/OnBoarding.vue';
 import UpdatesScreen from '@/components/UpdatesScreen.vue';
 import LevelExplanation from '@/components/home/LevelExplanation.vue';
@@ -44,7 +44,7 @@ export default {
   },
   components: {
     HelpScreen,
-    SelectSet,
+    Selection,
     OnBoarding,
     UpdatesScreen,
     LevelExplanation,

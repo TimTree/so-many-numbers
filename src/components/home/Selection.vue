@@ -4,7 +4,7 @@
 <div>
   <h2>Level <span class="header-help" v-on:click="$parent.onLevelExplanation = true;">
     ?</span></h2>
-  <p class="difficulty-indicator">
+  <p class="level-indicator">
     <span class="level-unselected" v-bind:class="{'level-selected': level === 'simple'}"
     v-on:click="toggleLevel('simple')">Simple</span>
     <span class="level-unselected" v-bind:class="{'level-selected': level === 'standard'}"
@@ -26,27 +26,27 @@
      v-on:click="toggleOperators('÷')">÷</div>
   </div>
   <div class="recents-pane" v-show="titleView === 1">
-    <div class="recents-buttons" v-if="recentSets[0]">
+    <div class="recents-buttons" v-if="recents[0]">
        <div class="big-circle-selected"
-        v-bind:class="{'big-circle-unselected': getSet('ops') !== recentSets[0]}"
-        v-on:click="operatorOverride(recentSets[0])"
-        v-if="recentSets[0]">
-         <span v-html="displayRecentSets(0)[0]"></span>
-         <span v-if="recentSets[0].length>2" v-html="displayRecentSets(0)[1]"></span>
+        v-bind:class="{'big-circle-unselected': getOperators('ops') !== recents[0]}"
+        v-on:click="operatorOverride(recents[0])"
+        v-if="recents[0]">
+         <span v-html="displayRecents(0)[0]"></span>
+         <span v-if="recents[0].length>2" v-html="displayRecents(0)[1]"></span>
        </div>
        <div class="big-circle-selected"
-        v-bind:class="{'big-circle-unselected': getSet('ops') !== recentSets[1]}"
-        v-on:click="operatorOverride(recentSets[1])"
-        v-if="recentSets[1]">
-         <span v-html="displayRecentSets(1)[0]"></span>
-         <span v-if="recentSets[1].length>2" v-html="displayRecentSets(1)[1]"></span>
+        v-bind:class="{'big-circle-unselected': getOperators('ops') !== recents[1]}"
+        v-on:click="operatorOverride(recents[1])"
+        v-if="recents[1]">
+         <span v-html="displayRecents(1)[0]"></span>
+         <span v-if="recents[1].length>2" v-html="displayRecents(1)[1]"></span>
        </div>
        <div class="big-circle-selected"
-        v-bind:class="{'big-circle-unselected': getSet('ops') !== recentSets[2]}"
-        v-on:click="operatorOverride(recentSets[2])"
-        v-if="recentSets[2]">
-         <span v-html="displayRecentSets(2)[0]"></span>
-         <span v-if="recentSets[2].length>2" v-html="displayRecentSets(2)[1]"></span>
+        v-bind:class="{'big-circle-unselected': getOperators('ops') !== recents[2]}"
+        v-on:click="operatorOverride(recents[2])"
+        v-if="recents[2]">
+         <span v-html="displayRecents(2)[0]"></span>
+         <span v-if="recents[2].length>2" v-html="displayRecents(2)[1]"></span>
        </div>
     </div>
     <div class="no-recents" v-else>
@@ -54,13 +54,13 @@
     </div>
   </div>
   <div class="operators-menu">
-    <span><a v-on:click="toggleTitleView()">{{setSwitcherText}}</a></span>
+    <span><a v-on:click="toggleTitleView()">{{gameViewText}}</a></span>
   </div>
   <div>
   <router-link tag="button" class="start-button button-magenta"
     v-bind:class="{startDisabled: !startEnabled}"
     :disabled="!startEnabled" :to="{ path: '/game',
-     query: { diff: level, set: getSet('letters')}}">
+     query: { lvl: level, ops: getOperators('letters')}}">
       Start
   </router-link>
   </div>
@@ -88,7 +88,7 @@ export default {
       level: '',
       titleView: 0,
       startEnabled: false,
-      recentSets: localStorage.saveData.recents,
+      recents: localStorage.saveData.recents,
     };
   },
   created() {
@@ -97,7 +97,7 @@ export default {
     this.level = localStorage.saveData.difficulty;
   },
   computed: {
-    setSwitcherText() {
+    gameViewText() {
       return this.titleView === 0 ? 'Recents' : 'Menu';
     },
   },
@@ -126,18 +126,18 @@ export default {
      * doesn't like the actual plus sign as a parameter.
      * @returns {string} - The operators in string format
      */
-    getSet(format) {
-      let computedSet = '';
+    getOperators(format) {
+      let computedOperators = '';
       if (this.operators.includes('+')) {
-        computedSet += format === 'letters' ? 'a' : '+';
+        computedOperators += format === 'letters' ? 'a' : '+';
       } if (this.operators.includes('−')) {
-        computedSet += format === 'letters' ? 's' : '−';
+        computedOperators += format === 'letters' ? 's' : '−';
       } if (this.operators.includes('×')) {
-        computedSet += format === 'letters' ? 'm' : '×';
+        computedOperators += format === 'letters' ? 'm' : '×';
       } if (this.operators.includes('÷')) {
-        computedSet += format === 'letters' ? 'd' : '÷';
+        computedOperators += format === 'letters' ? 'd' : '÷';
       }
-      return computedSet;
+      return computedOperators;
     },
 
     /**
@@ -182,12 +182,12 @@ export default {
 
     /**
      * Display the recently used operators in a format that looks good in the big circle button.
-     * @param {int} num - The array index of the set in localStorage's recents array
+     * @param {int} num - The array index of the operators in localStorage's recents array
      * @returns {array} - The formatted operators. More than three operators are split into two
      * parts so we can add an HTML line break between them
      */
-    displayRecentSets(num) {
-      const opsToWorkWith = this.recentSets[num];
+    displayRecents(num) {
+      const opsToWorkWith = this.recents[num];
       let opsArray;
       const opsArray2 = [];
       for (let i = 0; i < opsToWorkWith.length; i += 1) {
@@ -233,29 +233,11 @@ h2 {
   cursor: pointer;
 }
 
-.difficulty-indicator {
+.level-indicator {
   margin: 0 0 1em 0;
 }
 
-.selected-operators {
-  font-size: 13vmin;
-  line-height: 1.2;
-  margin: 0.25em 0 0.4em 0;
-  font-weight: 700;
-  color: rgba(0,0,0,0.15);
-}
-
-.operators-menu, .selected-operators {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.operators-menu span {
-  margin: 0 1em;
-}
-
-.difficulty-indicator span {
+.level-indicator span {
   margin: 0 0.5em;
   padding: 0.1em 0.6em;
   border-radius: 0.5em;
@@ -273,6 +255,14 @@ h2 {
 
 .level-selected:hover {
   background-color: #d0d0d0;
+}
+
+.selected-operators {
+  font-size: 13vmin;
+  line-height: 1.2;
+  margin: 0.25em 0 0.4em 0;
+  font-weight: 700;
+  color: rgba(0,0,0,0.15);
 }
 
 .small-circle-unselected {
@@ -296,16 +286,9 @@ h2 {
   background-color: #d0d0d0;
 }
 
-
-h1 {
-  font-weight:400;
-  font-size:7vmin;
-  margin:0;
-}
-
-.set-buttons {
-  margin-top:1.2em;
-  display:block;
+.recents-pane {
+  @extend %flex-center;
+  margin: 0.25em 0 0.7em 0;
 }
 
 .recents-buttons, .no-recents {
@@ -314,6 +297,33 @@ h1 {
 
 .no-recents {
   margin: 0.6em 1em;
+}
+
+.big-circle-selected {
+  border-radius: 50%;
+  font-size: 190%;
+  line-height: 0.65;
+  width: 18.5vmin;
+  height: 18.5vmin;
+  @extend %flex-center;
+  font-weight: 700;
+  margin: 0 0.25em;
+  cursor: pointer;
+  background-color: #e0e0e0;
+}
+
+.big-circle-selected:hover {
+  background-color: #d0d0d0;
+}
+
+.operators-menu, .selected-operators {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.operators-menu span {
+  margin: 0 1em;
 }
 
 .start-button {
@@ -339,51 +349,16 @@ h1 {
   transform:none;
 }
 
-.set-switcher {
-  background-color: #c2a230;
-  border-radius:8vmin;
-  padding:0.4vmin 6vmin;
-  font-size:5vmin;
-  margin-top:1.2em;
-}
-
-.set-switcher:hover {
-  background-color:#b39529;
-}
-
 .auxillary-buttons {
-  margin-top:7vh;
-  font-size:calc(10px + 2.2vmin);
-  word-spacing:0.8em;
+  margin-top: 7vh;
+  word-spacing: 0.8em;
 }
 
 .auxillary-buttons svg {
   height: calc(9px + 4vmin);
 }
 
-.recents-pane {
-  @extend %flex-center;
-  margin: 0.25em 0 0.7em 0;
-}
-
-.big-circle-selected {
-  border-radius: 50%;
-  font-size: 190%;
-  line-height: 0.65;
-  width: 18.5vmin;
-  height: 18.5vmin;
-  @extend %flex-center;
-  font-weight: 700;
-  margin: 0 0.25em;
-  cursor: pointer;
-  background-color: #e0e0e0;
-}
-
-.big-circle-selected:hover {
-  background-color: #d0d0d0;
-}
-
-@media (min-width: 420px) and (min-height: 420px) {
+@media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   h2 {
     font-size: calc(5vmin * 0.6);
     border-bottom: 0.12vmin solid var(--text-color);
@@ -397,52 +372,35 @@ h1 {
     font-size: calc(13vmin * 0.6);
   }
 
-  h1 {
-    font-weight:400;
-    font-size:calc(10px + 3.2vmin);
-  }
   .start-button {
     border-radius:2vmin;
     padding:1.2vmin 4.5vmin;
     font-size:6vmin;
   }
-  .set-switcher {
-    border-radius:8vmin;
-    padding:0.4vmin 4vmin;
-    font-size:calc(5px + 2.6vmin);
-  }
 
-  .recents-buttons div {
+  .big-circle-selected {
     width: 11vmin;
     height: 11vmin;
   }
-
 }
 
 @media (max-height: 520px) {
-  .set-buttons {
-    margin-top:0.75em;
+  .level-indicator {
+    margin: 0 0 0.75em 0;
   }
   .start-button {
-    margin-top:0.55em;
-    padding-top:1.3vmin;
-    padding-bottom:1.3vmin;
-  }
-  .set-switcher {
-    margin-top:1em;
+    margin-top: 0.55em;
+    padding-top: 1.3vmin;
+    padding-bottom: 1.3vmin;
   }
   .auxillary-buttons {
-    margin-top:5vh;
-  }
-  .difficulty-indicator {
-    margin: 0 0 0.75em 0;
+    margin-top: 5vh;
   }
 }
 
 @media (min-height: 800px) {
-
   .auxillary-buttons {
-    margin-top:7vh;
+    margin-top: 7vh;
   }
 }
 </style>
