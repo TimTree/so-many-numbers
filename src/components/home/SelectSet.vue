@@ -12,15 +12,18 @@
   </p>
   <h2>Operators (Tap to toggle)</h2>
   <div class="selected-operators" v-show="!onRecents">
-    <div class="small-circle-unselected" v-bind:class="{'small-circle-selected plus': isPlus}"
-     v-on:click="addPlus()">+</div>
-    <div class="small-circle-unselected" v-bind:class="{'small-circle-selected minus': isMinus}"
-     v-on:click="addMinus()">−</div>
     <div class="small-circle-unselected"
-     v-bind:class="{'small-circle-selected multiply': isMultiply}"
-     v-on:click="addMultiply()">×</div>
-    <div class="small-circle-unselected" v-bind:class="{'small-circle-selected divide': isDivide}"
-     v-on:click="addDivide()">÷</div>
+     v-bind:class="{'small-circle-selected plus': operators.includes('+')}"
+     v-on:click="toggleOperators('+')">+</div>
+    <div class="small-circle-unselected"
+     v-bind:class="{'small-circle-selected minus': operators.includes('−')}"
+     v-on:click="toggleOperators('−')">−</div>
+    <div class="small-circle-unselected"
+     v-bind:class="{'small-circle-selected multiply': operators.includes('×')}"
+     v-on:click="toggleOperators('×')">×</div>
+    <div class="small-circle-unselected"
+     v-bind:class="{'small-circle-selected divide': operators.includes('÷')}"
+     v-on:click="toggleOperators('÷')">÷</div>
   </div>
   <div class="recents-pane" v-show="onRecents">
     <div class="recents-buttons" v-if="recentSets[0]">
@@ -80,10 +83,7 @@ import localStorage from '@/stores/localStorage';
 export default {
   data() {
     return {
-      isPlus: false,
-      isMinus: false,
-      isMultiply: false,
-      isDivide: false,
+      operators: [],
       isSimple: false,
       isStandard: false,
       startEnabled: false,
@@ -97,35 +97,23 @@ export default {
     } else {
       this.onRecents = true;
     }
-    if (localStorage.saveData.savedSet.includes('+')) {
-      this.isPlus = true;
-    }
-    if (localStorage.saveData.savedSet.includes('−')) {
-      this.isMinus = true;
-    }
-    if (localStorage.saveData.savedSet.includes('×')) {
-      this.isMultiply = true;
-    }
-    if (localStorage.saveData.savedSet.includes('÷')) {
-      this.isDivide = true;
-    }
+    this.operators = localStorage.saveData.savedSet;
     if (localStorage.saveData.difficulty === 'simple') {
       this.isSimple = true;
     } else {
       this.isStandard = true;
     }
-    this.updateButtonStatus();
   },
   computed: {
     getSet() {
       let computedSet = '';
-      if (this.isPlus) {
+      if (this.operators.includes('+')) {
         computedSet += 'a';
-      } if (this.isMinus) {
+      } if (this.operators.includes('−')) {
         computedSet += 's';
-      } if (this.isMultiply) {
+      } if (this.operators.includes('×')) {
         computedSet += 'm';
-      } if (this.isDivide) {
+      } if (this.operators.includes('÷')) {
         computedSet += 'd';
       }
       return computedSet;
@@ -143,84 +131,40 @@ export default {
       return 'standard';
     },
   },
+  watch: {
+    operators(value) {
+      localStorage.saveData.savedSet = value;
+      if (value.length < 1) {
+        this.startEnabled = false;
+      } else {
+        this.startEnabled = true;
+      }
+      localStorage.save();
+    },
+  },
   methods: {
-    /**
-     * The following four functions toggle their respective operators.
-     *
-     * I probably could condense these functions into one if I had more
-     * time to figure it out.
-     */
-    addPlus() {
-      if (this.isPlus) {
-        this.isPlus = false;
-        localStorage.saveData.savedSet = localStorage.saveData.savedSet
-          .filter((item) => item !== '+');
+    toggleOperators(operator) {
+      if (this.operators.includes(operator)) {
+        this.operators = this.operators.filter((item) => item !== operator);
       } else {
-        this.isPlus = true;
-        localStorage.saveData.savedSet.push('+');
+        this.operators.push(operator);
       }
-      this.updateButtonStatus();
-      localStorage.save();
     },
-    addMinus() {
-      if (this.isMinus) {
-        this.isMinus = false;
-        localStorage.saveData.savedSet = localStorage.saveData.savedSet
-          .filter((item) => item !== '−');
-      } else {
-        this.isMinus = true;
-        localStorage.saveData.savedSet.push('−');
-      }
-      this.updateButtonStatus();
-      localStorage.save();
-    },
-    addMultiply() {
-      if (this.isMultiply) {
-        this.isMultiply = false;
-        localStorage.saveData.savedSet = localStorage.saveData.savedSet
-          .filter((item) => item !== '×');
-      } else {
-        this.isMultiply = true;
-        localStorage.saveData.savedSet.push('×');
-      }
-      this.updateButtonStatus();
-      localStorage.save();
-    },
-    addDivide() {
-      if (this.isDivide) {
-        this.isDivide = false;
-        localStorage.saveData.savedSet = localStorage.saveData.savedSet
-          .filter((item) => item !== '÷');
-      } else {
-        this.isDivide = true;
-        localStorage.saveData.savedSet.push('÷');
-      }
-      this.updateButtonStatus();
-      localStorage.save();
-    },
-    operatorOverride(operators) {
-      this.isPlus = false;
-      this.isMinus = false;
-      this.isMultiply = false;
-      this.isDivide = false;
-      localStorage.saveData.savedSet = [];
-      for (let i = 0; i < operators.length; i += 1) {
-        if (operators.charAt(i) === 'a') {
-          this.isPlus = true;
-          localStorage.saveData.savedSet.push('+');
-        } else if (operators.charAt(i) === 's') {
-          this.isMinus = true;
-          localStorage.saveData.savedSet.push('−');
-        } else if (operators.charAt(i) === 'm') {
-          this.isMultiply = true;
-          localStorage.saveData.savedSet.push('×');
-        } else if (operators.charAt(i) === 'd') {
-          this.isDivide = true;
-          localStorage.saveData.savedSet.push('÷');
+
+    operatorOverride(ops) {
+      const newOps = [];
+      for (let i = 0; i < ops.length; i += 1) {
+        if (ops.charAt(i) === 'a') {
+          newOps.push('+');
+        } else if (ops.charAt(i) === 's') {
+          newOps.push('−');
+        } else if (ops.charAt(i) === 'm') {
+          newOps.push('×');
+        } else if (ops.charAt(i) === 'd') {
+          newOps.push('÷');
         }
       }
-      this.updateButtonStatus();
-      localStorage.save();
+      this.operators = newOps;
     },
     toggleLevel(level) {
       if (level === 'simple') {
@@ -233,19 +177,6 @@ export default {
         this.isStandard = true;
         localStorage.saveData.difficulty = 'standard';
         localStorage.save();
-      }
-    },
-
-    /**
-     * Check if there are selected operators for the set.
-     * If there are, make the start button appear bold.
-     * If not, subdue the start button.
-     */
-    updateButtonStatus() {
-      if (!this.isPlus && !this.isMinus && !this.isMultiply && !this.isDivide) {
-        this.startEnabled = false;
-      } else {
-        this.startEnabled = true;
       }
     },
 
