@@ -5,13 +5,13 @@
   <h2>Level <span class="header-help" v-on:click="$parent.onLevelExplanation = true;">
     ?</span></h2>
   <p class="difficulty-indicator">
-    <span class="level-unselected" v-bind:class="{'level-selected': isSimple}"
+    <span class="level-unselected" v-bind:class="{'level-selected': level === 'simple'}"
     v-on:click="toggleLevel('simple')">Simple</span>
-    <span class="level-unselected" v-bind:class="{'level-selected': isStandard}"
+    <span class="level-unselected" v-bind:class="{'level-selected': level === 'standard'}"
     v-on:click="toggleLevel('standard')">Standard</span>
   </p>
   <h2>Operators (Tap to toggle)</h2>
-  <div class="selected-operators" v-show="!onRecents">
+  <div class="selected-operators" v-show="titleView === 0">
     <div class="small-circle-unselected"
      v-bind:class="{'small-circle-selected plus': operators.includes('+')}"
      v-on:click="toggleOperators('+')">+</div>
@@ -25,25 +25,25 @@
      v-bind:class="{'small-circle-selected divide': operators.includes('÷')}"
      v-on:click="toggleOperators('÷')">÷</div>
   </div>
-  <div class="recents-pane" v-show="onRecents">
+  <div class="recents-pane" v-show="titleView === 1">
     <div class="recents-buttons" v-if="recentSets[0]">
        <div class="big-circle-selected"
-        v-bind:class="{'big-circle-unselected': getSet !== recentSetsToChars(0)}"
-        v-on:click="operatorOverride(recentSetsToChars(0))"
+        v-bind:class="{'big-circle-unselected': getSet('ops') !== recentSets[0]}"
+        v-on:click="operatorOverride(recentSets[0])"
         v-if="recentSets[0]">
          <span v-html="displayRecentSets(0)[0]"></span>
          <span v-if="recentSets[0].length>2" v-html="displayRecentSets(0)[1]"></span>
        </div>
        <div class="big-circle-selected"
-        v-bind:class="{'big-circle-unselected': getSet !== recentSetsToChars(1)}"
-        v-on:click="operatorOverride(recentSetsToChars(1))"
+        v-bind:class="{'big-circle-unselected': getSet('ops') !== recentSets[1]}"
+        v-on:click="operatorOverride(recentSets[1])"
         v-if="recentSets[1]">
          <span v-html="displayRecentSets(1)[0]"></span>
          <span v-if="recentSets[1].length>2" v-html="displayRecentSets(1)[1]"></span>
        </div>
        <div class="big-circle-selected"
-        v-bind:class="{'big-circle-unselected': getSet !== recentSetsToChars(2)}"
-        v-on:click="operatorOverride(recentSetsToChars(2))"
+        v-bind:class="{'big-circle-unselected': getSet('ops') !== recentSets[2]}"
+        v-on:click="operatorOverride(recentSets[2])"
         v-if="recentSets[2]">
          <span v-html="displayRecentSets(2)[0]"></span>
          <span v-if="recentSets[2].length>2" v-html="displayRecentSets(2)[1]"></span>
@@ -54,12 +54,13 @@
     </div>
   </div>
   <div class="operators-menu">
-    <span><a v-on:click="toggleRecents()">{{setSwitcherText}}</a></span>
+    <span><a v-on:click="toggleTitleView()">{{setSwitcherText}}</a></span>
   </div>
   <div>
   <router-link tag="button" class="start-button button-magenta"
     v-bind:class="{startDisabled: !startEnabled}"
-    :disabled="!startEnabled" :to="{ path: '/game', query: { diff: difficulty, set: getSet }}">
+    :disabled="!startEnabled" :to="{ path: '/game',
+     query: { diff: level, set: getSet('letters')}}">
       Start
   </router-link>
   </div>
@@ -84,65 +85,65 @@ export default {
   data() {
     return {
       operators: [],
-      isSimple: false,
-      isStandard: false,
+      level: '',
+      titleView: 0,
       startEnabled: false,
-      onRecents: false,
       recentSets: localStorage.saveData.recents,
     };
   },
   created() {
-    if (localStorage.saveData.titleView === 0) {
-      this.onRecents = false;
-    } else {
-      this.onRecents = true;
-    }
+    this.titleView = localStorage.saveData.titleView;
     this.operators = localStorage.saveData.savedSet;
-    if (localStorage.saveData.difficulty === 'simple') {
-      this.isSimple = true;
-    } else {
-      this.isStandard = true;
-    }
+    this.level = localStorage.saveData.difficulty;
   },
   computed: {
-    getSet() {
-      let computedSet = '';
-      if (this.operators.includes('+')) {
-        computedSet += 'a';
-      } if (this.operators.includes('−')) {
-        computedSet += 's';
-      } if (this.operators.includes('×')) {
-        computedSet += 'm';
-      } if (this.operators.includes('÷')) {
-        computedSet += 'd';
-      }
-      return computedSet;
-    },
     setSwitcherText() {
-      if (!this.onRecents) {
-        return 'Recents';
-      }
-      return 'Menu';
-    },
-    difficulty() {
-      if (this.isSimple) {
-        return 'simple';
-      }
-      return 'standard';
+      return this.titleView === 0 ? 'Recents' : 'Menu';
     },
   },
   watch: {
     operators(value) {
       localStorage.saveData.savedSet = value;
-      if (value.length < 1) {
-        this.startEnabled = false;
-      } else {
-        this.startEnabled = true;
-      }
+      this.startEnabled = !((value.length < 1));
+      localStorage.save();
+    },
+    level(value) {
+      localStorage.saveData.difficulty = value;
+      localStorage.save();
+    },
+    titleView(value) {
+      localStorage.saveData.titleView = value;
       localStorage.save();
     },
   },
   methods: {
+    /**
+     * Output the currently selected operators in a string format.
+     * This is needed because operators are saved as strings instead of arrays
+     * in localStorage, and the URL parameter for the operators has to be a string.
+     * @param {string} format - ops to get exact operators, letters to get operators
+     * in letter format. We need letter format for the URL parameter because the URL
+     * doesn't like the actual plus sign as a parameter.
+     * @returns {string} - The operators in string format
+     */
+    getSet(format) {
+      let computedSet = '';
+      if (this.operators.includes('+')) {
+        computedSet += format === 'letters' ? 'a' : '+';
+      } if (this.operators.includes('−')) {
+        computedSet += format === 'letters' ? 's' : '−';
+      } if (this.operators.includes('×')) {
+        computedSet += format === 'letters' ? 'm' : '×';
+      } if (this.operators.includes('÷')) {
+        computedSet += format === 'letters' ? 'd' : '÷';
+      }
+      return computedSet;
+    },
+
+    /**
+     * Toggle an operator from the selected operators list
+     * @param {string} operator - The operator to toggle
+     */
     toggleOperators(operator) {
       if (this.operators.includes(operator)) {
         this.operators = this.operators.filter((item) => item !== operator);
@@ -151,56 +152,39 @@ export default {
       }
     },
 
+    /**
+     * Specifically set the selected operators (typically from Recents)
+     * @param {string} operators - The specific operators, all in one string
+     */
     operatorOverride(ops) {
       const newOps = [];
       for (let i = 0; i < ops.length; i += 1) {
-        if (ops.charAt(i) === 'a') {
-          newOps.push('+');
-        } else if (ops.charAt(i) === 's') {
-          newOps.push('−');
-        } else if (ops.charAt(i) === 'm') {
-          newOps.push('×');
-        } else if (ops.charAt(i) === 'd') {
-          newOps.push('÷');
-        }
+        newOps.push(ops.charAt(i));
       }
       this.operators = newOps;
     },
+
+    /**
+     * Toggle the game level
+     * @param {string} level - The name of the level
+     */
     toggleLevel(level) {
-      if (level === 'simple') {
-        this.isSimple = true;
-        this.isStandard = false;
-        localStorage.saveData.difficulty = 'simple';
-        localStorage.save();
-      } else {
-        this.isSimple = false;
-        this.isStandard = true;
-        localStorage.saveData.difficulty = 'standard';
-        localStorage.save();
-      }
+      this.level = level;
     },
 
     /**
      * Toggle the title view (menu or recents)
-     * Also save the current view state to localStorage
+     * titleView = 0 is menu, titleView = 1 is recents
      */
-    toggleRecents() {
-      if (!this.onRecents) {
-        this.onRecents = true;
-        localStorage.saveData.titleView = 1;
-        localStorage.save();
-      } else {
-        this.onRecents = false;
-        localStorage.saveData.titleView = 0;
-        localStorage.save();
-      }
+    toggleTitleView() {
+      this.titleView = (this.titleView === 0) ? 1 : 0;
     },
 
     /**
-     * Display the recent set in a format that looks good in the big circle button.
+     * Display the recently used operators in a format that looks good in the big circle button.
      * @param {int} num - The array index of the set in localStorage's recents array
-     * @returns {string} - The formatted set. Sets with more than three operators are
-     * split into two parts so we can add an HTML line break between them
+     * @returns {array} - The formatted operators. More than three operators are split into two
+     * parts so we can add an HTML line break between them
      */
     displayRecentSets(num) {
       const opsToWorkWith = this.recentSets[num];
@@ -217,38 +201,12 @@ export default {
           opsArray2.push(`<span class='divide'>${opsToWorkWith.charAt(i)}</span>`);
         }
       }
-      if (opsArray2.length < 2) {
-        opsArray = [opsArray2[0], ''];
-      } else if (opsArray2.length === 2) {
-        opsArray = [opsArray2[0] + opsArray2[1], ''];
-      } else if (opsArray2.length === 3) {
-        opsArray = [opsArray2[0] + opsArray2[1], opsArray2[2]];
-      } else {
-        opsArray = [opsArray2[0] + opsArray2[1], opsArray2[2] + opsArray2[3]];
+      if (opsArray2.length <= 2) {
+        opsArray = [opsArray2[0] + (opsArray2[1] ? opsArray2[1] : ''), ''];
+      } else if (opsArray2.length >= 3) {
+        opsArray = [opsArray2[0] + opsArray2[1], opsArray2[2] + (opsArray2[3] ? opsArray2[3] : '')];
       }
       return opsArray;
-    },
-
-    /**
-     * The query string for sets are expressed in letters instead of the actual operators.
-     * Since localStorage holds the actual operators, we need to convert them to letter
-     * format so the Recents buttons can properly process the sets.
-     * @param {int} num - The array index of the set in localStorage's recents array
-     * @returns {string} - The set expressed in letters
-     */
-    recentSetsToChars(num) {
-      const opsToWorkWith = this.recentSets[num];
-      let charOutput = '';
-      const dict = {
-        '+': 'a',
-        '−': 's',
-        '×': 'm',
-        '÷': 'd',
-      };
-      for (let i = 0; i < opsToWorkWith.length; i += 1) {
-        charOutput += dict[opsToWorkWith[i]];
-      }
-      return charOutput;
     },
   },
 };
