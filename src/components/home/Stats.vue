@@ -1,6 +1,6 @@
 <template>
   <div style="width:95%;">
-    <h1>Stats</h1>
+    <h2>Stats</h2>
     <p>
       Coming soon!
     </p>
@@ -13,11 +13,6 @@
 </template>
 
 <style lang="scss" scoped>
-h1 {
-  font-size: 120%;
-  margin-top: 0;
-}
-
 @media (max-width: 479px) and (min-aspect-ratio: 2/3) {
   p {
     margin: 0.75em 0;

@@ -2,7 +2,7 @@
   <div style="width:95%;">
     <transition name="fade-fast" mode="out-in">
     <div v-if="!onWarning" key="nonwarning">
-      <h1>Settings</h1>
+      <h2>Settings</h2>
       <p>
         <button class="small-button button-purple"
           v-on:click="$parent.onSettings = false;
@@ -105,11 +105,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h1 {
-  font-size: 120%;
-  margin-top: 0;
-}
-
 .hiddenYes {
   opacity: 0;
   transition: opacity 0.5s;

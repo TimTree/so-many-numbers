@@ -104,6 +104,15 @@ a:hover {
   color:var(--link-hover-color) !important;
 }
 
+h2 {
+  text-align: left;
+  font-size: 5vmin;
+  border-bottom: 0.2vmin solid var(--text-color);
+  margin: 0 auto 3vh auto;
+  padding: 0 0 0 0.6em;
+  width: 90%;
+}
+
 /**Button styles */
 button {
   border: none;
@@ -208,6 +217,11 @@ button:active {
     font-size: calc(5vmin * 0.6);
   }
 
+  h2 {
+    font-size: calc(5vmin * 0.6);
+    border-bottom: 0.12vmin solid var(--text-color);
+  }
+
   button {
     box-shadow: 0 1vmin var(--button-shadow);
   }
@@ -227,6 +241,12 @@ button:active {
     border-radius: 1.5vmin;
     padding: 0.8vmin 2vmin;
     font-size: 2.4vmin;
+  }
+}
+
+@media (max-width: 479px) and (min-aspect-ratio: 2/3) {
+  h2 {
+    margin: 0 auto 2.5vh auto;
   }
 }
 

@@ -2,7 +2,7 @@
   <div class="non-math-area">
     <p class="congrats">Congrats!</p>
     <p class="lvlIndicator">{{level}}</p>
-    <p class="mathOps">{{mathOps}}</p>
+    <p class="mathOps" v-html="mathOps"></p>
     <div class="highScoreCongrats" v-if="$parent.isHighScore">
       <div>New high score:</div>
       <div>{{store.currentTime}} seconds</div>
@@ -11,18 +11,16 @@
       <div>Your score: {{store.currentTime}} seconds</div>
       <div v-if="playedMoreThanOnce">
           High score: {{highScore.highScore.toFixed(1)}} seconds</div>
-      <div v-else>
-          First score on this set!</div>
     </div>
     <transition name="fade" appear>
       <div class="buttons-div">
         <p class="pmargin">
           <button class="button-again button-magenta"
-           v-on:click="refresh">Play Again</button>
+           v-on:click="refresh">Play again</button>
         </p>
         <p class="pmargin">
           <router-link class="home-area" to="/">
-            <button class="button-again button-magenta">Change Set</button>
+            <button class="button-again button-magenta">Change set</button>
           </router-link>
         </p>
       </div>
@@ -132,19 +130,18 @@ export default {
 }
 
 .lvlIndicator {
-  font-family: courier, serif;
   font-size: 5vmin;
   margin-top: 0.5em;
   margin-bottom: 0.1em;
 }
 
 .mathOps {
-  font-family: courier, serif;
   font-size: 12vmin;
-  opacity: 0.6;
   margin: 0 0 0.05em 0;
   letter-spacing: 0.5em;
   margin-right: -0.5em;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .results {

@@ -213,15 +213,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-h2 {
-  text-align: left;
-  font-size: 5vmin;
-  border-bottom: 0.2vmin solid var(--text-color);
-  margin: 0 auto 3vh auto;
-  padding: 0 0 0 0.6em;
-  width: 90%;
-}
-
 .header-help {
   @extend %flex-center;
   display: inline-flex;
@@ -373,11 +364,6 @@ h2 {
 }
 
 @media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
-  h2 {
-    font-size: calc(5vmin * 0.6);
-    border-bottom: 0.12vmin solid var(--text-color);
-  }
-
   .header-help {
     width: 3.24vmin;
   }
@@ -403,9 +389,6 @@ h2 {
 }
 
 @media (max-width: 479px) and (min-aspect-ratio: 2/3) {
-  h2 {
-    margin: 0 auto 2.5vh auto;
-  }
   .level-indicator {
     margin: 0 0 3vh 0;
   }

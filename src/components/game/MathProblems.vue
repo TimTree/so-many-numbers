@@ -136,9 +136,9 @@ export default {
   width: 2em;
   margin: 0;
   padding: 1px;
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #a9a9a9;
+  background-color: var(--math-box-bg);
+  color: var(--text-color);
+  border: 1px solid var(--math-box-border);
   font-size: inherit;
   font-family: inherit;
   transition: background-color 0.15s;
@@ -146,18 +146,18 @@ export default {
 
 .math-box:focus {
   outline: none;
-  border-color: #5473da;
-  box-shadow: 0 0 6px #5198e0;
+  border-color: var(--math-box-focus-border);
+  box-shadow: 0 0 6px var(--math-box-focus-border-shadow);
 }
 
 .green:focus {
   outline: none;
-  border-color: #45b56d;
-  box-shadow: 0 0 9px #51e07d;
+  border-color: var(--math-box-focus-green-border);
+  box-shadow: 0 0 9px var(--math-box-focus-green-border-shadow);
 }
 
 .red {
-  background-color: #facfcf;
+  background-color: var(--math-box-wrong);
 }
 
 .pulsed{
@@ -172,13 +172,13 @@ export default {
   top: 23%;
   transform: translateX(-50%);
   z-index: 2;
-  color: #000;
+  color: var(--text-color);
   transition: opacity 0.75s;
   width: 90vw;
 }
 
 .encouragement-words {
-  background-color: #d0ebfb;
+  background-color: var(--encouragement-bg);
   border-radius: 12px;
   padding: 4px 15px;
 }

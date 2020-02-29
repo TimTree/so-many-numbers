@@ -4,7 +4,7 @@
       <div class="countdown">
         <p class="soManyTitle">So Many Numbers!</p>
         <p class="lvlIndicator">{{level}}</p>
-        <p class="mathOps">{{mathOps}}</p>
+        <p class="mathOps" v-html="mathOps"></p>
         <p class="countdownNumber">{{countdownNumber}}</p>
       </div>
     </transition>
@@ -46,26 +46,23 @@ export default {
 }
 
 .soManyTitle {
-  font-family: courier, serif;
-  font-size: 7vmin;
-  opacity: 0.6;
+  font-size: 6.8vmin;
   margin: 0 0 0.3em 0;
 }
 
 .lvlIndicator {
-  font-family: courier, serif;
   font-size: 5vmin;
   margin-top: 0.5em;
   margin-bottom: 0.1em;
 }
 
 .mathOps {
-  font-family: courier,serif;
   font-size: 12vmin;
-  opacity: 0.6;
   margin: 0 0 0.05em 0;
   letter-spacing: 0.5em;
   margin-right: -0.5em;
+  font-weight: 700;
+  line-height: 1.1;
 }
 
 .countdownNumber {
@@ -75,7 +72,7 @@ export default {
 
 @media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   .soManyTitle {
-    font-size: 5.4vmin;
+    font-size: 3.8vmin;
   }
 
   .lvlIndicator {

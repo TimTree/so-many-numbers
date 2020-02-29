@@ -136,7 +136,15 @@ export default {
   displayOps() {
     let mathOpsDisplay = '';
     for (let i = 0; i < this.state.operators.length; i += 1) {
-      mathOpsDisplay += this.state.operators[i];
+      if (this.state.operators[i] === '+') {
+        mathOpsDisplay += `<span class="plus">${this.state.operators[i]}</span>`;
+      } else if (this.state.operators[i] === '−') {
+        mathOpsDisplay += `<span class='minus'>${this.state.operators[i]}</span>`;
+      } else if (this.state.operators[i] === '×') {
+        mathOpsDisplay += `<span class='multiply'>${this.state.operators[i]}</span>`;
+      } else if (this.state.operators[i] === '÷') {
+        mathOpsDisplay += `<span class='divide'>${this.state.operators[i]}</span>`;
+      }
     }
     return mathOpsDisplay;
   },

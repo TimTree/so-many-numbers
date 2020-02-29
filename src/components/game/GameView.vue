@@ -4,7 +4,7 @@
       <div class="HUD">
         <div class="gauge">
           <div class="percent-complete">{{Math.round(store.numberOfProblemsSolved
-            /store.numberOfProblems*100)}}% Complete</div>
+            /store.numberOfProblems*100)}}% complete</div>
           <div class="active-gauge" v-bind:style="{width: (store.numberOfProblemsSolved
             /store.numberOfProblems*100)+'%'}"></div>
         </div>
@@ -75,7 +75,7 @@ that happens when resizing the browser window. */
 }
 
 .gauge {
-  background-color: #dadada;
+  background-color: var(--gauge-bg);
   margin: 16px 0 15px 0;
   height: 30px;
   border-radius: 10px;
@@ -85,7 +85,7 @@ that happens when resizing the browser window. */
 }
 
 .active-gauge {
-  background-color: #1da2e6;
+  background-color: var(--active-gauge);
   height: 30px;
   width: 0%;
   border-radius: 10px;
@@ -93,7 +93,7 @@ that happens when resizing the browser window. */
 }
 
 .percent-complete {
-  color: #fff;
+  color: #fafafa;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -154,11 +154,11 @@ that happens when resizing the browser window. */
 }
 
 .gold {
-  background-color: #e2e239;
+  background-color: var(--gold);
 }
 
 .silver {
-  background-color: #c0c0c0;
+  background-color: var(--silver);
 }
 
 @media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
