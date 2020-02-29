@@ -102,20 +102,20 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .math-problems {
-  text-align:center;
-  font-size:13vmin;
+  text-align: center;
+  font-size: 13vmin;
 }
 
 .set1, .set5 {
   transform: scale(0.65);
-  opacity:0.13;
+  opacity: 0.13;
 }
 
 .set2, .set4 {
   transform: scale(0.9);
-  opacity:0.26;
+  opacity: 0.26;
 }
 
 .set3 {
@@ -124,24 +124,24 @@ export default {
 }
 
 .set1, .set2, .set3, .set4, .set5 {
-  padding-bottom:0.08em;
+  padding-bottom: 0.08em;
 }
 
 .set1 *, .set2 *, .set3 *, .set4 *, .set5 * {
-  display:inline-block;
+  display: inline-block;
 }
 
 .math-box {
-  text-align:center;
-  width:2em;
-  margin:0;
-  padding:1px;
-  background-color:#fff;
-  color:#000;
-  border:1px solid #a9a9a9;
-  font-size:inherit;
-  font-family:inherit;
-  transition:background-color 0.15s;
+  text-align: center;
+  width: 2em;
+  margin: 0;
+  padding: 1px;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #a9a9a9;
+  font-size: inherit;
+  font-family: inherit;
+  transition: background-color 0.15s;
 }
 
 .math-box:focus {
@@ -157,29 +157,29 @@ export default {
 }
 
 .red {
-  background-color:#facfcf;
+  background-color: #facfcf;
 }
 
 .pulsed{
-  transform:scale(1.05);
+  transform: scale(1.05);
 }
 
 .encouragement {
-  text-align:center;
-  font-size:8vmin;
-  position:absolute;
-  left:50%;
-  top:23%;
+  text-align: center;
+  font-size: 8vmin;
+  position: absolute;
+  left: 50%;
+  top: 23%;
   transform: translateX(-50%);
-  z-index:2;
-  color:#000;
-  transition:opacity 0.75s;
-  width:90vw;
+  z-index: 2;
+  color: #000;
+  transition: opacity 0.75s;
+  width: 90vw;
 }
 
 .encouragement-words {
-  background-color:#d0ebfb;
-  border-radius:12px;
+  background-color: #d0ebfb;
+  border-radius: 12px;
   padding: 4px 15px;
 }
 
@@ -189,26 +189,26 @@ export default {
 }
 
 .encourage-leave-to {
-  opacity:0;
+  opacity: 0;
 }
 
 .expression1, .expression2, .expression3 {
   white-space: pre;
 }
 
-@media (min-width: 420px) and (min-height: 420px) {
+@media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   .math-problems {
-    font-size:10vmin;
+    font-size: 10vmin;
   }
 
   .encouragement {
-    font-size:6.15vmin;
+    font-size: 6.15vmin;
   }
 }
 
 @media (min-width: 1000px) and (min-height: 950px) {
   .encouragement-words {
-    border-radius:20px;
+    border-radius: 20px;
   }
 }
 </style>

@@ -119,85 +119,85 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .non-math-area {
-  display:block;
-  text-align:center;
+  display: block;
+  text-align: center;
 }
 
 .congrats {
-  font-size:11vmin;
-  margin-top:0;
-  margin-bottom:0.1em;
+  font-size: 11vmin;
+  margin-top: 0;
+  margin-bottom: 0.1em;
 }
 
 .diffIndicator {
-  font-family:courier, serif;
-  font-size:5vmin;
-  margin-top:0.5em;
-  margin-bottom:0.1em;
+  font-family: courier, serif;
+  font-size: 5vmin;
+  margin-top: 0.5em;
+  margin-bottom: 0.1em;
 }
 
 .mathOps {
-  font-family:courier,serif;
-  font-size:12vmin;
-  opacity:0.6;
-  margin:0 0 0.05em 0;
-  letter-spacing:0.5em;
-  margin-right:-0.5em;
+  font-family: courier, serif;
+  font-size: 12vmin;
+  opacity: 0.6;
+  margin: 0 0 0.05em 0;
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
 }
 
 .results {
-  font-size:6vmin;
-  line-height:1.8;
-  margin-bottom:12px;
+  font-size: 6vmin;
+  line-height: 1.8;
+  margin-bottom: 12px;
 }
 
 .highScoreCongrats {
-  font-size:6vmin;
-  font-weight:700;
-  line-height:1.5;
-  margin-bottom:12px;
+  font-size: 6vmin;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 12px;
 }
 
 .button-again {
   padding: 4.5% 10%;
   font-size: 6.5vmin;
-  border-radius:3vmin;
+  border-radius: 3vmin;
 }
 
 .pmargin {
-  margin:calc(3px + 1.8vmin) 0;
+  margin: calc(3px + 1.8vmin) 0;
 }
 
-@media (min-width: 420px) and (min-height: 420px) {
+@media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   .congrats {
-    font-size:8.5vmin;
+    font-size: 8.5vmin;
   }
 
   .diffIndicator {
-    font-size:3vmin;
+    font-size: 3vmin;
   }
 
   .mathOps {
-    font-size:6.9vmin;
+    font-size: 6.9vmin;
   }
 
   .results {
-    font-size:4.6vmin;
+    font-size: 4.6vmin;
   }
 
   .highScoreCongrats {
-    font-size:4.6vmin;
+    font-size: 4.6vmin;
   }
 
   .button-again {
-    font-size:5vmin;
-    border-radius:2vmin;
+    font-size: 5vmin;
+    border-radius: 2vmin;
   }
 
   .pmargin {
-    margin:3vmin 0;
+    margin: 3vmin 0;
   }
 }
 </style>

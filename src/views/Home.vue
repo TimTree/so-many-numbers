@@ -8,7 +8,7 @@
       <LevelExplanation v-if="onLevelExplanation" key="explanation"/>
       <Settings v-else-if="onSettings" key="settings"/>
       <OnBoarding v-else-if="onOnboarding" key="onboarding"/>
-      <Stats v-else-if="onStats" key="updater"/>
+      <Stats v-else-if="onStats" key="stats"/>
       <Selection v-else key="selection"/>
     </transition>
   </main>
@@ -125,13 +125,13 @@ header img {
 
 @media (min-height: 800px) {
   header {
-    padding:20px 0;
+    padding: 20px 0;
   }
 }
 
 @media (min-height: 1000px) {
   header {
-    padding:30px 0;
+    padding: 30px 0;
   }
 }
 

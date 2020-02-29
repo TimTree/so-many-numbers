@@ -105,33 +105,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 h1 {
-  font-size:120%;
+  font-size: 120%;
   margin-top: 0;
 }
 
 .hiddenYes {
-  opacity:0;
+  opacity: 0;
   transition: opacity 0.5s;
-  cursor:default;
+  cursor: default;
 }
 
 .visibleYes {
-  opacity:1;
-  cursor:pointer;
+  opacity: 1;
+  cursor: pointer;
 }
 
-@media (min-width: 420px) and (min-height: 420px) {
+@media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   .reset {
-    font-size:1.8vmin;
-    padding:1vmin 2vmin;
+    font-size: 1.8vmin;
+    padding: 1vmin 2vmin;
   }
 }
 
 @media (max-width: 479px) and (min-aspect-ratio: 2/3) {
   p {
-    margin:0.75em 0;
+    margin: 0.75em 0;
   }
 }
 </style>

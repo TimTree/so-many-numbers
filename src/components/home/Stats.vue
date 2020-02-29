@@ -14,13 +14,13 @@
 
 <style lang="scss" scoped>
 h1 {
-  font-size:120%;
+  font-size: 120%;
   margin-top: 0;
 }
 
 @media (max-width: 479px) and (min-aspect-ratio: 2/3) {
   p {
-    margin:0.75em 0;
+    margin: 0.75em 0;
   }
 }
 </style>

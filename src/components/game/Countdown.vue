@@ -39,58 +39,55 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .countdown {
-    height:85%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
+  @extend %flex-center;
+  height: 85%;
 }
 
 .soManyTitle {
-  font-family:courier, serif;
-  font-size:7vmin;
-  opacity:0.6;
-  margin:0 0 0.3em 0;
+  font-family: courier, serif;
+  font-size: 7vmin;
+  opacity: 0.6;
+  margin: 0 0 0.3em 0;
 }
 
 .diffIndicator {
-  font-family:courier, serif;
-  font-size:5vmin;
-  margin-top:0.5em;
-  margin-bottom:0.1em;
+  font-family: courier, serif;
+  font-size: 5vmin;
+  margin-top: 0.5em;
+  margin-bottom: 0.1em;
 }
 
 .mathOps {
-  font-family:courier,serif;
-  font-size:12vmin;
-  opacity:0.6;
-  margin:0 0 0.05em 0;
-  letter-spacing:0.5em;
-  margin-right:-0.5em;
+  font-family: courier,serif;
+  font-size: 12vmin;
+  opacity: 0.6;
+  margin: 0 0 0.05em 0;
+  letter-spacing: 0.5em;
+  margin-right: -0.5em;
 }
 
 .countdownNumber {
-  font-size:16vmin;
-  margin:0 0 0 0;
+  font-size: 16vmin;
+  margin: 0 0 0 0;
 }
 
-@media (min-width: 420px) and (min-height: 420px) {
+@media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   .soManyTitle {
-    font-size:5.4vmin;
+    font-size: 5.4vmin;
   }
 
   .diffIndicator {
-    font-size:3vmin;
+    font-size: 3vmin;
   }
 
   .mathOps {
-    font-size:6.9vmin;
+    font-size: 6.9vmin;
   }
 
   .countdownNumber {
-    font-size:10.8vmin;
+    font-size: 10.8vmin;
   }
 }
 </style>

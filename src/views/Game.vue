@@ -7,8 +7,8 @@
 
 <script>
 import gameStore from '@/stores/gameStore';
-import Countdown from '@/components/Countdown.vue';
-import GameView from '@/components/GameView.vue';
+import Countdown from '@/components/game/Countdown.vue';
+import GameView from '@/components/game/GameView.vue';
 
 export default {
   data() {
