@@ -6,9 +6,9 @@
   <main>
     <transition name="fade" mode="out-in" appear>
       <LevelExplanation v-if="onLevelExplanation" key="explanation"/>
-      <HelpScreen v-else-if="onHelp" key="help"/>
+      <Settings v-else-if="onSettings" key="settings"/>
       <OnBoarding v-else-if="onOnboarding" key="onboarding"/>
-      <UpdatesScreen v-else-if="onUpdatesScreen" key="updater"/>
+      <Stats v-else-if="onStats" key="updater"/>
       <Selection v-else key="selection"/>
     </transition>
   </main>
@@ -28,27 +28,27 @@
 </template>
 
 <script>
-import HelpScreen from '@/components/HelpScreen.vue';
+import Settings from '@/components/home/Settings.vue';
 import Selection from '@/components/home/Selection.vue';
-import OnBoarding from '@/components/OnBoarding.vue';
-import UpdatesScreen from '@/components/UpdatesScreen.vue';
+import OnBoarding from '@/components/home/OnBoarding.vue';
+import Stats from '@/components/home/Stats.vue';
 import LevelExplanation from '@/components/home/LevelExplanation.vue';
 import localStorage from '@/stores/localStorage';
 
 export default {
   data() {
     return {
-      onHelp: false,
+      onSettings: false,
       onOnboarding: false,
-      onUpdatesScreen: false,
+      onStats: false,
       onLevelExplanation: false,
     };
   },
   components: {
-    HelpScreen,
+    Settings,
     Selection,
     OnBoarding,
-    UpdatesScreen,
+    Stats,
     LevelExplanation,
   },
   created() {

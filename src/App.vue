@@ -142,27 +142,23 @@ button:active {
 }
 
 .button-orange:hover {
-  background-color:#dc862f;
+  background-color: #dc862f;
 }
 
 .button-purple {
-  background-color:#726bd3;
+  background-color: #726bd3;
 }
 
 .button-purple:hover {
-  background-color:#837ce7;
+  background-color: #837ce7;
 }
 
-.button-greenUnselected {
-  background-color: #b5c5b4;
+.button-red {
+  background-color: #cf1a1a;
 }
 
-.button-greenUnselected:hover {
-  background-color:#9abb98;
-}
-
-.button-greenSelected, .button-greenSelected:hover {
-  background-color: #0d9806;
+.button-red:hover {
+  background-color: #e23737;
 }
 
 .normal-button {
@@ -170,6 +166,13 @@ button:active {
   border-radius: 3vmin;
   padding: 1.5vmin 4vmin;
   font-size: 6vmin;
+}
+
+.small-button {
+  margin-top: 0.5em;
+  border-radius: 3vmin;
+  padding: 1.5vmin 3vmin;
+  font-size: 4vmin;
 }
 
 .plus {
@@ -219,6 +222,11 @@ button:active {
     border-radius: 1.5vmin;
     padding: 0.8vmin 3vmin;
     font-size: 3.5vmin;
+  }
+  .small-button {
+    border-radius: 1.5vmin;
+    padding: 0.8vmin 2vmin;
+    font-size: 2.4vmin;
   }
 }
 
