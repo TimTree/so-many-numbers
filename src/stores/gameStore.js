@@ -131,19 +131,24 @@ export default {
 
   /**
    * Return the operators to a string format readable in HTML
+   * @param {int} format - 1 for colored operators, else unformatted
    * @returns {string} - The string of the operators
    */
-  displayOps() {
+  displayOps(format) {
     let mathOpsDisplay = '';
     for (let i = 0; i < this.state.operators.length; i += 1) {
-      if (this.state.operators[i] === '+') {
-        mathOpsDisplay += `<span class="plus">${this.state.operators[i]}</span>`;
-      } else if (this.state.operators[i] === '−') {
-        mathOpsDisplay += `<span class='minus'>${this.state.operators[i]}</span>`;
-      } else if (this.state.operators[i] === '×') {
-        mathOpsDisplay += `<span class='multiply'>${this.state.operators[i]}</span>`;
-      } else if (this.state.operators[i] === '÷') {
-        mathOpsDisplay += `<span class='divide'>${this.state.operators[i]}</span>`;
+      if (format === 1) {
+        if (this.state.operators[i] === '+') {
+          mathOpsDisplay += `<span class="plus">${this.state.operators[i]}</span>`;
+        } else if (this.state.operators[i] === '−') {
+          mathOpsDisplay += `<span class='minus'>${this.state.operators[i]}</span>`;
+        } else if (this.state.operators[i] === '×') {
+          mathOpsDisplay += `<span class='multiply'>${this.state.operators[i]}</span>`;
+        } else if (this.state.operators[i] === '÷') {
+          mathOpsDisplay += `<span class='divide'>${this.state.operators[i]}</span>`;
+        }
+      } else {
+        mathOpsDisplay += this.state.operators[i];
       }
     }
     return mathOpsDisplay;

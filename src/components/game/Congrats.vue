@@ -2,7 +2,7 @@
   <div class="non-math-area">
     <p class="congrats">Congrats!</p>
     <p class="lvlIndicator">{{level}}</p>
-    <p class="mathOps" v-html="mathOps"></p>
+    <p class="mathOps" v-html="mathOpsColored"></p>
     <div class="highScoreCongrats" v-if="$parent.isHighScore">
       <div>New high score:</div>
       <div>{{store.currentTime}} seconds</div>
@@ -44,6 +44,9 @@ export default {
     },
     levelLowerCase() {
       return gameStore.state.level.toLowerCase();
+    },
+    mathOpsColored() {
+      return gameStore.displayOps(1);
     },
     mathOps() {
       return gameStore.displayOps();

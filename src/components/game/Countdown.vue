@@ -4,7 +4,7 @@
       <div class="countdown">
         <p class="soManyTitle">So Many Numbers!</p>
         <p class="lvlIndicator">{{level}}</p>
-        <p class="mathOps" v-html="mathOps"></p>
+        <p class="mathOps" v-html="mathOpsColored"></p>
         <p class="countdownNumber">{{countdownNumber}}</p>
       </div>
     </transition>
@@ -32,8 +32,8 @@ export default {
     clearTimeout(this.countdown0);
   },
   computed: {
-    mathOps() {
-      return gameStore.displayOps();
+    mathOpsColored() {
+      return gameStore.displayOps(1);
     },
   },
 };
