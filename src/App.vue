@@ -138,27 +138,27 @@ button:active {
 }
 
 .button-orange {
-  background-color: #c27120;
+  background-color: var(--button-orange);
 }
 
 .button-orange:hover {
-  background-color: #dc862f;
+  background-color: var(--button-orange-hover);
 }
 
 .button-purple {
-  background-color: #726bd3;
+  background-color: var(--button-purple);
 }
 
 .button-purple:hover {
-  background-color: #837ce7;
+  background-color: var(--button-purple-hover);
 }
 
 .button-red {
-  background-color: #cf1a1a;
+  background-color: var(--button-red);
 }
 
 .button-red:hover {
-  background-color: #e23737;
+  background-color: var(--button-red-hover);
 }
 
 .normal-button {
@@ -176,19 +176,19 @@ button:active {
 }
 
 .plus {
-  color: #fa2909;
+  color: var(--plus-color);
 }
 
 .minus {
-  color: #afaf20;
+  color: var(--minus-color);
 }
 
 .multiply {
-  color: #1086e7;
+  color: var(--multiply-color);
 }
 
 .divide {
-  color: #54b500;
+  color: var(--divide-color);
 }
 
 .big-circle-unselected {
@@ -196,11 +196,11 @@ button:active {
 }
 
 .big-circle-unselected:hover {
-  background-color: #f0f0f0 !important;
+  background-color: var(--div-button-hover-color) !important;
 }
 
 .big-circle-unselected span {
-  color: rgba(0,0,0,0.15) !important;
+  color: var(--unselected-color) !important;
 }
 
 @media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {

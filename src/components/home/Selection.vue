@@ -227,7 +227,7 @@ h2 {
   display: inline-flex;
   margin-left: 0.3em;
   border-radius: 50%;
-  background: #e0e0e0;
+  background: var(--div-button-active-color);
   width: 5.65vmin;
   font-size: 80%;
   cursor: pointer;
@@ -235,7 +235,7 @@ h2 {
 }
 
 .header-help:hover {
-  background-color: #d0d0d0;
+  background-color: var(--div-button-active-hover-color);
 }
 
 .level-indicator {
@@ -251,15 +251,15 @@ h2 {
 }
 
 .level-unselected:hover {
-  background-color: #f0f0f0;
+  background-color: var(--div-button-hover-color);
 }
 
 .level-selected {
-  background-color: #e0e0e0;
+  background-color: var(--div-button-active-color);
 }
 
 .level-selected:hover {
-  background-color: #d0d0d0;
+  background-color: var(--div-button-active-hover-color);
 }
 
 .operators-container {
@@ -272,7 +272,7 @@ h2 {
   font-size: 13vmin;
   line-height: 1.2;
   font-weight: 700;
-  color: rgba(0,0,0,0.15);
+  color: var(--unselected-color);
 }
 
 .small-circle-unselected {
@@ -286,15 +286,15 @@ h2 {
 }
 
 .small-circle-unselected:hover {
-  background-color: #f0f0f0;
+  background-color: var(--div-button-hover-color);
 }
 
 .small-circle-selected {
-  background-color: #e0e0e0;
+  background-color: var(--div-button-active-color);
 }
 
 .small-circle-selected:hover {
-  background-color: #d0d0d0;
+  background-color: var(--div-button-active-hover-color);
 }
 
 .recents-pane {
@@ -319,12 +319,12 @@ h2 {
   font-weight: 700;
   margin: 0 0.25em;
   cursor: pointer;
-  background-color: #e0e0e0;
+  background-color: var(--div-button-active-color);
   transition: background-color $transition-time;
 }
 
 .big-circle-selected:hover {
-  background-color: #d0d0d0;
+  background-color: var(--div-button-active-hover-color);
 }
 
 .operators-menu, .selected-operators {
@@ -346,17 +346,17 @@ h2 {
 
 .startDisabled {
   cursor: not-allowed;
-  background-color: #d8c3d0;
+  background-color: var(--button-magenta-disabled);
   box-shadow: 0px 0px !important;
   transition: none;
 }
 
 .startDisabled:hover {
-  background-color: #d8c3d0;
+  background-color: var(--button-magenta-disabled);
 }
 
 .startDisabled:active {
-  background-color: #d8c3d0;
+  background-color: var(--button-magenta-disabled);
   transform: none;
 }
 
