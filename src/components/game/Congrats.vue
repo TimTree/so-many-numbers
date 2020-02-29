@@ -1,7 +1,7 @@
 <template>
   <div class="non-math-area">
     <p class="congrats">Congrats!</p>
-    <p class="diffIndicator">{{difficulty}}</p>
+    <p class="lvlIndicator">{{level}}</p>
     <p class="mathOps">{{mathOps}}</p>
     <div class="highScoreCongrats" v-if="$parent.isHighScore">
       <div>New high score:</div>
@@ -14,7 +14,7 @@
       <div v-else>
           First score on this set!</div>
     </div>
-    <transition name="fade07" appear>
+    <transition name="fade" appear>
       <div class="buttons-div">
         <p class="pmargin">
           <button class="button-again button-magenta"
@@ -41,21 +41,21 @@ export default {
     };
   },
   computed: {
-    difficulty() {
-      return gameStore.state.difficulty;
+    level() {
+      return gameStore.state.level;
     },
-    difficultyLowerCase() {
-      return gameStore.state.difficulty.toLowerCase();
+    levelLowerCase() {
+      return gameStore.state.level.toLowerCase();
     },
     mathOps() {
       return gameStore.displayOps();
     },
     highScore() {
-      return localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase];
+      return localStorage.saveData.sets[this.mathOps][this.levelLowerCase];
     },
     playedMoreThanOnce() {
       if (localStorage.saveData
-        .sets[this.mathOps][this.difficultyLowerCase].timesFinished > 1) {
+        .sets[this.mathOps][this.levelLowerCase].timesFinished > 1) {
         return true;
       } return false;
     },
@@ -66,18 +66,18 @@ export default {
      */
     refresh() {
       gameStore.clearGame();
-      gameStore.createGame(this.$route.query.diff, this.$route.query.set);
+      gameStore.createGame(this.$route.query.lvl, this.$route.query.ops);
       this.$parent.$parent.isCountdown = true;
     },
   },
   created() {
     /**
      * When the congrats screen first appears, check if the player has a new
-     * high score in the difficulty/set.
+     * high score in the given set (level/operators combination).
      *
      * If it's a new high score, replace the old high score with the new one.
-     * If the player never played the difficulty/set before, create save data
-     * for the difficulty/set and insert the current score as the high score.
+     * If the player never played the set before, create save data
+     * for the set and insert the current score as the high score.
      */
     localStorage.saveData.recents = localStorage.saveData.recents
       .filter((item) => item !== this.mathOps);
@@ -85,33 +85,33 @@ export default {
     if (Object.prototype.hasOwnProperty
       .call(localStorage.saveData.sets, this.mathOps)) {
       if (Object.prototype.hasOwnProperty
-        .call(localStorage.saveData.sets[this.mathOps], this.difficultyLowerCase)) {
+        .call(localStorage.saveData.sets[this.mathOps], this.levelLowerCase)) {
         localStorage.saveData
-          .sets[this.mathOps][this.difficultyLowerCase].timesFinished += 1;
+          .sets[this.mathOps][this.levelLowerCase].timesFinished += 1;
         if (Number(gameStore.state.currentTime)
-         < localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase]
+         < localStorage.saveData.sets[this.mathOps][this.levelLowerCase]
            .highScore) {
           this.$parent.isHighScore = true;
-          localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase]
+          localStorage.saveData.sets[this.mathOps][this.levelLowerCase]
             .highScore = Number(gameStore.state.currentTime);
         } else {
           this.$parent.isNotHighScore = true;
         }
       } else {
         this.$parent.isNotHighScore = true;
-        localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase] = {};
-        localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase]
+        localStorage.saveData.sets[this.mathOps][this.levelLowerCase] = {};
+        localStorage.saveData.sets[this.mathOps][this.levelLowerCase]
           .highScore = Number(gameStore.state.currentTime);
-        localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase]
+        localStorage.saveData.sets[this.mathOps][this.levelLowerCase]
           .timesFinished = 1;
       }
     } else {
       this.$parent.isNotHighScore = true;
       localStorage.saveData.sets[this.mathOps] = {};
-      localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase] = {};
-      localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase]
+      localStorage.saveData.sets[this.mathOps][this.levelLowerCase] = {};
+      localStorage.saveData.sets[this.mathOps][this.levelLowerCase]
         .highScore = Number(gameStore.state.currentTime);
-      localStorage.saveData.sets[this.mathOps][this.difficultyLowerCase]
+      localStorage.saveData.sets[this.mathOps][this.levelLowerCase]
         .timesFinished = 1;
     }
     localStorage.save();
@@ -131,7 +131,7 @@ export default {
   margin-bottom: 0.1em;
 }
 
-.diffIndicator {
+.lvlIndicator {
   font-family: courier, serif;
   font-size: 5vmin;
   margin-top: 0.5em;
@@ -175,7 +175,7 @@ export default {
     font-size: 8.5vmin;
   }
 
-  .diffIndicator {
+  .lvlIndicator {
     font-size: 3vmin;
   }
 

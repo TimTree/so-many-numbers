@@ -1,7 +1,7 @@
 <template>
 <div style="width:100%;">
-  <h2>Level <span class="header-help" v-on:click="$parent.onLevelExplanation = true;">
-    ?</span></h2>
+  <h2>Level <span class="header-help" v-on:click="$parent.onLevelExplanation = true;"
+   title="Levels explanation">?</span></h2>
   <p class="level-indicator">
     <span class="level-unselected" v-bind:class="{'level-selected': level === 'simple'}"
     v-on:click="toggleLevel('simple')">Simple</span>
@@ -231,6 +231,11 @@ h2 {
   width: 5.65vmin;
   font-size: 80%;
   cursor: pointer;
+  transition: background-color $transition-time;
+}
+
+.header-help:hover {
+  background-color: #d0d0d0;
 }
 
 .level-indicator {
@@ -277,6 +282,7 @@ h2 {
   width: 1.19em;
   cursor: pointer;
   user-select: none;
+  transition: background-color $transition-time;
 }
 
 .small-circle-unselected:hover {
@@ -314,6 +320,7 @@ h2 {
   margin: 0 0.25em;
   cursor: pointer;
   background-color: #e0e0e0;
+  transition: background-color $transition-time;
 }
 
 .big-circle-selected:hover {

@@ -8,7 +8,7 @@ export default {
     numberOfProblemsSolved: 0,
     expressions: [],
     solutions: [],
-    difficulty: '',
+    level: '',
     operators: [],
     currentTime: '0.0',
   },
@@ -28,15 +28,15 @@ export default {
   },
 
   /**
-   * Generate a game, given a difficulty and set of operators
-   * @param {string} diff - the difficulty of the game - Simple or Standard
-   * @param {string} ops - the operators (set) to use for the game
+   * Generate a game, given the level and operators
+   * @param {string} lvl - the level of the game - Simple or Standard
+   * @param {string} ops - the operators to use for the game
    */
-  createGame(diff, ops) {
+  createGame(lvl, ops) {
     /**
      * Change this number if you want to debug.
      * If you make the number less than 1 (aka no game) or over 100 (risking
-     * an infinite loop since we don't repeat problems and some diff/sets
+     * an infinite loop since we don't repeat problems and some level/operator sets
      * only have 100 possible problems), edit the problem count to the nearest
      * valid amount.
      */
@@ -48,20 +48,20 @@ export default {
       this.state.numberOfProblems = 100;
     }
     /**
-     * Define the ruleset (math problem bounds) based on chosen difficulty
+     * Define the ruleset (math problem bounds) based on chosen level
      */
     const ruleset = [];
-    if (diff === 'simple') {
-      this.state.difficulty = 'Simple';
+    if (lvl === 'simple') {
+      this.state.level = 'Simple';
       ruleset.push(10, 15, 10);
     } else {
-      this.state.difficulty = 'Standard';
+      this.state.level = 'Standard';
       ruleset.push(20, 30, 12);
     }
     /**
-     * Configure the game set.
-     * If the difficulty/set is invalid, the game will default
-     * to the Standard difficulty with all four operators.
+     * Configure the game operators.
+     * If the level/operators are invalid, the game will default
+     * to the standard level with all four operators.
      *
      * Note: The minus and multiply symbols are NOT dash (-) and x.
      * They are actual minus and multiply symbols (−,×).
@@ -130,8 +130,8 @@ export default {
   },
 
   /**
-   * Return the set of operators to a string format readable in HTML
-   * @returns {string} - The string of the set
+   * Return the operators to a string format readable in HTML
+   * @returns {string} - The string of the operators
    */
   displayOps() {
     let mathOpsDisplay = '';
@@ -178,7 +178,7 @@ export default {
     this.state.numberOfProblemsSolved = 0;
     this.state.expressions = [];
     this.state.solutions = [];
-    this.state.difficulty = '';
+    this.state.level = '';
     this.state.operators = [];
     this.state.currentTime = '0.0';
   },

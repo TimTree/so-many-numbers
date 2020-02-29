@@ -1,9 +1,9 @@
 <template>
   <div style="height:100%;">
-    <transition name="fade07" appear>
+    <transition name="fade" appear>
       <div class="countdown">
         <p class="soManyTitle">So Many Numbers!</p>
-        <p class="diffIndicator">{{difficulty}}</p>
+        <p class="lvlIndicator">{{level}}</p>
         <p class="mathOps">{{mathOps}}</p>
         <p class="countdownNumber">{{countdownNumber}}</p>
       </div>
@@ -18,7 +18,7 @@ export default {
   data() {
     return {
       countdownNumber: 3,
-      difficulty: gameStore.state.difficulty,
+      level: gameStore.state.level,
     };
   },
   created() {
@@ -52,7 +52,7 @@ export default {
   margin: 0 0 0.3em 0;
 }
 
-.diffIndicator {
+.lvlIndicator {
   font-family: courier, serif;
   font-size: 5vmin;
   margin-top: 0.5em;
@@ -78,7 +78,7 @@ export default {
     font-size: 5.4vmin;
   }
 
-  .diffIndicator {
+  .lvlIndicator {
     font-size: 3vmin;
   }
 
