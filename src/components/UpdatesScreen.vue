@@ -1,7 +1,6 @@
 <template>
   <div class="help">
   <div>
-  <transition name="fade" appear>
   <div>
     <p>So Many Numbers downloads to your device for offline use.
       It automatically updates as we release new versions.
@@ -23,7 +22,6 @@
       v-on:click="$parent.onUpdatesScreen=false;">Go back</button>
     </p>
   </div>
-  </transition>
   </div>
   </div>
 </template>

@@ -2,7 +2,6 @@
   <div class="help">
   <div v-if="!onWarning">
   <div>
-  <transition name="fade" appear>
   <div>
     <h1>Game Goals!</h1>
     <p>Solve <b>30 problems</b> as fast as you can.</p>
@@ -16,7 +15,6 @@
       v-on:click="$parent.onHelp= false;">Go back</button>
     </p>
   </div>
-  </transition>
   </div>
   </div>
   <div style="width:95%;margin:0 auto;" v-if="onWarning">

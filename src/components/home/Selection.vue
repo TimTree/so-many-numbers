@@ -1,7 +1,5 @@
 <template>
-<div style="text-align:center;width:100%;">
-<transition name="fade" appear>
-<div>
+<div style="width:100%;">
   <h2>Level <span class="header-help" v-on:click="$parent.onLevelExplanation = true;">
     ?</span></h2>
   <p class="level-indicator">
@@ -12,7 +10,8 @@
   </p>
   <h2>Operators (Tap to toggle)</h2>
   <div class="operators-container">
-    <div class="selected-operators" v-show="titleView === 0">
+    <transition name="fade-fast" mode="out-in">
+    <div class="selected-operators" v-if="titleView === 0" key="menu">
       <div class="small-circle-unselected"
       v-bind:class="{'small-circle-selected plus': operators.includes('+')}"
       v-on:click="toggleOperators('+')">+</div>
@@ -26,7 +25,7 @@
       v-bind:class="{'small-circle-selected divide': operators.includes('÷')}"
       v-on:click="toggleOperators('÷')">÷</div>
     </div>
-    <div class="recents-pane" v-show="titleView === 1">
+    <div class="recents-pane" v-if="titleView === 1" key="recents">
       <div class="recents-buttons" v-if="recents[0]">
         <div class="big-circle-selected"
           v-bind:class="{'big-circle-unselected': getOperators('ops') !== recents[0]}"
@@ -54,6 +53,7 @@
         No recents - you haven't finished a game yet!
       </div>
     </div>
+    </transition>
   </div>
   <div class="operators-menu">
     <span><a v-on:click="toggleTitleView()">{{gameViewText}}</a></span>
@@ -75,8 +75,6 @@
       <svg preserveAspectRatio="xMidYMid meet" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33 31"><defs><clipPath id="clip1"><path d="M8 175 41 175 41 206 8 206Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip1)" transform="translate(-8 -175)"><rect x="10" y="183" width="10" height="22" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/><rect x="20" y="176" width="10" height="29" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/><rect x="30" y="190" width="10" height="15" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/></g></svg>
     </a>
   </div>
-</div>
-</transition>
 </div>
 </template>
 
@@ -298,7 +296,7 @@ h2 {
 }
 
 .recents-buttons, .no-recents {
-  display:flex;
+  display: flex;
 }
 
 .no-recents {
@@ -333,26 +331,26 @@ h2 {
 }
 
 .start-button {
-  margin-top:5vh;
-  border-radius:4vmin;
-  padding:2vmin 7vmin;
-  font-size:10vmin;
+  margin-top: 4vh;
+  border-radius: 4vmin;
+  padding: 2vmin 7vmin;
+  font-size: 10vmin;
 }
 
 .startDisabled {
   cursor: not-allowed;
-  background-color:#d8c3d0;
+  background-color: #d8c3d0;
   box-shadow: 0px 0px !important;
-  transition:none;
+  transition: none;
 }
 
 .startDisabled:hover {
-  background-color:#d8c3d0;
+  background-color: #d8c3d0;
 }
 
 .startDisabled:active {
-  background-color:#d8c3d0;
-  transform:none;
+  background-color: #d8c3d0;
+  transform: none;
 }
 
 .auxillary-buttons {
@@ -386,9 +384,9 @@ h2 {
   }
 
   .start-button {
-    border-radius:2vmin;
-    padding:1.2vmin 4.5vmin;
-    font-size:6vmin;
+    border-radius: 2vmin;
+    padding: 1.2vmin 4.5vmin;
+    font-size: 6vmin;
   }
 
   .big-circle-selected {

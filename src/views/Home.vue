@@ -4,11 +4,13 @@
     <img src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
   </header>
   <main>
-    <LevelExplanation v-if="onLevelExplanation"/>
-    <HelpScreen v-else-if="onHelp"/>
-    <OnBoarding v-else-if="onOnboarding" />
-    <UpdatesScreen v-else-if="onUpdatesScreen" />
-    <Selection v-else />
+    <transition name="fade" mode="out-in" appear>
+      <LevelExplanation v-if="onLevelExplanation" key="explanation"/>
+      <HelpScreen v-else-if="onHelp" key="help"/>
+      <OnBoarding v-else-if="onOnboarding" key="onboarding"/>
+      <UpdatesScreen v-else-if="onUpdatesScreen" key="updater"/>
+      <Selection v-else key="selection"/>
+    </transition>
   </main>
   <footer class="authors">
     <span>
@@ -74,6 +76,7 @@ main {
   margin: 0 auto;
   width: 100%;
   max-width: 1024px;
+  text-align: center;
 }
 
 header {

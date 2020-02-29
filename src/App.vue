@@ -227,11 +227,16 @@ button:active {
   transition: opacity 0.3s ease-in;
 }
 
+.fade-fast-enter-active {
+  transition: opacity 0.15s ease-in;
+}
+
 .fade07-enter-active {
   transition: opacity .7s;
 }
 
-.fade-enter, .fade-leave-to, .fade07-enter, .fade07-leave-to {
+.fade-enter, .fade-leave-to, .fade-fast-enter, .fade-fast-leave-to,
+ .fade07-enter, .fade07-leave-to {
   opacity: 0;
 }
 

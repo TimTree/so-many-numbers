@@ -1,7 +1,5 @@
 <template>
-  <div class="help">
-  <transition name="fade" appear>
-  <div>
+  <div style="width:95%;">
     <p>
       <b>Simple</b>: Use basic problems.
     </p>
@@ -19,19 +17,12 @@
     </p>
     <p>
     <button class="normal-button button-orange"
-      v-on:click="$parent.onLevelExplanation= false;">Go back</button>
+      v-on:click="$parent.onLevelExplanation = false;">Go back</button>
     </p>
-  </div>
-  </transition>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.help {
-  text-align:center;
-  width:95%;
-}
-
 p span {
   margin: 0 0.5em;
 }
@@ -42,7 +33,7 @@ p span {
 
 @media (max-width: 479px) and (min-aspect-ratio: 2/3) {
   p {
-    margin:0.75em 0;
+    margin: 0.75em 0;
   }
 }
 </style>
