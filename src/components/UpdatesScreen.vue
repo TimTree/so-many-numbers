@@ -93,7 +93,7 @@ export default {
   }
 }
 
-@media (max-height: 520px) {
+@media (max-width: 479px) and (min-aspect-ratio: 2/3) {
   p {
     margin:0.75em 0;
   }

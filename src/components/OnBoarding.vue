@@ -30,7 +30,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .onboarding {
   text-align:center;
   width:95%;
@@ -47,7 +47,7 @@ main {
   margin:1em 0;
 }
 
-@media (min-width: 420px) and (min-height: 420px) {
+@media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   img {
     height:40vmin;
     max-height:618px;
