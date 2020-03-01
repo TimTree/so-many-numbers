@@ -26,7 +26,6 @@ export default {
   },
   destroyed() {
     gameStore.clearGame();
-    document.body.classList.remove('oneThird', 'twoThirds', 'almost');
     this.$parent.isGame = false;
   },
   components: {

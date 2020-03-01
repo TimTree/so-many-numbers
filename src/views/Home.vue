@@ -1,10 +1,8 @@
 <template>
 <div class="home-div">
   <header>
-    <img v-if="this.$store.state.theme === 'light'"
-     src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
-    <img v-else
-     src="@/assets/SoManyNumbersTitleDark.svg" alt="So Many Numbers!"/>
+    <SoManyNumbersTitleLight v-if="this.$store.state.theme === 'light'" alt="So Many Numbers!"/>
+    <SoManyNumbersTitleDark v-else alt="So Many Numbers!"/>
   </header>
   <main>
     <transition name="fade" mode="out-in" appear>
@@ -37,6 +35,8 @@ import OnBoarding from '@/components/home/OnBoarding.vue';
 import Stats from '@/components/home/Stats.vue';
 import LevelExplanation from '@/components/home/LevelExplanation.vue';
 import localStorage from '@/stores/localStorage';
+import SoManyNumbersTitleLight from '@/components/home/SoManyNumbersTitleLight.vue';
+import SoManyNumbersTitleDark from '@/components/home/SoManyNumbersTitleDark.vue';
 
 export default {
   data() {
@@ -53,6 +53,8 @@ export default {
     OnBoarding,
     Stats,
     LevelExplanation,
+    SoManyNumbersTitleLight,
+    SoManyNumbersTitleDark,
   },
   created() {
     this.$parent.isHome = true;
@@ -91,7 +93,7 @@ header {
   height: 18.5vmin;
 }
 
-header img {
+header svg {
   height: 18.5vmin;
 }
 
@@ -116,7 +118,7 @@ header img {
     min-height: 63.6px;
     max-height: 159px;
   }
-  header img {
+  header svg {
     height: 13.25vmin;
     min-height: 63.6px;
     max-height: 159px;

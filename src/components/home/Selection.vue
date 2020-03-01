@@ -244,6 +244,7 @@ export default {
 
 .level-indicator {
   margin: 0 0 4vh 0;
+  user-select: none;
 }
 
 .level-indicator span {
@@ -335,6 +336,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  user-select: none;
 }
 
 .operators-menu span {

@@ -129,6 +129,7 @@ button {
   font-family: "noto sans", sans-serif;
   box-shadow: 0 1.8vmin var(--button-shadow);
   transition: background-color 0.12s, transform 0.12s, box-shadow 0.12s;
+  user-select: none;
 }
 
 button::-moz-focus-inner {
