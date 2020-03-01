@@ -1,7 +1,10 @@
 <template>
 <div class="home-div">
   <header>
-    <img src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
+    <img v-if="this.$store.state.theme === 'light'"
+     src="@/assets/SoManyNumbersTitleLight.svg" alt="So Many Numbers!"/>
+    <img v-else
+     src="@/assets/SoManyNumbersTitleDark.svg" alt="So Many Numbers!"/>
   </header>
   <main>
     <transition name="fade" mode="out-in" appear>

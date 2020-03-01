@@ -12,8 +12,8 @@
           <div class="score-meter">
             {{store.numberOfProblems-store.numberOfProblemsSolved}} left</div>
           <div class="home-area-outside">
-            <router-link class="home-area" to="/">
-                <img class="home-button" alt="home-button" src="../../assets/home-button.png">
+            <router-link class="home-button" to="/" title="Main menu">
+              <svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 70 66"><defs><clipPath id="clip4"><path d="M435 308 505 308 505 374 435 374Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip4)" transform="translate(-435 -308)"><path d="M470 321 494 341.696 494 341.696 494 343.373 494 343.373 494 372.455C494 373.309 493.306 374 492.449 374L477.402 374 477.402 360.561C477.402 359.919 476.879 359.399 476.235 359.399L463.765 359.399C463.121 359.399 462.598 359.919 462.598 360.561L462.598 374 447.551 374C446.694 374 446 373.309 446 372.455L446 348.465 446 348.465 446 341.696 446 341.696Z" fill="currentColor" fill-rule="evenodd"/><path d="M0.0693152 6.52049 0.0693152 6.59575 0 6.6059 0.0693152 7.07842 0.0693152 52.0588 5.77989 52.0588 5.77989 11.527 45.8777 5.6472 45.0496 0 0.582521 6.52049Z" fill="currentColor" fill-rule="evenodd" transform="matrix(-0.653802 0.756665 0.756665 0.653802 465.318 304.67)"/><path d="M446 314 455 314 455 318.892 446 326Z" fill="currentColor" fill-rule="evenodd"/></g></svg>
             </router-link>
           </div>
           <div class="timer-area-outside">
@@ -116,7 +116,7 @@ that happens when resizing the browser window. */
   @extend %flex-center;
 }
 
-.home-area {
+.home-button {
   cursor: pointer;
   opacity: 0.25;
   display: inline-flex;
@@ -124,12 +124,13 @@ that happens when resizing the browser window. */
   transition:opacity 0.12s;
 }
 
-.home-area:hover {
+.home-button:hover {
   opacity: 1;
 }
 
-.home-button {
+.home-button svg {
   height: 6.5vmin;
+  color: var(--home-button);
 }
 
 .timer-area-outside {
@@ -166,7 +167,7 @@ that happens when resizing the browser window. */
     font-size: 6.15vmin;
   }
 
-  .home-button {
+  .home-button svg {
     height: 5vmin;
   }
 
@@ -215,7 +216,7 @@ that happens when resizing the browser window. */
     font-size: 75px;
   }
 
-  .home-button {
+  .home-button svg {
     height: 61px;
   }
 }

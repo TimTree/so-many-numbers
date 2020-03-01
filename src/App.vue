@@ -10,17 +10,42 @@
 <script>
 import localStorage from '@/stores/localStorage';
 import gameStore from '@/stores/gameStore';
+import themeMixin from '@/stores/themeMixin';
 
 export default {
+  mixins: [themeMixin],
   data() {
     return {
       store: gameStore.state,
       isHome: false,
       isGame: false,
+      mediaQuery: window.matchMedia('(prefers-color-scheme: dark)'),
     };
   },
   created() {
     localStorage.configureSaveData();
+    if (localStorage.saveData.theme === 'dark' || localStorage.saveData.theme === 'light') {
+      this.changeTheme(localStorage.saveData.theme);
+    } else if (this.mediaQuery.matches) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      this.$store.commit('changeTheme', 'dark');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'light');
+      this.$store.commit('changeTheme', 'light');
+    }
+  },
+  mounted() {
+    this.mediaQuery.addListener((e) => {
+      if (localStorage.saveData.theme === 0) {
+        if (e.matches) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          this.$store.commit('changeTheme', 'dark');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+          this.$store.commit('changeTheme', 'light');
+        }
+      }
+    });
   },
   computed: {
     isOneThird() {

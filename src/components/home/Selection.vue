@@ -71,17 +71,29 @@
     <a v-on:click="$parent.onSettings = true;" title="Settings">
       <svg preserveAspectRatio="xMidYMid meet" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 31"><defs><clipPath id="clip0"><path d="M12 210 44 210 44 241 12 241Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip0)" transform="translate(-12 -210)"><path d="M25.4506 219.189C21.9343 220.541 20.1794 224.487 21.5309 228.003 22.8825 231.52 26.8287 233.275 30.3451 231.923 33.8614 230.571 35.6163 226.625 34.2648 223.109 32.9132 219.592 28.967 217.838 25.4506 219.189ZM22.7315 212.115C23.2073 211.932 23.6869 211.776 24.1689 211.648L26.9212 215.036C27.7598 214.91 28.5998 214.934 29.4134 215.102L32.2906 211.91C33.289 212.164 34.2315 212.583 35.0884 213.155L34.6459 217.428C35.3155 217.92 35.8961 218.528 36.3639 219.235L40.7231 219.01C40.9509 219.453 41.1563 219.914 41.3392 220.39 41.522 220.865 41.678 221.345 41.806 221.827L38.418 224.579C38.5444 225.418 38.5202 226.258 38.3523 227.072L41.5435 229.949C41.29 230.947 40.8708 231.89 40.2993 232.747L36.0254 232.304C35.5337 232.974 34.9261 233.554 34.2187 234.022L34.4442 238.381C34.0005 238.609 33.54 238.814 33.0642 238.997 32.5884 239.18 32.1088 239.336 31.6268 239.464L28.8746 236.076C28.0359 236.203 27.1959 236.178 26.3823 236.01L23.505 239.202C22.5067 238.948 21.5642 238.529 20.7073 237.957L21.1498 233.684C20.4802 233.192 19.8997 232.584 19.4318 231.877L15.0726 232.102C14.8448 231.659 14.6394 231.198 14.4565 230.722 14.2736 230.247 14.1177 229.767 13.9897 229.285L17.3778 226.533C17.2513 225.694 17.2755 224.854 17.4434 224.04L14.2522 221.163C14.5057 220.165 14.9249 219.222 15.4964 218.365L19.7703 218.808C20.262 218.138 20.8696 217.558 21.577 217.09L21.3515 212.731C21.7952 212.503 22.2557 212.298 22.7315 212.115Z" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>
     </a>
-    <a v-on:click="$parent.onStats = true;" title="Stats">
+    <a v-if="statsReady" v-on:click="$parent.onStats = true;" title="Stats">
       <svg preserveAspectRatio="xMidYMid meet" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 33 31"><defs><clipPath id="clip1"><path d="M8 175 41 175 41 206 8 206Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip1)" transform="translate(-8 -175)"><rect x="10" y="183" width="10" height="22" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/><rect x="20" y="176" width="10" height="29" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/><rect x="30" y="190" width="10" height="15" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none"/></g></svg>
     </a>
+    <transition name="fade-fast" mode="out-in">
+    <a v-if="this.$store.state.theme === 'light'"
+      v-on:click="changeTheme('dark');" title="Dark mode" key="dark-mode">
+      <svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32"><defs><clipPath id="clip2"><path d="M79 162 111 162 111 194 79 194Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip2)" transform="translate(-79 -162)"><rect x="80" y="163" width="30" height="29" fill="#000000" fill-opacity="0"/><path d="M105.882 189.44C98.0759 193.947 88.5246 192.017 84.5481 185.129 80.5717 178.242 83.6759 169.005 91.4817 164.499 86.6583 174.171 90.7175 184.855 100.548 188.362 102.235 188.964 104.031 189.327 105.882 189.44Z" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>
+    </a>
+    <a v-else
+      v-on:click="changeTheme('light');" title="Light mode" key="light-mode">
+      <svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 32"><defs><clipPath id="clip3"><path d="M113 164 145 164 145 196 113 196Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip3)" transform="translate(-113 -164)"><path d="M121 180C121 176.134 124.358 173 128.5 173 132.642 173 136 176.134 136 180 136 183.866 132.642 187 128.5 187 124.358 187 121 183.866 121 180Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M129 165 129 168.84" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M129 190 129 193.84" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M142.84 180 139 180" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M117.84 180 114 180" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M118.462 169.431 121.177 172.146" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M136.1 187.069 138.816 189.785" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M138.646 169.262 135.931 171.977" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M121.008 186.9 118.293 189.615" stroke="currentColor" stroke-width="1.66667" stroke-linecap="round" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>
+    </a>
+    </transition>
   </div>
 </div>
 </template>
 
 <script>
 import localStorage from '@/stores/localStorage';
+import themeMixin from '@/stores/themeMixin';
 
 export default {
+  mixins: [themeMixin],
   data() {
     return {
       operators: [],
@@ -89,6 +101,7 @@ export default {
       titleView: 0,
       startEnabled: false,
       recents: localStorage.saveData.recents,
+      statsReady: false,
     };
   },
   created() {

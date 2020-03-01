@@ -18,7 +18,7 @@
     --button-red: #cf1a1a;
     --button-red-hover: #e23737;
     --div-button-active-color: #dadada;
-    --div-button-hover-color: #f0f0f0;
+    --div-button-hover-color: #f3f3f3;
     --div-button-active-hover-color: #cfcfcf;
     --unselected-color: rgba(0,0,0,0.15);
     --plus-color: #fa2909;
@@ -37,6 +37,7 @@
     --encouragement-bg: #d0ebfb;
     --silver: #c0c0c0;
     --gold: #e2e239;
+    --home-button: #006680;
 }
 
 [data-theme="dark"] {
@@ -78,4 +79,5 @@
     --encouragement-bg: #244353;
     --silver: #333;
     --gold: #5d5d15;
+    --home-button: #0094b9;
 }

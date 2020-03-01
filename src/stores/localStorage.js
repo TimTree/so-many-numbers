@@ -9,13 +9,17 @@ export default {
    * The save data contains:
    *
    * firstRun: True if the player passed onboarding, false otherwise
+   * theme: 0 for unspecified (use system-defined theme).
+   * Otherwise 'light' or 'dark'
    * titleView: 0 if the player last viewed the operators menu or 1 if
    * the player last viewed the Recents pane
    * savedSet: The set of operators that was last clicked on
-   * difficulty: The player's current set difficulty (simple or standard)
-   * recents: The most recent sets the player played
+   * difficulty: The player's current set level (simple or standard)
+   * The game used to refer to level as difficulty, so we keep the
+   * name difficulty in localStorage for compatibility reasons.
+   * recents: The most recent operator combinations the player played
    * sets: An object that tracks the player's high score/number of plays
-   * for each difficulty/set
+   * for each level/operator combo
    *
    * Example:
    *
@@ -43,6 +47,7 @@ export default {
    */
   saveData: {
     firstRun: false,
+    theme: 0,
     titleView: 0,
     savedSet: ['+', '−', '×', '÷'],
     difficulty: 'standard',
