@@ -1,7 +1,10 @@
 <template>
   <div style="width:95%;font-size:calc(10px + 2.4vmin);">
     <p style="margin-top:0;">
-      <img src="@/assets/SoManyNumbersOnboarding.png" alt="So Many Numbers game screenshot" />
+      <img v-if="this.$store.state.theme === 'light'"
+      src="@/assets/SoManyNumbersOnboarding.png" alt="So Many Numbers game screenshot"/>
+      <img v-else
+      src="@/assets/SoManyNumbersOnboardingDark.png" alt="So Many Numbers game screenshot"/>
     </p>
     <main>
     <strong>So many numbers!</strong> Solve 30 problems as fast as you can.
@@ -30,7 +33,7 @@ export default {
 img {
   height: 45vmin;
   border-radius: 0.5vmin;
-  box-shadow: 2px 2px 7px rgba(0,0,0,0.3);
+  box-shadow: 0.5vmin 0.5vmin 2vmin var(--onboarding-shadow);
 }
 
 main {

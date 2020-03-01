@@ -7,14 +7,14 @@
 </p>
 
 <p align="center">
- <img src="src/assets/SoManyNumbersOnboarding.png" width=380 align="center" alt="So Many Numbers!">
+ <img src="src/assets/SoManyNumbersOnboarding.png" width=380 align="center" alt="So Many Numbers screenshot">
 </p>
 
 ***
-**Works on smartphones, tablets, and desktop devices**
+**Works on smartphones, tablets, and desktop devices, dark mode compatible**
 
 
-Your goal in So Many Numbers is to solve 30 math problems as fast as you can. You can fine-tune the game to a chosen difficulty (simple or standard) and set of operators (+, −, ×, and ÷).
+Your goal in So Many Numbers is to solve 30 math problems as fast as you can. You can fine-tune the game to a chosen level (simple or standard) and set of operators (+, −, ×, and ÷).
 
 So Many Numbers is designed for those of all ages. It helps children and adults sharpen their mental math skills and offers a competitive challenge for enthusiasts alike!
 
