@@ -1,8 +1,5 @@
 <template>
-  <div id="app" class="bodyBG" v-bind:class="{
-    oneThird: isOneThird,
-    twoThirds: isTwoThirds,
-    almost: isAlmost}">
+  <div id="app">
     <router-view/>
   </div>
 </template>
@@ -47,29 +44,6 @@ export default {
       }
     });
   },
-  computed: {
-    isOneThird() {
-      if (this.store.numberOfProblemsSolved >= gameStore.getOneThird()
-      && this.store.numberOfProblemsSolved < gameStore.getTwoThirds()) {
-        return true;
-      }
-      return false;
-    },
-    isTwoThirds() {
-      if (this.store.numberOfProblemsSolved >= gameStore.getTwoThirds()
-       && this.store.numberOfProblemsSolved < gameStore.getNineTenth()) {
-        return true;
-      }
-      return false;
-    },
-    isAlmost() {
-      if (this.store.numberOfProblemsSolved >= gameStore.getNineTenth()
-       && this.store.numberOfProblemsSolved < this.store.numberOfProblems) {
-        return true;
-      }
-      return false;
-    },
-  },
 };
 </script>
 
@@ -110,8 +84,12 @@ html, body, #app {
   box-sizing: border-box;
   -webkit-text-size-adjust: 100%;
   color: var(--text-color);
-  background-color: var(--primary-bg);
   font-size: 5vmin;
+}
+
+body {
+  transition: background-color 0.2s;
+  background-color: var(--primary-bg);
 }
 
 * {
@@ -237,6 +215,18 @@ button:active {
   color: var(--unselected-color) !important;
 }
 
+.oneThird {
+  background-color: var(--one-third-bg) !important;
+}
+
+.twoThirds {
+  background-color: var(--two-thirds-bg) !important;
+}
+
+.almost {
+  background-color: var(--almost-bg) !important;
+}
+
 @media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   html, body, #app {
     font-size: calc(5vmin * 0.6);
@@ -286,26 +276,5 @@ button:active {
 
 .fade-enter, .fade-leave-to, .fade-fast-enter, .fade-fast-leave-to {
   opacity: 0;
-}
-
-</style>
-
-<style lang="scss" scoped>
-.bodyBG {
-  position: absolute;
-  transition: background-color 0.2s;
-  background-color: var(--primary-bg);
-}
-
-.oneThird {
-  background-color: var(--one-third-bg) !important;
-}
-
-.twoThirds {
-  background-color: var(--two-thirds-bg) !important;
-}
-
-.almost {
-  background-color: var(--almost-bg) !important;
 }
 </style>

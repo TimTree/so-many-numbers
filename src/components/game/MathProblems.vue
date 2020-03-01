@@ -71,14 +71,17 @@ export default {
         this.isCorrect = true;
         this.correctTimeout = setTimeout(() => { this.isCorrect = false; }, 100);
         if (this.store.numberOfProblemsSolved === gameStore.getOneThird()) {
+          document.body.classList.add('oneThird');
           this.timestamp = this.store.currentTime;
           this.showEncouragement = true;
           this.fadeTimeout1 = setTimeout(() => { this.showEncouragement = false; }, 800);
         } else if (this.store.numberOfProblemsSolved === gameStore.getTwoThirds()) {
+          document.body.classList.add('twoThirds');
           this.timestamp = this.store.currentTime;
           this.showEncouragement = true;
           this.fadeTimeout2 = setTimeout(() => { this.showEncouragement = false; }, 800);
         } else if (this.store.numberOfProblemsSolved === gameStore.getNineTenth()) {
+          document.body.classList.add('almost');
           this.onFinalFew = true;
           this.showEncouragement = true;
         }
@@ -92,6 +95,7 @@ export default {
   },
   beforeDestroy() {
     gameStore.stopTimer();
+    document.body.classList.remove('oneThird', 'twoThirds', 'almost');
   },
   destroyed() {
     clearTimeout(this.correctTimeout);
