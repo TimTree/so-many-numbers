@@ -121,7 +121,7 @@ that happens when resizing the browser window. */
   opacity: 0.25;
   display: inline-flex;
   align-items: flex-end;
-  transition:opacity 0.12s;
+  transition: opacity $transition-time;
 }
 
 .home-button:hover {

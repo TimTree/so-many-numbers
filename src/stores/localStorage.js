@@ -9,6 +9,9 @@ export default {
    * The save data contains:
    *
    * firstRun: True if the player passed onboarding, false otherwise
+   * version: The user's last played version of the game. The version increments
+   * each feature update. If the user's version if lower than the current,
+   * the game will display an update notice.
    * theme: 0 for unspecified (use system-defined theme).
    * Otherwise 'light' or 'dark'
    * titleView: 0 if the player last viewed the operators menu or 1 if
@@ -47,6 +50,7 @@ export default {
    */
   saveData: {
     firstRun: false,
+    version: 1,
     theme: 0,
     titleView: 0,
     savedSet: ['+', '−', '×', '÷'],

@@ -128,7 +128,8 @@ button {
   color: #fafafa;
   font-family: "noto sans", sans-serif;
   box-shadow: 0 1.8vmin var(--button-shadow);
-  transition: background-color 0.12s, transform 0.12s, box-shadow 0.12s;
+  transition: background-color $transition-time, transform $transition-time,
+   box-shadow $transition-time;
   user-select: none;
 }
 
@@ -272,7 +273,7 @@ button:active {
 }
 
 .fade-fast-enter-active {
-  transition: opacity 0.15s ease-in;
+  transition: opacity $transition-time ease-in;
 }
 
 .fade-enter, .fade-leave-to, .fade-fast-enter, .fade-fast-leave-to {
