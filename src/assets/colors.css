@@ -17,9 +17,9 @@
     --button-orange-hover: #dc862f;
     --button-red: #cf1a1a;
     --button-red-hover: #e23737;
-    --div-button-active-color: #dadada;
-    --div-button-hover-color: #f3f3f3;
-    --div-button-active-hover-color: #cfcfcf;
+    --div-button-active-color: #d7d7d7;
+    --div-button-hover-color: #f1f1f1;
+    --div-button-active-hover-color: #cdcdcd;
     --unselected-color: rgba(0,0,0,0.15);
     --plus-color: #fa2909;
     --minus-color: #afaf20;
@@ -60,9 +60,9 @@
     --button-orange-hover: #af651a;
     --button-red: #9a1111;
     --button-red-hover: #c51818;
-    --div-button-active-color: #2d2d2d;
-    --div-button-hover-color: #181818;
-    --div-button-active-hover-color: #363636;
+    --div-button-active-color: #333;
+    --div-button-hover-color: #1a1a1a;
+    --div-button-active-hover-color: #3b3b3b;
     --unselected-color: rgba(251,251,251,0.15);
     --plus-color: #fc6e58;
     --minus-color: #ffe57d;
