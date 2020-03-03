@@ -30,6 +30,16 @@ export default {
       document.documentElement.setAttribute('data-theme', 'light');
       this.$store.commit('changeTheme', 'light');
     }
+    document.addEventListener(
+      'swUpdated', this.showUpdateNotification, { once: true },
+    );
+    navigator.serviceWorker.addEventListener(
+      'controllerchange', () => {
+        if (this.$store.state.refreshing) return;
+        this.$store.state.refreshing = true;
+        window.location.reload();
+      },
+    );
   },
   mounted() {
     this.mediaQuery.addListener((e) => {
@@ -43,6 +53,15 @@ export default {
         }
       }
     });
+  },
+  methods: {
+    /**
+     * If a new update is available, the game will show an update notification.
+     */
+    showUpdateNotification(e) {
+      this.$store.commit('changeRegistration', e.detail);
+      this.$store.commit('changeUpdateExists', true);
+    },
   },
 };
 </script>
