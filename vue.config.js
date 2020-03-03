@@ -21,7 +21,7 @@ module.exports = {
     },
     workboxPluginMode: 'GenerateSW',
     workboxOptions: {
-      exclude: [/\.map$/, '_headers', '_redirects'],
+      exclude: ['_headers', '_redirects'],
     },
   },
 };
