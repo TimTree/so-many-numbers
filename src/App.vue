@@ -263,7 +263,7 @@ button:active {
 
 @media (max-width: 479px) and (min-aspect-ratio: 2/3) {
   h2 {
-    margin: 0 auto 2.5vh auto;
+    margin: 0 auto 2.2vh auto;
   }
 }
 

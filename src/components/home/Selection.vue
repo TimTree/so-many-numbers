@@ -66,8 +66,8 @@
       Start
   </router-link>
   </div>
-
-  <div class="auxillary-buttons">
+  <div class="update-notifier"></div>
+  <div class="auxiliary-buttons">
     <a v-on:click="$parent.onSettings = true;" title="Settings">
       <svg preserveAspectRatio="xMidYMid meet" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 32 31"><defs><clipPath id="clip0"><path d="M12 210 44 210 44 241 12 241Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip0)" transform="translate(-12 -210)"><path d="M25.4506 219.189C21.9343 220.541 20.1794 224.487 21.5309 228.003 22.8825 231.52 26.8287 233.275 30.3451 231.923 33.8614 230.571 35.6163 226.625 34.2648 223.109 32.9132 219.592 28.967 217.838 25.4506 219.189ZM22.7315 212.115C23.2073 211.932 23.6869 211.776 24.1689 211.648L26.9212 215.036C27.7598 214.91 28.5998 214.934 29.4134 215.102L32.2906 211.91C33.289 212.164 34.2315 212.583 35.0884 213.155L34.6459 217.428C35.3155 217.92 35.8961 218.528 36.3639 219.235L40.7231 219.01C40.9509 219.453 41.1563 219.914 41.3392 220.39 41.522 220.865 41.678 221.345 41.806 221.827L38.418 224.579C38.5444 225.418 38.5202 226.258 38.3523 227.072L41.5435 229.949C41.29 230.947 40.8708 231.89 40.2993 232.747L36.0254 232.304C35.5337 232.974 34.9261 233.554 34.2187 234.022L34.4442 238.381C34.0005 238.609 33.54 238.814 33.0642 238.997 32.5884 239.18 32.1088 239.336 31.6268 239.464L28.8746 236.076C28.0359 236.203 27.1959 236.178 26.3823 236.01L23.505 239.202C22.5067 238.948 21.5642 238.529 20.7073 237.957L21.1498 233.684C20.4802 233.192 19.8997 232.584 19.4318 231.877L15.0726 232.102C14.8448 231.659 14.6394 231.198 14.4565 230.722 14.2736 230.247 14.1177 229.767 13.9897 229.285L17.3778 226.533C17.2513 225.694 17.2755 224.854 17.4434 224.04L14.2522 221.163C14.5057 220.165 14.9249 219.222 15.4964 218.365L19.7703 218.808C20.262 218.138 20.8696 217.558 21.577 217.09L21.3515 212.731C21.7952 212.503 22.2557 212.298 22.7315 212.115Z" stroke="currentColor" stroke-width="1.66667" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/></g></svg>
     </a>
@@ -269,7 +269,7 @@ export default {
 
 .operators-container {
   @extend %flex-center;
-  margin: 0 0 3vh 0;
+  margin: 0 0 2.7vh 0;
   height: 18.5vmin;
 }
 
@@ -344,7 +344,7 @@ export default {
 }
 
 .start-button {
-  margin-top: 4vh;
+  margin-top: 3vh;
   border-radius: 4vmin;
   padding: 2vmin 7vmin;
   font-size: 10vmin;
@@ -366,16 +366,19 @@ export default {
   transform: none;
 }
 
-.auxillary-buttons {
-  margin-top: 7vh;
-}
-
-.auxillary-buttons a {
+.auxiliary-buttons a {
   margin: 0 0.75em;
 }
 
-.auxillary-buttons svg {
+.auxiliary-buttons svg {
   height: calc(9px + 4vmin);
+}
+
+.update-notifier {
+  @extend %flex-center;
+  height: 7.6vh;
+  font-size: 85%;
+  margin-top: 0.7vh;
 }
 
 @media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
@@ -405,18 +408,19 @@ export default {
 
 @media (max-width: 479px) and (min-aspect-ratio: 2/3) {
   .level-indicator {
-    margin: 0 0 3vh 0;
+    margin: 0 0 2.7vh 0;
   }
   .operators-container {
-    margin: 0 0 2.5vh 0;
+    margin: 0 0 1.5vh 0;
   }
   .start-button {
-    margin-top: 0.55em;
-    padding-top: 1.3vmin;
-    padding-bottom: 1.3vmin;
+    margin-top: 0.4em;
+    padding-top: 1.1vmin;
+    padding-bottom: 1.1vmin;
   }
-  .auxillary-buttons {
-    margin-top: 5vh;
+  .update-notifier {
+    height: 7.3vh;
+    margin-top: 0.7vh;
   }
 }
 </style>

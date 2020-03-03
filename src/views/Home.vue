@@ -145,4 +145,10 @@ header svg {
     max-width: 100vmin;
   }
 }
+
+@media (max-width: 479px) and (min-aspect-ratio: 2/3) {
+.home-div {
+  grid-template-rows: auto 1fr 6%;
+}
+}
 </style>
