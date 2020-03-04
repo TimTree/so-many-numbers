@@ -33,13 +33,6 @@ export default {
     document.addEventListener(
       'swUpdated', this.showUpdateNotification, { once: true },
     );
-    navigator.serviceWorker.addEventListener(
-      'controllerchange', () => {
-        if (this.$store.state.refreshing) return;
-        this.$store.state.refreshing = true;
-        window.location.reload();
-      },
-    );
   },
   mounted() {
     this.mediaQuery.addListener((e) => {
@@ -58,8 +51,7 @@ export default {
     /**
      * If a new update is available, the game will show an update notification.
      */
-    showUpdateNotification(e) {
-      this.$store.commit('changeRegistration', e.detail);
+    showUpdateNotification() {
       this.$store.commit('changeUpdateExists', true);
     },
   },

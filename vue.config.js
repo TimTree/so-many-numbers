@@ -21,6 +21,7 @@ module.exports = {
     },
     workboxPluginMode: 'GenerateSW',
     workboxOptions: {
+      skipWaiting: true,
       exclude: ['_headers', '_redirects'],
     },
   },

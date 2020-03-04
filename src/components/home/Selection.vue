@@ -68,10 +68,14 @@
   </div>
   <div class="update-notifier">
     <transition name="fade-fast" mode="out-in">
-    <span v-if="this.$store.state.updateExists" key='clickUpdate'>
-      New version available! <a @click="updateGame">Click to update</a>
+    <span v-if="this.$store.state.updateExists || refreshing">
+      <span>
+        <span v-if="this.$store.state.updateExists">
+          New version available! <a @click="updateGame">Refresh to update</a>
+        </span>
+        <span v-else-if="refreshing">Updating...</span>
+      </span>
     </span>
-    <span v-if="this.$store.state.refreshing" key='updating'>Updating...</span>
     </transition>
   </div>
   <div class="auxiliary-buttons">
@@ -109,6 +113,7 @@ export default {
       startEnabled: false,
       recents: localStorage.saveData.recents,
       statsReady: false,
+      refreshing: false,
     };
   },
   created() {
@@ -229,14 +234,13 @@ export default {
       return opsArray;
     },
     /**
-     * Updates the game by registering a newer version of the game's service worker.
-     * 'SKIP_WAITING' allows us to update the game without requiring the user to close
-     * all game tabs.
+     * Updates the game by triggering a refresh.
+     * Since Workbox is configured to skip waiting, there's no need to close all tabs
+     * to update the game.
      */
     updateGame() {
-      this.$store.commit('changeUpdateExists', false);
-      if (!this.$store.state.registration || !this.$store.state.registration.waiting) { return; }
-      this.$store.state.registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      this.refreshing = true;
+      window.location.reload();
     },
   },
 };

@@ -11,15 +11,15 @@
       <div v-if="isOnline">
         <p>
           <button class="small-button button-purple"
-            v-on:click="forceUpdate()">Update now *</button>
+            v-on:click="resetCache()">Reset cache *</button>
         </p>
         <p style="font-size:75%;">
-          * Get the latest version of the game before it automatically downloads to your device.
+          * Redownloads the latest version of the game, preserving save data.
         </p>
       </div>
       <div v-else>
         <p style="font-size:80%;margin:2em 0;">
-          "Update now" disabled - you're offline
+          "Reset cache" disabled - you're offline
         </p>
       </div>
       <p>
@@ -33,7 +33,7 @@
       </p>
     </div>
     <div style="margin:0 auto;" v-if="onWarning">
-      <p>Are you ABSOULTELY sure you want to delete all your save data?</p>
+      <p>Are you ABSOLUTELY sure you want to delete all your save data?</p>
       <p><b>You cannot undo this action.</b> The game will refresh if you select Yes.</p>
       <p style="font-size:200%;word-spacing:0.8em;"><a class="hiddenYes"
       v-bind:class="{visibleYes: yesPrecaution}" v-on:click="wipeData()">Yes</a>
@@ -65,7 +65,7 @@ export default {
      * Force a game update by unregistering the service worker,
      * purging the cache, and refreshing the game
      */
-    forceUpdate() {
+    resetCache() {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistrations()
           .then((registrations) => {

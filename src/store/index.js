@@ -6,8 +6,6 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     theme: 'light',
-    refreshing: false,
-    registration: null,
     updateExists: false,
   },
   mutations: {
@@ -18,14 +16,8 @@ export default new Vuex.Store({
         state.theme = 'light';
       }
     },
-    changeRegistration(state, n) {
-      state.registration = n;
-    },
     changeUpdateExists(state, n) {
       state.updateExists = n;
-    },
-    changeRefreshing(state, n) {
-      state.refreshing = n;
     },
   },
   actions: {
