@@ -96,6 +96,22 @@
     </a>
     </transition>
   </div>
+  <transition name="fader">
+  <div class="black-overlay" v-if="overlayOuter === true">
+    <transition name="slide" v-on:leave="overlayOuter = false">
+    <div class="iOS-home-screen-prompt" v-if="overlay === true">
+      <p>
+        <img src="/img/icons/apple-touch-icon.png">
+      </p>
+      <p><b>Make So Many Numbers an app!</b></p>
+      <p>Open the game in Safari, then:</p>
+      <p>Tap (share button)<br>Select "Add to Home Screen"</p>
+      <p style="margin-bottom:2em;"><a
+       v-on:click="overlay = false">No thanks</a></p>
+    </div>
+    </transition>
+  </div>
+  </transition>
 </div>
 </template>
 
@@ -114,12 +130,20 @@ export default {
       recents: localStorage.saveData.recents,
       statsReady: false,
       refreshing: false,
+      overlay: false,
+      overlayOuter: false,
     };
   },
   created() {
     this.titleView = localStorage.saveData.titleView;
     this.operators = localStorage.saveData.savedSet;
     this.level = localStorage.saveData.difficulty;
+    this.overlayOuter = true;
+  },
+  mounted() {
+    if (this.overlayOuter) {
+      this.overlay = true;
+    }
   },
   computed: {
     gameViewText() {
@@ -402,6 +426,33 @@ export default {
   margin-top: 0.7vh;
 }
 
+.black-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: column;
+}
+
+.iOS-home-screen-prompt {
+  background-color: var(--silver);
+  border-radius: 4vmin 4vmin 0 0;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.iOS-home-screen-prompt img {
+  width: 16vmin;
+  border-radius: 2.8vmin;
+}
+
 @media (min-width: $mobile-boundary) and (min-height: $mobile-boundary) {
   .header-help {
     width: 3.24vmin;
@@ -424,6 +475,10 @@ export default {
   .big-circle-selected {
     width: 11vmin;
     height: 11vmin;
+  }
+  .iOS-home-screen-prompt img {
+    width: 9.6vmin;
+    border-radius: 1.68vmin;
   }
 }
 

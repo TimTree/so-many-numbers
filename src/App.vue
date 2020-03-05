@@ -290,4 +290,32 @@ button:active {
 .fade-enter, .fade-leave-to, .fade-fast-enter, .fade-fast-leave-to {
   opacity: 0;
 }
+
+.fader-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.fader-enter, .fader-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active {
+  animation: slide-in 0.5s;
+  animation-delay: 0.3s;
+  animation-fill-mode: backwards;
+}
+.slide-leave-active {
+  animation: slide-in 0.3s reverse;
+}
+
+@keyframes slide-in {
+  0% {
+    top: 20%;
+    opacity: 0;
+  }
+  100% {
+    top: 0%;
+    opacity: 1;
+  }
+}
 </style>
