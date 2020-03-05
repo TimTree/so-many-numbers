@@ -3,8 +3,7 @@
     <h2>What's new in So Many Numbers</h2>
     <ul>
       <li v-if="priorVersion < 2">
-        <strong>Updates made easy</strong> - Now when an update's ready, just refresh to get it.
-         We'll even let you know!</li>
+        <strong>Update notifier</strong> - We'll let you know when an update's ready.</li>
     </ul>
     <p>
     <button class="normal-button button-orange"

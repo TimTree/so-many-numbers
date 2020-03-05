@@ -9,6 +9,8 @@ export default {
    * The save data contains:
    *
    * firstRun: True if the player passed onboarding, false otherwise
+   * seeniOSPrompt: iOS users get a prompt to add the game to their home screen.
+   * This is true if the user said "No thanks" to the prompt.
    * version: The user's last played version of the game. The version increments
    * each feature update. If the user's version if lower than the current,
    * the game will display an update notice.
@@ -50,6 +52,7 @@ export default {
    */
   saveData: {
     firstRun: false,
+    seeniOSPrompt: false,
     version: 2,
     theme: 0,
     titleView: 0,

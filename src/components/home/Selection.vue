@@ -97,17 +97,17 @@
     </transition>
   </div>
   <transition name="fader">
-  <div class="black-overlay" v-if="overlayOuter === true">
-    <transition name="slide" v-on:leave="overlayOuter = false">
+  <div class="black-overlay" v-if="overlayOuter > 0">
+    <transition name="slide" v-on:leave="overlayOuter = 0">
     <div class="iOS-home-screen-prompt" v-if="overlay === true">
       <p>
         <img src="/img/icons/apple-touch-icon.png">
       </p>
       <p><b>Make So Many Numbers an app!</b></p>
-      <p>Open the game in Safari, then:</p>
+      <p v-if="overlayOuter === 2">Open the game in iOS Safari, then:</p>
       <p>Tap (share button)<br>Select "Add to Home Screen"</p>
       <p style="margin-bottom:2em;"><a
-       v-on:click="overlay = false">No thanks</a></p>
+       v-on:click="promptNoThanks();">No thanks</a></p>
     </div>
     </transition>
   </div>
@@ -131,17 +131,38 @@ export default {
       statsReady: false,
       refreshing: false,
       overlay: false,
-      overlayOuter: false,
+      overlayOuter: 0,
     };
   },
   created() {
     this.titleView = localStorage.saveData.titleView;
     this.operators = localStorage.saveData.savedSet;
     this.level = localStorage.saveData.difficulty;
-    this.overlayOuter = true;
+
+    /**
+     * Detect if the user is on iOS to display a prompt to add to home screen.
+     * Android users should already receive a built-in prompt, and desktop users
+     * need not apply.
+     *
+     * If the iOS user's using a browser other than Safari, display an additional
+     * notice saying that Safari's required to add to home screen. If the user
+     * already added the game to the home screen, don't display another prompt. And
+     * if the user said "no thanks" to the prompt before, don't display it again.
+     */
+    if (navigator.platform.substr(0, 2) === 'iP') { // iOS detected
+      if (navigator.standalone || localStorage.saveData.seeniOSPrompt === true) {
+        this.overlayOuter = 0;
+      } else if (window.webkit && window.webkit.messageHandlers) {
+        this.overlayOuter = 2;
+      } else {
+        this.overlayOuter = 1;
+      }
+    } else {
+      this.overlayOuter = 0;
+    }
   },
   mounted() {
-    if (this.overlayOuter) {
+    if (this.overlayOuter > 0) {
       this.overlay = true;
     }
   },
@@ -265,6 +286,16 @@ export default {
     updateGame() {
       this.refreshing = true;
       window.location.reload();
+    },
+    /**
+     * iOS users get a prompt to add the game to their home screen.
+     * If the iOS user said "No thanks" to the prompt, save the response so we
+     * don't prompt them again.
+     */
+    promptNoThanks() {
+      this.overlay = false;
+      localStorage.saveData.seeniOSPrompt = true;
+      localStorage.save();
     },
   },
 };
@@ -430,7 +461,7 @@ export default {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0,0,0,0.7);
   left: 0;
   top: 0;
   overflow: hidden;
