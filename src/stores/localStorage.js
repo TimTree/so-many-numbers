@@ -50,7 +50,7 @@ export default {
    */
   saveData: {
     firstRun: false,
-    version: 1,
+    version: 2,
     theme: 0,
     titleView: 0,
     savedSet: ['+', '−', '×', '÷'],

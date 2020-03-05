@@ -9,6 +9,7 @@
       <LevelExplanation v-if="onLevelExplanation" key="explanation"/>
       <Settings v-else-if="onSettings" key="settings"/>
       <OnBoarding v-else-if="onOnboarding" key="onboarding"/>
+      <WhatsNew v-else-if="onWhatsNew" key="whatsnew"/>
       <Stats v-else-if="onStats" key="stats"/>
       <Selection v-else key="selection"/>
     </transition>
@@ -34,6 +35,7 @@ import Selection from '@/components/home/Selection.vue';
 import OnBoarding from '@/components/home/OnBoarding.vue';
 import Stats from '@/components/home/Stats.vue';
 import LevelExplanation from '@/components/home/LevelExplanation.vue';
+import WhatsNew from '@/components/home/WhatsNew.vue';
 import localStorage from '@/stores/localStorage';
 import SoManyNumbersTitleLight from '@/components/home/SoManyNumbersTitleLight.vue';
 import SoManyNumbersTitleDark from '@/components/home/SoManyNumbersTitleDark.vue';
@@ -45,6 +47,7 @@ export default {
       onOnboarding: false,
       onStats: false,
       onLevelExplanation: false,
+      onWhatsNew: false,
     };
   },
   components: {
@@ -55,11 +58,14 @@ export default {
     LevelExplanation,
     SoManyNumbersTitleLight,
     SoManyNumbersTitleDark,
+    WhatsNew,
   },
   created() {
     this.$parent.isHome = true;
     if (localStorage.saveData.firstRun === false) {
       this.onOnboarding = true;
+    } else if (localStorage.saveData.version < 2) {
+      this.onWhatsNew = true;
     }
   },
   destroyed() {
