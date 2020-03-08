@@ -122,10 +122,9 @@ that happens when resizing the browser window. */
   display: inline-flex;
   align-items: flex-end;
   transition: opacity $transition-time;
-}
-
-.home-button:hover {
-  opacity: 1;
+  @include on-hover {
+    opacity: 1;
+  }
 }
 
 .home-button svg {

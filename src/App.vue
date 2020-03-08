@@ -112,10 +112,9 @@ a {
   text-decoration: none !important;
   cursor: pointer;
   transition: color $transition-time;
-}
-
-a:hover {
-  color:var(--link-hover-color) !important;
+  @include on-hover {
+    color: var(--link-hover-color) !important;
+  }
 }
 
 h2 {
@@ -156,34 +155,30 @@ button:active {
 
 .button-magenta {
   background-color: var(--button-magenta);
-}
-
-.button-magenta:hover {
-  background-color: var(--button-magenta-hover);
+  @include on-hover {
+    background-color: var(--button-magenta-hover);
+  }
 }
 
 .button-orange {
   background-color: var(--button-orange);
-}
-
-.button-orange:hover {
-  background-color: var(--button-orange-hover);
+  @include on-hover {
+    background-color: var(--button-orange-hover);
+  }
 }
 
 .button-purple {
   background-color: var(--button-purple);
-}
-
-.button-purple:hover {
-  background-color: var(--button-purple-hover);
+  @include on-hover {
+    background-color: var(--button-purple-hover);
+  }
 }
 
 .button-red {
   background-color: var(--button-red);
-}
-
-.button-red:hover {
-  background-color: var(--button-red-hover);
+  @include on-hover {
+    background-color: var(--button-red-hover);
+  }
 }
 
 .normal-button {
@@ -218,10 +213,9 @@ button:active {
 
 .big-circle-unselected {
   background-color: transparent !important;
-}
-
-.big-circle-unselected:hover {
-  background-color: var(--div-button-hover-color) !important;
+  @include on-hover {
+    background-color: var(--div-button-hover-color) !important;
+  }
 }
 
 .big-circle-unselected span {

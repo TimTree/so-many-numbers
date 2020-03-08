@@ -7,3 +7,11 @@ $mobile-boundary: 480px;
     justify-content: center;
     flex-direction: column;
 }
+
+@mixin on-hover {
+    @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            @content;
+        }
+    }
+}

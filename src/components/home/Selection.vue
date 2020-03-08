@@ -315,10 +315,9 @@ export default {
   font-size: 80%;
   cursor: pointer;
   transition: background-color $transition-time;
-}
-
-.header-help:hover {
-  background-color: var(--div-button-active-hover-color);
+  @include on-hover {
+    background-color: var(--div-button-active-hover-color);
+  }
 }
 
 .level-indicator {
@@ -334,16 +333,17 @@ export default {
   transition: background-color $transition-time;
 }
 
-.level-unselected:hover {
-  background-color: var(--div-button-hover-color);
+.level-unselected {
+  @include on-hover {
+    background-color: var(--div-button-hover-color);
+  }
 }
 
 .level-selected {
   background-color: var(--div-button-active-color);
-}
-
-.level-selected:hover {
-  background-color: var(--div-button-active-hover-color);
+  @include on-hover {
+    background-color: var(--div-button-active-hover-color);
+  }
 }
 
 .operators-container {
@@ -367,18 +367,16 @@ export default {
   cursor: pointer;
   user-select: none;
   transition: background-color $transition-time;
-}
-
-.small-circle-unselected:hover {
-  background-color: var(--div-button-hover-color);
+  @include on-hover {
+    background-color: var(--div-button-hover-color);
+  }
 }
 
 .small-circle-selected {
   background-color: var(--div-button-active-color);
-}
-
-.small-circle-selected:hover {
-  background-color: var(--div-button-active-hover-color);
+  @include on-hover {
+    background-color: var(--div-button-active-hover-color);
+  }
 }
 
 .recents-pane {
@@ -405,10 +403,9 @@ export default {
   cursor: pointer;
   background-color: var(--div-button-active-color);
   transition: background-color $transition-time;
-}
-
-.big-circle-selected:hover {
-  background-color: var(--div-button-active-hover-color);
+  @include on-hover {
+    background-color: var(--div-button-active-hover-color);
+  }
 }
 
 .operators-menu, .selected-operators {
@@ -434,10 +431,9 @@ export default {
   background-color: var(--button-magenta-disabled);
   box-shadow: 0px 0px !important;
   transition: none;
-}
-
-.startDisabled:hover {
-  background-color: var(--button-magenta-disabled);
+  @include on-hover {
+    background-color: var(--button-magenta-disabled);
+  }
 }
 
 .startDisabled:active {
