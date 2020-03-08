@@ -188,14 +188,14 @@ button:active {
 
 .normal-button {
   margin-top: 0.5em;
-  border-radius: 3vmin;
+  border-radius: 2.5vmin;
   padding: 1.5vmin 4vmin;
   font-size: 6vmin;
 }
 
 .small-button {
   margin-top: 0.5em;
-  border-radius: 3vmin;
+  border-radius: 2.5vmin;
   padding: 1.5vmin 3vmin;
   font-size: 4vmin;
 }

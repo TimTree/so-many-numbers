@@ -424,9 +424,9 @@ export default {
 
 .start-button {
   margin-top: 3vh;
-  border-radius: 4vmin;
-  padding: 2vmin 7vmin;
-  font-size: 10vmin;
+  border-radius: 3.3vmin;
+  padding: 2vmin 6.7vmin;
+  font-size: 8vmin;
 }
 
 .startDisabled {
@@ -506,8 +506,8 @@ export default {
 
   .start-button {
     border-radius: 2vmin;
-    padding: 1.2vmin 4.5vmin;
-    font-size: 6vmin;
+    padding: 1.2vmin 4vmin;
+    font-size: 4.8vmin;
   }
 
   .big-circle-selected {
@@ -524,20 +524,18 @@ export default {
   }
 }
 
-@media (max-width: 479px) and (min-aspect-ratio: 2/3) {
+@media (max-width: 479px) and (min-aspect-ratio: 7/10) {
   .level-indicator {
-    margin: 0 0 2.7vh 0;
+    margin: 0 0 3.2vh 0;
   }
   .operators-container {
-    margin: 0 0 1.5vh 0;
+    margin: 0 0 2.2vh 0;
   }
   .start-button {
-    margin-top: 0.4em;
-    padding-top: 1.1vmin;
-    padding-bottom: 1.1vmin;
+    margin-top: 2.2vh;
   }
   .update-notifier {
-    height: 7.3vh;
+    height: 6vh;
     margin-top: 0.7vh;
   }
 }
