@@ -7,7 +7,7 @@ module.exports = {
     },
   },
   pwa: {
-    name: 'Numbers!',
+    name: 'So Numbers!',
     themeColor: '#066596',
     msTileColor: '',
     appleMobileWebAppCapable: 'yes',
