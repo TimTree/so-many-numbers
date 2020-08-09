@@ -49,7 +49,7 @@ npm run build
 
 ## Bug Reports and Feedback
 
-You can submit bug reports/feature requests to [GitHub Issues](https://github.com/TimTree/so-many-numbers/issues) and general feedback as a comment on the [blog's project page](https://www.gamesbytim.com/2018/09/so-many-numbers-30-problem-arithmetic.html).
+You can submit bug reports/feature requests to [GitHub Issues](https://github.com/TimTree/so-many-numbers/issues) and general feedback as a comment on the [blog's project page](https://www.gamesbytim.com/so-many-numbers/).
 
 (You can also report bugs on the blog, but I'm more receptive to GitHub Issues in this case.)
 

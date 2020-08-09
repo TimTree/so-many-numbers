@@ -164,7 +164,7 @@ export default {
   background-color: var(--math-box-wrong);
 }
 
-.pulsed{
+.pulsed {
   transform: scale(1.05);
 }
 
@@ -186,7 +186,6 @@ export default {
   border-radius: 12px;
   padding: 4px 15px;
 }
-
 
 .encourage-leave-active {
   transition:opacity .75s;
