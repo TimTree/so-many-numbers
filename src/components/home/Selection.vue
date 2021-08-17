@@ -105,8 +105,9 @@
       </p>
       <p><b>Make So Many Numbers an app!</b></p>
       <p style="margin-bottom:0.5em;" v-if="overlayOuter === 2">
-        Open the game in iOS Safari, then:</p>
-      <p style="margin-top:0.5em;"><span style="margin-right:0.5em;">Tap</span>
+        To begin, open the game in <b>iOS Safari</b></p>
+      <p style="margin-top:0.5em;" v-if="overlayOuter === 1">
+        <span style="margin-right:0.5em;">Tap</span>
         <svg preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 18 34"><defs><clipPath id="clip8"><path d="M113 164 145 164 145 196 113 196Z" fill-rule="evenodd" clip-rule="evenodd"/></clipPath></defs><g clip-path="url(#clip6)" transform="translate(-860 -349)"><path d="M861 368.969C861 367.881 861.881 367 862.969 367L874.031 367C875.119 367 876 367.881 876 368.969L876 379.031C876 380.119 875.119 381 874.031 381L862.969 381C861.881 381 861 380.119 861 379.031Z" stroke="currentColor" stroke-width="2" stroke-miterlimit="8" fill="none" fill-rule="evenodd"/><path d="M1-5.94951e-06 1.0001 16.1263C1.0001 16.6786 0.552387 17.1263 0.000101893 17.1263-0.552183 17.1263-0.999901 16.6786-0.999904 16.1263L-1 5.94951e-06C-1-0.552279-0.552291-0.999997-5.94951e-06-1 0.552279-1 0.999997-0.552291 1-5.94951e-06ZM5.41931 11.4514 0.000104904 17.6449-5.41918 11.4515C-5.78286 11.0359-5.74075 10.4041-5.32511 10.0404-4.90948 9.67674-4.27771 9.71885-3.91403 10.1345L0.752669 15.4678-0.752485 15.4678 3.91415 10.1344C4.27783 9.7188 4.90959 9.67668 5.32523 10.0404 5.74087 10.404 5.78299 11.0358 5.41931 11.4514Z" fill="currentColor" transform="matrix(1 0 0 -1 869 373.646)"/></g></svg>
         <br>Select "Add to Home Screen"</p>
       <p style="margin-bottom:2em;"><a
